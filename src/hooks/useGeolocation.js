@@ -9,7 +9,7 @@ const useGeolocation = () => {
     const onSuccess = (location) => {
         if (location.coords && location.coords.latitude && location.coords.longitude) {
             setlocation({
-                loaded: true,
+                loaded: false,
                 coordinates: {
                     lat: location.coords.latitude,
                     lng: location.coords.longitude,

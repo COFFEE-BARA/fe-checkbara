@@ -1,12 +1,13 @@
 import React, { useEffect } from "react";
 
-import useGeolocation from "./useGeolocation";
-import loadNaverMap from "./loadNaverMap";
+import useGeolocation from "./hooks/useGeolocation";
 
 function App() {
-
     const location = useGeolocation();
-    const naverMapClientId = process.env.NAVER_MAP_CLIENT_ID;
+    let lat = location.coordinates.lat;
+    let lng = location.coordinates.lng;
+    const { naver } = window;
+    const naverMapClientId = "naverMapClientId";
     const jsonData = {
         bookstores: [
             {
@@ -41,42 +42,46 @@ function App() {
     }
 
     useEffect(() => {
-        loadNaverMap(naverMapClientId);
+        const naverMapUrl = `https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=${naverMapClientId}`;
 
-        window.onload = () => {
-            const map = new window.naver.maps.Map('map', {
-                center: new window.naver.maps.LatLng(37.5656, 126.9769),
-                zoom: 14,
-            });
+        const naverMapScript = document.createElement('script');
+        naverMapScript.src = naverMapUrl;
+        naverMapScript.async = true;
+        document.head.appendChild(naverMapScript); 
+        const container = document.getElementById('map');
 
-            jsonData.bookstores.forEach(loc => {
-                let markerImage = "";
-                switch (loc.bookstore) {
-                    case "교보문고":
-                      markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF0000";
-                      break;
-                    case "영풍문고":
-                      markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00FF00";
-                      break;
-                    default:
-                      markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|0000FF";
-                      break;
-                  }
-
-                const marker = new window.naver.maps.Marker({
-                    position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
-                    map: map,
-                    title: loc.stock.toString(),
-                    icon: {
-                        content: `<img src="${markerImage}" alt="${loc.bookstore} Marker" style="width:30px; height:30px;">`,
-                        anchor: new window.naver.maps.Point(15, 30),
-                    },
-                });
-            });
-
-           
+        const options = {
+            center: new naver.maps.LatLng(location.coordinates.lat, location.coordinates.lng),
+            zoom: 17,
         };
-    });
+        const map = new naver.maps.Map(container, options);
+
+        // 마커 표시 코드는 다른 함수로 
+        jsonData.bookstores.forEach(loc => {
+            let markerImage = "";
+            switch (loc.bookstore) {
+                case "교보문고":
+                  markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF0000";
+                  break;
+                case "영풍문고":
+                  markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00FF00";
+                  break;
+                default:
+                  markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|0000FF";
+                  break;
+              }
+
+            const marker = new naver.maps.Marker({
+                position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
+                map: map,
+                title: loc.stock.toString(),
+                icon: {
+                    content: `<img src="${markerImage}" alt="${loc.bookstore} Marker" style="width:30px; height:30px;">`,
+                    anchor: new naver.maps.Point(15, 30),
+                },
+            });
+        });
+    }, []);
 
     return (
         <div className="App" style={{ height: '100vh' }}>
