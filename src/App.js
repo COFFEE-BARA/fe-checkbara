@@ -1,11 +1,15 @@
+import useGeolocation from "./useGeolocation";
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       <p>hi</p>
-      </header>
-    </div>
-  );
+    const location = useGeolocation();
+
+    return (
+        <div className="App">
+            {location.loaded
+                ? JSON.stringify(location)
+                : "Location data not available yet."}
+        </div>
+    )
 }
 
 export default App;
