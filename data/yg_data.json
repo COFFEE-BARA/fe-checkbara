@@ -2,23 +2,27 @@
     "bookstore":"교보문고",
     "branch":"광화문",
     "stock":3,
-    "address": "서울특별시 종로구 종로 1 교보생명빌딩 지하1층"
+    "latitude": 37.5956, 
+    "longitude": 126.9769
 },
 {
     "bookstore":"교보문고",
     "branch":"가든파이브",
     "stock":0,
-    "address": "서울특별시 송파구 충민로 66 가든파이브 라이프 리빙관 현대시티몰 4층"
+    "latitude": 37.5656, 
+    "longitude": 126.9729
 },
 {
     "bookstore":"교보문고",
     "branch":"강남",
     "stock":2,
-    "address": "서울특별시 서초구 강남대로 465 교보타워 지하 1층~지하 2층"
+    "latitude": 37.6656, 
+    "longitude": 126.9069
 },
 {
     "bookstore":"영풍문고",
     "branch":"용산 아이파크몰점",
     "stock":1,
-    "address":"서울특별시 용산구 한강대로23길 55 아이파크몰 리빙파크 3층"
+    "latitude": 37.4656, 
+    "longitude": 126.9569
 }
