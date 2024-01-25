@@ -64,14 +64,14 @@ function App() {
             let markerImage = "";
             switch (loc.bookstore) {
                 case "교보문고":
-                  markerImage = kyobo;
-                  break;
+                    markerImage = kyobo;
+                    break;
                 case "영풍문고":
-                  markerImage = ypbooks;
-                  break;
-                default:
-                  markerImage = aladin;
-                  break;
+                    markerImage = ypbooks;
+                    break;
+                case "알라딘":
+                    markerImage = aladin;
+                    break;
               }
 
             const marker = new naver.maps.Marker({
