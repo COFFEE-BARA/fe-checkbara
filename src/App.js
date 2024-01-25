@@ -51,7 +51,7 @@ function App() {
         const container = document.getElementById('map');
 
         const options = {
-            center: new naver.maps.LatLng(location.coordinates.lat, location.coordinates.lng),
+            center: new naver.maps.LatLng(lat, lng),
             zoom: 17,
         };
         const map = new naver.maps.Map(container, options);
