@@ -1,6 +1,9 @@
 import React, { useEffect } from "react";
 
 import useGeolocation from "./hooks/useGeolocation";
+import aladin from "./images/aladin.png"
+import kyobo from "./images/kyobo.png"
+import ypbooks from "./images/ypbooks.png"
 
 function App() {
     const location = useGeolocation();
@@ -61,13 +64,13 @@ function App() {
             let markerImage = "";
             switch (loc.bookstore) {
                 case "교보문고":
-                  markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|FF0000";
+                  markerImage = kyobo;
                   break;
                 case "영풍문고":
-                  markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|00FF00";
+                  markerImage = ypbooks;
                   break;
                 default:
-                  markerImage = "http://chart.apis.google.com/chart?chst=d_map_pin_letter&chld=%E2%80%A2|0000FF";
+                  markerImage = aladin;
                   break;
               }
 
@@ -76,7 +79,7 @@ function App() {
                 map: map,
                 title: loc.stock.toString(),
                 icon: {
-                    content: `<img src="${markerImage}" alt="${loc.bookstore} Marker" style="width:30px; height:30px;">`,
+                    content: `<img src="${markerImage}" alt="${loc.bookstore} Marker" style="width:60px; height:70px;">`,
                     anchor: new naver.maps.Point(15, 30),
                 },
             });
