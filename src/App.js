@@ -28,7 +28,7 @@ function App() {
                 "longitude": 126.9729
             },
             {
-                "bookstore":"교보문고",
+                "bookstore":"알라딘",
                 "branch":"강남",
                 "stock":2,
                 "latitude": 37.6656, 
@@ -75,7 +75,7 @@ function App() {
               }
 
             const marker = new naver.maps.Marker({
-                position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
+                position: new naver.maps.LatLng(loc.latitude, loc.longitude),
                 map: map,
                 title: loc.stock.toString(),
                 icon: {
