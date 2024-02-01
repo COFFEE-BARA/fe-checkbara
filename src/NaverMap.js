@@ -5,7 +5,7 @@ import aladin from "./images/aladin.png"
 import kyobo from "./images/kyobo.png"
 import ypbooks from "./images/ypbooks.png"
 
-function App() {
+function NaverMap() {
     const location = useGeolocation();
     let lat = location.coordinates.lat;
     let lng = location.coordinates.lng;
@@ -93,4 +93,4 @@ function App() {
     )
 }
 
-export default App;
+export default NaverMap;
