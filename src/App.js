@@ -10,7 +10,7 @@ function App() {
     let lat = location.coordinates.lat;
     let lng = location.coordinates.lng;
     const { naver } = window;
-    const naverMapClientId = "naverMapClientId";
+    const naverMapClientId = process.env.REACT_APP_NAVER_MAP_CLIENT_ID;
     const jsonData = {
         bookstores: [
             {
