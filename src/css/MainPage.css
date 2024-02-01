@@ -37,7 +37,6 @@
 
 .ai-chatbot-button:hover, .book-search-button:hover, .statistics-button:hover {
     background-color: rgba(255, 255, 255, 0.9);
-    transition: 0.7s;
 }
 
 .ai-chatbot-image, .book-search-image, .statistics-image {
@@ -54,7 +53,6 @@
 .ai-chatbot-button:hover > .ai-chatbot-image{
     background-color: #616BC0;
     content: url('../images/ai-chatbot-white.png'); 
-    transition: 0.6s;
 }
 
 .book-search-image {
@@ -64,7 +62,6 @@
 .book-search-button:hover > .book-search-image{
     background-color: #616BC0;
     content: url('../images/book-search-white.png');
-    transition: 0.6s;
 }
 
 .statistics-image {
@@ -74,7 +71,6 @@
 .statistics-button:hover > .statistics-image{
     background-color: #616BC0;
     content: url('../images/statistics-white.png');
-    transition: 0.6s;
 }
 
 .ai-chatbot-button-text-1, .book-search-button-text-1, .statistics-button-text-1 {
