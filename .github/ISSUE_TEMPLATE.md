@@ -1,5 +1,5 @@
 <!-- 이슈이름은 '[컨벤션] 기능이름' 으로 통일해주세요. 라벨로 담장자를  표시해 주세요.
- ex. [feat] searchPublicCourse -->
+ ex. [Feat] searchPublicCourse -->
  
 ### 🌳 이슈 설명
 
