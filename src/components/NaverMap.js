@@ -49,6 +49,13 @@ function NaverMap() {
 
     return (
         <>
+            <div class="top-bar">
+                <div class="search-book">현재 검색어 | bookName</div>
+                <div class="search-bar">
+                    <input class="search-tap" type="text" placeholder="검색할 위치를 입력해주세요" />
+                    <div class="search-button"></div>
+                </div>
+            </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
         </>
     )
