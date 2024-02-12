@@ -3,6 +3,8 @@ import { RecoilRoot } from 'recoil';
 import Booklist from './Booklist.js'
 // import NaverMap from ‘./components/NaverMap’;
 // import MainPage from ‘./components/MainPage’;
+import MainPage from './components/MainPage'
+
 function App() {
     return (
         <>
@@ -10,6 +12,7 @@ function App() {
                 <RecoilRoot>
                     <Routes>
                         <Route path="/" element={<Booklist />}></Route>
+                        <Route path="/" element={<MainPage />}></Route>
                     </Routes>
                 </RecoilRoot>
             </BrowserRouter>
