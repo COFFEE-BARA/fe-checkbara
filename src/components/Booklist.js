@@ -27,7 +27,7 @@ function Booklist() {
               src="https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c654e3cea0d4810c2d3337/img/qoo-image-1.png"
             />
             <div className="text-wrapper-6">마르코 룩샤</div>
-            <div className="text-wrapper-7">사장님</div>
+            <div className="text-wrapper-7">저자</div>
             <img
               className="line"
               alt="Line"
