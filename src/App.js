@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { RecoilRoot } from 'recoil';
-import Booklist from './Booklist.js'
+import Booklist from './components/Booklist.js'
 // import NaverMap from ‘./components/NaverMap’;
 // import MainPage from ‘./components/MainPage’;
 import MainPage from './components/MainPage'
@@ -11,7 +11,7 @@ function App() {
             <BrowserRouter>
                 <RecoilRoot>
                     <Routes>
-                        <Route path="/" element={<Booklist />}></Route>
+                        <Route path="/booklist" element={<Booklist />}></Route>
                         <Route path="/" element={<MainPage />}></Route>
                     </Routes>
                 </RecoilRoot>
