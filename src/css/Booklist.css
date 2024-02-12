@@ -27,21 +27,22 @@
   }
   
   .index .gradient-BG {
-    height: 852px !important;
-    left: 0 !important;
-    position: absolute !important;
-    top: 0 !important;
-    width: 393px !important;
+    height: 852px ;
+    left: 0 ;
+    position: absolute ;
+    top: 0 ;
+    width: 393px ;
   }
   
   .index .rectangle {
-    background-color: var(--white);
+    background-color: #ffffff;
     border-radius: 40px 40px 0px 0px;
     height: 768px;
     left: 0;
     position: absolute;
     top: 100px;
     width: 393px;
+    box-shadow: 0px -5px 20px rgba(0, 0, 0, 0.1); /* 수평 offset, 수직 offset, 흐림 정도, 색상 */
   }
   
   .index .div {

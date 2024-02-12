@@ -42,7 +42,7 @@ export const GradientBg1 = ({ className }) => {
           <feGaussianBlur className="fe-gaussian-blur" result="effect1_foregroundBlur_101_7599" stdDeviation="250" />
         </filter>
         <clipPath className="clip-path" id="clip0_101_7599">
-          <rect className="rect" fill="white" height="852" transform="translate(0 0.0390625)" width="393" />
+          <rect className="rectangle" fill="white" height="852" transform="translate(0 0.0390625)" width="393" />
         </clipPath>
       </defs>
     </svg>

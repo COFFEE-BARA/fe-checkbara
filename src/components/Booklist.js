@@ -1,5 +1,5 @@
 import React from "react";
-import { GradientBg1 } from "../icons/GradientBg1";
+import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/Booklist.css";
 
 function Booklist() {
