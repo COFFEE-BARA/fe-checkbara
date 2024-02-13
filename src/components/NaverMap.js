@@ -1,6 +1,7 @@
 import React, { useRef, useEffect } from "react";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../hooks/atoms.js";
+import Distance from "./Distance.js";
 
 import useGeolocation from "../hooks/useGeolocation";
 import aladin from "../images/aladin.png"
@@ -49,6 +50,7 @@ function NaverMap() {
 
     return (
         <>
+            <Distance currentMyLocation={currentMyLocation} />
             <div class="top-bar">
                 <div class="search-book">현재 검색어 | bookName</div>
                 <div class="search-bar">
@@ -57,6 +59,7 @@ function NaverMap() {
                 </div>
             </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
+            
         </>
     )
 }

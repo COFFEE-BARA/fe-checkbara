@@ -3,6 +3,7 @@ import { RecoilRoot } from 'recoil';
 
 import NaverMap from './components/NaverMap';
 import MainPage from './components/MainPage';
+import Distance from './components/Distance';
 
 function App() {
     return (
@@ -11,6 +12,7 @@ function App() {
                 <RecoilRoot>
                     <Routes>
                         <Route path="/" element={<NaverMap />}></Route>
+                        <Route path="/distance" element={<Distance />}></Route>
                     </Routes>
                 </RecoilRoot>
             </BrowserRouter>
