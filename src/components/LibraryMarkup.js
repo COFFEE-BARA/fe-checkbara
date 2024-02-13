@@ -42,9 +42,20 @@ function LibraryMarkup({ currentMyLocation, map }) {
                     position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
                     map: map,
                     icon: {
-                        content: `<img src="${markerImage}" Marker" style="width:30px; height:30px;">`,
+                        content: `<img src="${markerImage}" alt= "${loc.libName}" Marker" style="width:30px; height:30px;">`,
                         anchor: new window.naver.maps.Point(15, 30),
                     },
+                });
+
+                marker.addListener('mouseover', () => {
+                    new window.naver.maps.InfoWindow({
+                        content: loc.libName,
+                        position: marker.getPosition(),
+                    }).open(map, marker);
+                });
+
+                marker.addListener('mouseout', () => {
+                    map.closeInfoWindow();
                 });
             });
         }
