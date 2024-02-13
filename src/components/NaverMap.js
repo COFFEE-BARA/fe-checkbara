@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from "react";
+import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../hooks/atoms.js";
-import Distance from "./Distance.js";
+import LibraryMarkup from "./LibraryMarkup.js";
 
 import useGeolocation from "../hooks/useGeolocation";
 import aladin from "../images/aladin.png"
@@ -34,8 +35,7 @@ function NaverMap() {
     }, [setCurrentMyLocation]);
 
     useEffect(() => {
-        console.log(currentMyLocation.lat, currentMyLocation.lng);
-        const map = new window.naver.maps.Map("map", {
+        let map = new window.naver.maps.Map("map", {
             center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
             zoom: 15,
             minZoom: 10,
@@ -46,11 +46,17 @@ function NaverMap() {
             },
             mapDataControl: false,
         });
+
+        ReactDOM.render(
+            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} />, 
+            document.getElementById('library-markup-container')
+        );
+
     }, [currentMyLocation]);
 
     return (
         <>
-            <Distance currentMyLocation={currentMyLocation} />
+            {/* <LibraryMarkup currentMyLocation={currentMyLocation}/> */}
             <div class="top-bar">
                 <div class="search-book">현재 검색어 | bookName</div>
                 <div class="search-bar">
@@ -59,7 +65,7 @@ function NaverMap() {
                 </div>
             </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-            
+            <div id="library-markup-container"></div>
         </>
     )
 }

@@ -3,7 +3,7 @@ import { RecoilRoot } from 'recoil';
 
 import NaverMap from './components/NaverMap';
 import MainPage from './components/MainPage';
-import Distance from './components/Distance';
+import Distance from './components/LibraryMarkup';
 
 function App() {
     return (
