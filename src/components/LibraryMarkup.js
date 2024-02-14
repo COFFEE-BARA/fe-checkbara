@@ -3,9 +3,27 @@ import { MapContainer, Marker, Popup } from "react-leaflet";
 import AWS from "aws-sdk";
 import markerImage from '../images/library.png';
 
-function LibraryMarkup({ currentMyLocation, map }) {
+function LibraryMarkup({ currentMyLocation, map }) { //NaverMap에서 isbn값 받아와서 넘겨줘야함
     const [libraries, setLibraries] = useState([]);
     const [loading, setLoading] = useState(true); 
+    const [currentMyLocation, setCurrentMyLocation] = useState(null); 
+
+    useEffect(() => {
+        const sendLocationToServer = async () => {
+            try {
+                // Axios를 사용해 서버의 엔드포인트로 POST 요청 보내기
+                const response = await axios.post('/api/book/9788956609959/lending-library', { currentMyLocation });
+                console.log('Location sent to server:', response.data);
+            } catch (error) {
+                console.error('Error sending location to server:', error);
+            }
+        };
+
+        // 컴포넌트가 처음 렌더링될 때 한 번만 위치 정보를 서버에 전송함
+        if (currentMyLocation) {
+            sendLocationToServer();
+        }
+    }, [currentMyLocation]);
 
     useEffect(() => {
         AWS.config.update({
