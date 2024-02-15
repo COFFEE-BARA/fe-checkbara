@@ -17,6 +17,7 @@ function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
     const mapRef = useRef<window.naver.maps.Map | null>(null);
+    const isbn = "9788956609959"
 
     useEffect(() => {
         const success = (location) => {
@@ -38,7 +39,7 @@ function NaverMap() {
     useEffect(() => {
         const sendLocationToBackend = async () => {
             try {
-                const response = await axios.post(`/api/book/9788956609959/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                const response = await axios.post(`/api/book/${isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
                     lat: currentMyLocation.lat,
                     lon: currentMyLocation.lng
                 });
@@ -67,7 +68,7 @@ function NaverMap() {
         });
 
         ReactDOM.render(
-            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} />, 
+            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
             document.getElementById('library-markup-container')
         );
 
