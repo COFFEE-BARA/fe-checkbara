@@ -21,8 +21,6 @@ function LibraryMarkup({ currentMyLocation, map, isbn }) { //NaverMap에서 isbn
     }, []);
 
     useEffect(() => {
-        // libraries에는 latitude, longitude, libName, libCode만 있음
-
         if (!loading && currentMyLocation) {
             libraries.forEach(loc => {
                 const marker = new window.naver.maps.Marker({
