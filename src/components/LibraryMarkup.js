@@ -3,39 +3,24 @@ import { MapContainer, Marker, Popup } from "react-leaflet";
 import AWS from "aws-sdk";
 import markerImage from '../images/library.png';
 
-function LibraryMarkup({ currentMyLocation, map }) { //NaverMap에서 isbn값 받아와서 넘겨줘야함
+function LibraryMarkup({ currentMyLocation, map, isbn }) { //NaverMap에서 isbn값 받아와서 넘겨줘야함
     const [libraries, setLibraries] = useState([]);
     const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
-        AWS.config.update({
-            region: process.env.REACT_APP_REGION,
-            credentials: new AWS.Credentials({
-                accessKeyId: process.env.REACT_APP_ACCESS_KEY_ID,
-                secretAccessKey: process.env.REACT_APP_SECRET_ACCESS_KEY
-            })
-        });
-
-        const docClient = new AWS.DynamoDB.DocumentClient();
-
-        const params = {
-            TableName: process.env.REACT_APP_TABLE_NAME 
-        };
-
-        docClient.scan(params, function(err, data) {
-            if (err) {
-                console.error("Error fetching data from DynamoDB:", err);
-            } else {
-                setLibraries(data.Items);
+        fetch(`/api/book/${isbn}/lending-library`)
+            .then(response => response.json())
+            .then(data => {
+                setLibraries(data); 
                 setLoading(false);
-            }
-        });
+            })
+            .catch(error => {
+                console.error("Error fetching data from backend:", error);
+            });
         
     }, []);
 
     useEffect(() => {
-        // libraries에는 latitude, longitude, libName, libCode만 있음
-
         if (!loading && currentMyLocation) {
             libraries.forEach(loc => {
                 const marker = new window.naver.maps.Marker({

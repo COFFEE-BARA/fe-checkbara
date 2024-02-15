@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../hooks/atoms.js";
+import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
 import useGeolocation from "../hooks/useGeolocation";
@@ -16,6 +17,7 @@ function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
     const mapRef = useRef<window.naver.maps.Map | null>(null);
+    const isbn = "9788956609959"
 
     useEffect(() => {
         const success = (location) => {
@@ -35,6 +37,24 @@ function NaverMap() {
     }, [setCurrentMyLocation]);
 
     useEffect(() => {
+        const sendLocationToBackend = async () => {
+            try {
+                const response = await axios.post(`/api/book/${isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                    lat: currentMyLocation.lat,
+                    lon: currentMyLocation.lng
+                });
+                console.log('Location sent to backend:', response.data);
+            } catch (error) {
+                console.error('Error sending location to backend:', error);
+            }
+        };
+
+        if (currentMyLocation) {
+            sendLocationToBackend();
+        }
+    }, [currentMyLocation])
+
+    useEffect(() => {
         let map = new window.naver.maps.Map("map", {
             center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
             zoom: 15,
@@ -48,7 +68,7 @@ function NaverMap() {
         });
 
         ReactDOM.render(
-            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} />, 
+            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
             document.getElementById('library-markup-container')
         );
 
