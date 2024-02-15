@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup } from "react-leaflet";
-import AWS from "aws-sdk";
 import markerImage from '../images/library.png';
 
 function LibraryMarkup({ currentMyLocation, map, isbn }) { //NaverMap에서 isbn값 받아와서 넘겨줘야함
