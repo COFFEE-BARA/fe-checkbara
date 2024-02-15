@@ -49,7 +49,6 @@ function NaverMap() {
         };
 
         if (currentMyLocation) {
-            console.log(currentMyLocation);
             sendLocationToBackend();
         }
     }, [currentMyLocation])
