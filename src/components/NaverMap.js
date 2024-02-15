@@ -38,9 +38,9 @@ function NaverMap() {
     useEffect(() => {
         const sendLocationToBackend = async () => {
             try {
-                const response = await axios.post('/api/book/9788956609959/lending-library?lat=${currentMyLocation.lat}&long=${currentMyLocation.lng}', {
+                const response = await axios.post(`/api/book/9788956609959/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
                     lat: currentMyLocation.lat,
-                    long: currentMyLocation.lng
+                    lon: currentMyLocation.lng
                 });
                 console.log('Location sent to backend:', response.data);
             } catch (error) {
