@@ -2,6 +2,7 @@ import React, { useRef, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../hooks/atoms.js";
+import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
 import useGeolocation from "../hooks/useGeolocation";
@@ -33,6 +34,24 @@ function NaverMap() {
             navigator.geolocation.getCurrentPosition(success, error);
         }
     }, [setCurrentMyLocation]);
+
+    useEffect(() => {
+        const sendLocationToBackend = async () => {
+            try {
+                const response = await axios.post('/api/book/9788956609959/lending-library?lat=${currentMyLocation.lat}&long=${currentMyLocation.lng}', {
+                    lat: currentMyLocation.lat,
+                    long: currentMyLocation.lng
+                });
+                console.log('Location sent to backend:', response.data);
+            } catch (error) {
+                console.error('Error sending location to backend:', error);
+            }
+        };
+
+        if (currentMyLocation) {
+            sendLocationToBackend();
+        }
+    }, [currentMyLocation])
 
     useEffect(() => {
         let map = new window.naver.maps.Map("map", {
