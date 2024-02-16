@@ -54,6 +54,14 @@ function NaverMap() {
         }
     }, [currentMyLocation])
 
+
+    useEffect(() => {
+        ReactDOM.render(
+            <ResultSection data={searchResult}/>, 
+            document.getElementById('')
+        );
+    })
+
     useEffect(() => {
         let map = new window.naver.maps.Map("map", {
             center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
