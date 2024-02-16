@@ -9,7 +9,7 @@ function MainPage() {
 
     function clickBookSearchButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/inputsection';
     }
 
     function clickStatisticsButton(e) {
