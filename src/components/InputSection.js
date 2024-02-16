@@ -1,15 +1,14 @@
 import React, { useState, useCallback, useEffect } from 'react';
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import { useNavigate } from 'react-router-dom';
-import ResultSection from './ResultSection';
 import '../css/section.css';
 import '../css/index.css';
 
 function InputSection() {
     const [curKeywords, setCurKeywords] = useState("");
     const [searchResult, setSearchResult] = useState(null);
-    const navigate = useNavigate();
-        
+    const navigate = useNavigate(); // useNavigate 밖에서 호출
+
     const data = {
         source: [
             {
@@ -52,11 +51,13 @@ function InputSection() {
             const filteredData = data.source.filter(item =>
                 item.Title.toLowerCase().includes(curKeywords.toLowerCase())
             );
-            setSearchResult(filteredData.length > 0 ? filteredData : null); // 일치하는 데이터가 없으면 null
-            console.log("Navigating to result section"); 
-            navigate('/resultsection');
+            setSearchResult(filteredData.length > 0 ? filteredData : null); // 일치하는 데이터가 없으면 null로 설정
+            console.log("Search Result:", filteredData);
+
+            // navigate 함수 호출
+            navigate('/resultsection', { state: { data: filteredData } });
         }
-    }, [curKeywords, navigate]);
+    }, [curKeywords, data.source, navigate]);
 
     const clickLeftButton = () => {
         window.location.href = '/mainpage'; 

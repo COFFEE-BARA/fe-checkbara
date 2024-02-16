@@ -3,10 +3,9 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import InputSection from './components/InputSection.js';
 import ResultSection from './components/ResultSection.js';
-import { request } from './api/api.js';
 import MainPage from './components/MainPage.js';
 import RecommendInput from './components/RecommendInput';
-
+import { request } from './api/api.js'; // 이 부분은 필요에 따라 추가되었으므로 적절히 조정해야 합니다.
 
 const MAX_KEYWORD = 3;
 
@@ -16,7 +15,7 @@ function App() {
     const [keywords, setKeywords] = useState([]);
 
     const onSearch = async (keyword, pageNum) => {
-        const response = await request(keyword, pageNum);
+        const response = await request(keyword, pageNum); // 필요에 따라 적절한 방법으로 검색을 처리합니다.
 
         let newKeywords = [...keywords];
         if (newKeywords.indexOf(keyword) !== -1) {
