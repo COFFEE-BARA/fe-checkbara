@@ -4,7 +4,7 @@ import '../css/MainPage.css'
 function MainPage() {
     function clickAiChatbotButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/recommend';
     }
 
     function clickBookSearchButton(e) {
