@@ -26,6 +26,13 @@ function InputSection() {
                 "Author": "찾을 수 없음"
             },
             {
+                "Title": "포인트 도해식 RFID",
+                "ImageURL": "https://shopping-phinf.pstatic.net/main_3246655/32466553474.20220519215347.jpg",
+                "ISBN": "9788958324263",
+                "Price": "18000",
+                "Author": "찾을 수 없음"
+            },
+            {
                 "Title": "정보통신관련 국제기구 지식정보원",
                 "ImageURL": "https://shopping-phinf.pstatic.net/main_3343597/33435978815.20221019123623.jpg",
                 "ISBN": "9788926802304",

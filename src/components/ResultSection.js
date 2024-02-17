@@ -11,7 +11,7 @@ function ResultSection() {
     const stockButton = (isbn) => {
         return `/book/${isbn}/stock`;
     };
-    
+
     const borrowButton = (isbn) => {
         return `/book/${isbn}/lending-library`;
     };
@@ -30,33 +30,35 @@ function ResultSection() {
 
     return (
         <>
-            <div className="result-wrapper">
-                {loading ? (
-                    <div>데이터를 로딩 중입니다...</div>
-                ) : (
-                    <>
-                        {data && data.length > 0 ? (
-                            <section>
-                                {data.map((item, index) => (
-                                    <div key={index} className="source-isbn">
-                                        <img src={item.ImageURL ? item.ImageURL : "../img/notFound.png"} alt="Thumbnail" className="thumbnail" />
-                                        <div className="source-details">
-                                            <p className="title">
-                                                <a href={item.ISBN} target="_blank" rel="noopener noreferrer">{item.Title}</a>
-                                            </p>
-                                            <p className="author">{item.Author}</p>
-                                            <p className="price">{item.Price}</p>
-                                            <button onClick={() => window.location.href = stockButton(item.ISBN)}>재고</button>
-                                            <button onClick={() => window.location.href = borrowButton(item.ISBN)}>대출</button>
+            <div className="bgrectangle">
+                <div className="result-wrapper">
+                    {loading ? (
+                        <div>데이터를 로딩 중입니다...</div>
+                    ) : (
+                        <>
+                            {data && data.length > 0 ? (
+                                <section>
+                                    {data.map((item, index) => (
+                                        <div key={index} className="source-isbn">
+                                            <img src={item.ImageURL ? item.ImageURL : "../img/notFound.png"} alt="Thumbnail" className="thumbnail" />
+                                            <div className="source-details">
+                                                <p className="title">
+                                                    <a href={item.ISBN} target="_blank" rel="noopener noreferrer">{item.Title}</a>
+                                                </p>
+                                                <p className="author">{item.Author}</p>
+                                                <p className="price">{Number(item.Price).toLocaleString()}원</p>
+                                                <div className="stock-button" onClick={() => window.location.href = stockButton(item.ISBN)}>재고</div>
+                                                <div className="borrow-button" onClick={() => window.location.href = borrowButton(item.ISBN)}>대출</div>
+                                            </div>
                                         </div>
-                                    </div>
-                                ))}
-                            </section>
-                        ) : (
-                            <div>데이터가 없습니다.</div>
-                        )}
-                    </>
-                )}
+                                    ))}
+                                </section>
+                            ) : (
+                                <div>데이터가 없습니다.</div>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
         </>
     );

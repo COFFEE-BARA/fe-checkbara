@@ -52,6 +52,7 @@
     width: 100%;
     box-shadow: 0px -1px 10px rgba(89, 89, 89, 0.1);
     /* 수평 offset, 수직 offset, 흐림 정도, 색상 */
+    z-index: 1;
 }
 
 .result-wrapper {
@@ -59,21 +60,24 @@
     padding: 10px 25px;
     max-width: 1400px;
     margin: 0 auto;
+    z-index: 1;
 }
+
 
 section {
     display: flex;
 }
 
-.card {
+.source-isbn {
     display: flex;
     border-bottom: 1px solid #d6d6d6;
-    margin-bottom: 25px;
+    position: relative;
+    margin-right: 25px;
 }
 
 
 @media screen and (max-width: 400px) {
-    .card>img {
+    .source-isbn>img {
         display: none;
     }
 }
@@ -81,10 +85,12 @@ section {
 
 .thumbnail {
     margin-right: 15px;
+    margin-left: 15px;
     object-fit: 100%;
-    top: 300px;
+    top: 1000px;
     width: 70px;
     height: 100px;
+    margin-top: 15px;
     margin-bottom: 20px;
 }
 
@@ -93,18 +99,19 @@ section {
 }
 
 .title {
+    font-family: 'IBM Plex Sans KR', sans-serif;
     color: #000000;
     font-size: 14px;
     font-weight: 400;
     left: 119px;
     letter-spacing: 0;
     line-height: normal;
-    margin-top: none;
+    margin-top: 30px;
     top: 120px;
     width: 200px;
 }
 
-a {
+a { 
     text-decoration: none;
     color: var(--font-color);
     transition: 0.2s;
@@ -115,6 +122,7 @@ a:hover {
 }
 
 .author {
+    font-family: 'IBM Plex Sans KR', sans-serif;
     color: #6f6f6f;
     font-size: 12px;
     color: var(--not-point-color);
@@ -128,9 +136,11 @@ a:hover {
     line-height: 1.1em;
     height: 1.1em;
     width: 100px;
+    margin-top: -5px;
 }
 
 .price {
+    font-family: 'IBM Plex Sans KR', sans-serif;
     font-size: 14px;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -148,7 +158,7 @@ a:hover {
         justify-content: space-between;
     }
 
-    .card {
+    .source-isbn {
         flex-basis: 50%;
     }
 }
@@ -157,4 +167,28 @@ a:hover {
     section {
         flex-direction: column;
     }
+}
+
+.stock-button {
+    background-color: #e5e6ebba;
+    border-radius: 30px;
+    height: 29px;
+    width: 57px;
+    text-align: center; 
+    font-size: 14px;
+    line-height: 29px; 
+    margin-top: -150px; /* 위쪽으로 이동하는 마진을 추가합니다. */
+    margin-left: 200px;
+}
+
+.borrow-button{
+    background-color: #e5e6ebba;
+    border-radius: 30px;
+    height: 29px;
+    width: 57px;
+    text-align: center; 
+    font-size: 14px;
+    line-height: 29px; 
+    margin-top: 15px; /* 위쪽으로 이동하는 마진을 추가합니다. */
+    margin-left: 200px;
 }
