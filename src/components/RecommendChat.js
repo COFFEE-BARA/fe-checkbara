@@ -1,18 +1,45 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/recommend.css";
 import "../css/RecommendDefault.css";
 
-const RecommendChat = () => {
+function RecommendChat() {
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
     const [loading, setLoading] = useState(false);
+    const [data, setData] = useState([]);
+
+    const fetchedData = [
+        {
+            "Title": "파이썬",
+            "ImageURL": "https://shopping-phinf.pstatic.net/main_3250509/32505092162.20221101113257.jpg",
+            "ISBN": "9791158391461",
+            "Price": "0",
+            "Author": "조대표"
+        }
+    ];
 
     const apiKey = '';
     const apiEndpoint = 'https://api.openai.com/v1/chat/completions'; //바꾸기
     const isbn = '1234';
     const lati = '5678';
     const long = '910';
+
+    // API에서 데이터를 가져오는 함수
+    const fetchData = async () => {
+        try {
+            const response = await fetch('API 엔드포인트');
+            const data = await response.json();
+            setData(data); // 데이터 설정
+        } catch (error) {
+            console.error('데이터를 불러오는 중 오류 발생:', error);
+        }
+    };
+
+    // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
+    useEffect(() => {
+        setData(fetchedData); //나중에 fetchData로 수정해야할듯
+    }, []);
 
     const addMessage = (sender, message) => {
         setMessages(prevMessages => [...prevMessages, { sender, message }]);
@@ -107,23 +134,22 @@ const RecommendChat = () => {
                         </div>
                     </div>
                     <div className="user-chat-wrapper">
-                        <div className="user-chat-box">{userInput}</div>
+                        <div className="user-chat-box" style={{ display: 'inline-block', overflow: 'auto' }}>
+                        <div style={{ margin: '10px'}}></div>{userInput}</div>
                     </div>
                     <div className="chatbot-2nd-box" />
                     <p className="chatbot-rank-title-element">
                         <span className="span">2위 | </span>
                         <span className="chatbot-2nd-text">무슨 증명</span>
                     </p>
-                    <div className="chatbot-chat-box" />
-                    <p className="chatbot-1st-rank">
-                        <span className="chatbot-1st-title">제목 | </span>
-                        <span className="text-wrapper-4">
-                            {" "}
-                            <br />
-                        </span>
-                        <span className="span"> </span>
-                        <span className="text-wrapper-4"></span>
-                    </p>
+                    <div className="chatbot-chat-box">
+                        {data.map((item, index) => (
+                            <div className="chatbot-1st-rank" key={index}>
+                                <p className="chatbot-1st-title">제목 | {item.Title}</p>
+                                <p className="chatbot-1st-author">저자 | {item.Author}</p>
+                            </div>
+                        ))}
+                    </div>
 
                     <div className="button-group">
                         <div className="detail-rect" onClick={() => handleDetailButtonClick(isbn)}>
@@ -136,7 +162,7 @@ const RecommendChat = () => {
                             <div className="borrow-text">대출여부</div>
                         </div>
                     </div>
-                    <p className="chatbot-text">최진영 작가는 증명을 너무 잘해서 구를 쿠우쿠우로 증명한 책을 추천합니다.</p>
+                    <p className="chatbot-text">최진영 작가는 증명을 너무 잘해서 구를 쿠우쿠우로 증명한 책을 추천합니다.</p> 
                 </div>
             </div>
         </>

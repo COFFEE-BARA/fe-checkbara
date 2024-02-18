@@ -196,7 +196,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 336px;
+    top: 70px;
     width: 159px;
 }
 
@@ -322,15 +322,23 @@
 .chatbot-1st-title {
     font-family: 'IBM Plex Sans KR', sans-serif;
     height: 24px;
-    left: 14px;
+    left: 0px;
     position: absolute;
-    top: 14px;
+    top: 20px;
+    width: 135px;
+}
+
+.chatbot-1st-author {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    height: 24px;
+    position: absolute;
+    top: 50px;
     width: 135px;
 }
 
 .recommend-input {
     font-family: 'IBM Plex Sans KR', sans-serif;
-    max-width: 430px;
+    max-width: 300px;
     width: 70%;
     margin: 0 auto;
     font-size: 15px;
