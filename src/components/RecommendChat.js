@@ -135,20 +135,24 @@ function RecommendChat() {
                     </div>
                     <div className="user-chat-wrapper">
                         <div className="user-chat-box" style={{ display: 'inline-block', overflow: 'auto' }}>
-                        <div style={{ margin: '10px'}}></div>{userInput}</div>
+                            <div style={{ margin: '0 0 20px' }}></div>{userInput}</div>
                     </div>
                     <div className="chatbot-2nd-box" />
-                    <p className="chatbot-rank-title-element">
-                        <span className="span">2위 | </span>
-                        <span className="chatbot-2nd-text">무슨 증명</span>
-                    </p>
+                        <p className="chatbot-rank-title-element">
+                            <span className="span">2위 | </span>
+                            <span className="chatbot-2nd-text">무슨 증명</span>
+                        </p>
                     <div className="chatbot-chat-box">
                         {data.map((item, index) => (
-                            <div className="chatbot-1st-rank" key={index}>
-                                <p className="chatbot-1st-title">제목 | {item.Title}</p>
-                                <p className="chatbot-1st-author">저자 | {item.Author}</p>
+                            <div key={index} className="chatbot-1st-rank">
+                                <img src={item.ImageURL ? item.ImageURL : "../img/notFound.png"} alt="book-image" className="book-image" />
+                                <div>
+                                    <p className="chatbot-1st-title">제목 | {item.Title}</p>
+                                    <p className="chatbot-1st-author">저자 | {item.Author}</p>
+                                </div>
                             </div>
                         ))}
+
                     </div>
 
                     <div className="button-group">
@@ -162,7 +166,7 @@ function RecommendChat() {
                             <div className="borrow-text">대출여부</div>
                         </div>
                     </div>
-                    <p className="chatbot-text">최진영 작가는 증명을 너무 잘해서 구를 쿠우쿠우로 증명한 책을 추천합니다.</p> 
+                    <p className="chatbot-text">최진영 작가는 증명을 너무 잘해서 구를 쿠우쿠우로 증명한 책을 추천합니다.</p>
                 </div>
             </div>
         </>

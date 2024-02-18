@@ -196,7 +196,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 70px;
+    top: 63px;
     width: 159px;
 }
 
@@ -280,10 +280,10 @@
 
 .book-image {
     height: 96px;
-    left: 34px;
+    left: -90px;
     object-fit: cover;
     position: absolute;
-    top: 314px;
+    top: 10px;
     width: 69px;
 }
 
@@ -297,7 +297,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 260px;
+    top: 250px;
     width: 223px;
 }
 
