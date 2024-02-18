@@ -2,6 +2,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import { useNavigate } from 'react-router-dom';
 import '../css/section.css';
+import '../css/index.css';
 
 function InputSection() {
     const [curKeywords, setCurKeywords] = useState("");

@@ -3,6 +3,7 @@ import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/recommend.css";
 import "../css/RecommendDefault.css";
 
+
 const RecommendInput = () => {
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
@@ -13,9 +14,9 @@ const RecommendInput = () => {
 
     const addMessage = (sender, message) => {
         setMessages(prevMessages => [...prevMessages, { sender, message }]);
-    };
-
-    const handleSendMessage = async () => {
+     };
+  
+     const handleSendMessage = async () => {
         const message = userInput.trim();
         if (message.length === 0) return;
 
