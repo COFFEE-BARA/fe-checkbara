@@ -109,65 +109,63 @@ function RecommendChat() {
                     <div className="index">
                         <div className="head-text">AI에게 책 추천받기</div>
                         <div className="bgrectangle">
-                            <div className='recommend'>
-                                {messages.map((msg, index) => (
-                                    <div key={index} className={`message ${msg.sender}`}>
-                                        {`${msg.sender === 'user' ? '나' : '챗봇'} : ${msg.message}`}
-                                    </div>
-                                ))}
-                                <div className='union'></div>
-                                <input
-                                    type='text'
-                                    class="recommend-input"
-                                    placeholder='검색할 내용을 입력해주세요'
-                                    value={userInput} onChange={(e) => setUserInput(e.target.value)}
-                                    onKeyDown={handleKeyDown}
+                            <div className='union'></div>
+                            <input
+                                type='text'
+                                className="recommend-input"
+                                placeholder='검색할 내용을 입력해주세요'
+                                value={userInput}
+                                onChange={(e) => setUserInput(e.target.value)}
+                                onKeyDown={handleKeyDown}
+                            />
+                            <div className="scan-wrapper" onClick={handleSendMessage}>
+                                <img
+                                    className="scan"
+                                    alt="Scan"
+                                    src=""
                                 />
-                                <div className="scan-wrapper" onClick={handleSendMessage}>
-                                    <img
-                                        className="scan"
-                                        alt="Scan"
-                                        src=""
-                                    />
-                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="user-chat-wrapper">
-                        <div className="user-chat-box" style={{ display: 'inline-block', overflow: 'auto' }}>
-                            <div style={{ margin: '0 0 20px' }}></div>{userInput}</div>
-                    </div>
-                    <div className="chatbot-2nd-box" />
-                        <p className="chatbot-rank-title-element">
-                            <span className="span">2위 | </span>
-                            <span className="chatbot-2nd-text">무슨 증명</span>
-                        </p>
-                    <div className="chatbot-chat-box">
-                        {data.map((item, index) => (
-                            <div key={index} className="chatbot-1st-rank">
-                                <img src={item.ImageURL ? item.ImageURL : "../img/notFound.png"} alt="book-image" className="book-image" />
-                                <div>
-                                    <p className="chatbot-1st-title">제목 | {item.Title}</p>
-                                    <p className="chatbot-1st-author">저자 | {item.Author}</p>
-                                </div>
+                </div>
+                <div className="user-chat-wrapper">
+                    <div className="user-chat-box">
+                        {messages.map((msg, index) => (
+                            <div key={index} className={`message ${msg.sender}`} style={{ margin: '10px 20px' }}>
+                                {msg.message}
                             </div>
                         ))}
-
                     </div>
-
-                    <div className="button-group">
-                        <div className="detail-rect" onClick={() => handleDetailButtonClick(isbn)}>
-                            <div className="detail-text">상세정보</div>
-                        </div>
-                        <div className="stock-rect" onClick={() => handleStockButtonClick(isbn)}>
-                            <div className="stock-text">서점재고</div>
-                        </div>
-                        <div className="borrow-rect" onClick={() => handleBorrowButtonClick(isbn)}>
-                            <div className="borrow-text">대출여부</div>
-                        </div>
-                    </div>
-                    <p className="chatbot-text">최진영 작가는 증명을 너무 잘해서 구를 쿠우쿠우로 증명한 책을 추천합니다.</p>
                 </div>
+                <div className="chatbot-2nd-box" />
+                <p className="chatbot-rank-title-element">
+                    <span className="span">2위 | </span>
+                    <span className="chatbot-2nd-text">무슨 증명</span>
+                </p>
+                <div className="chatbot-chat-box">
+                    {data.map((item, index) => (
+                        <div key={index} className="chatbot-1st-rank">
+                            <img src={item.ImageURL ? item.ImageURL : "../img/notFound.png"} alt="book-image" className="book-image" />
+                            <div>
+                                <p className="chatbot-1st-title">제목 | {item.Title}</p>
+                                <p className="chatbot-1st-author">저자 | {item.Author}</p>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+
+                <div className="button-group">
+                    <div className="detail-rect" onClick={() => handleDetailButtonClick(isbn)}>
+                        <div className="detail-text">상세정보</div>
+                    </div>
+                    <div className="stock-rect" onClick={() => handleStockButtonClick(isbn)}>
+                        <div className="stock-text">서점재고</div>
+                    </div>
+                    <div className="borrow-rect" onClick={() => handleBorrowButtonClick(isbn)}>
+                        <div className="borrow-text">대출여부</div>
+                    </div>
+                </div>
+                <p className="chatbot-text">{messages[messages.length - 1]?.sender === 'bot' ? messages[messages.length - 1]?.message : '응답을 받아오는 중 에러가 발생했습니다.'}</p>
             </div>
         </>
     );
