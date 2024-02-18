@@ -3,6 +3,7 @@ import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import { useNavigate } from 'react-router-dom';
 import '../css/section.css';
 import '../css/index.css';
+import ResultSection from './ResultSection.js';
 
 function InputSection() {
     const [curKeywords, setCurKeywords] = useState("");
@@ -61,7 +62,13 @@ function InputSection() {
             setSearchResult(filteredData.length > 0 ? filteredData : null); // 일치하는 데이터가 없으면 null로 설정
             console.log("Search Result:", filteredData);
 
-            // navigate 함수 호출
+            // const bgRectangleElement = document.querySelector('.bgrectangle');
+
+            // if (bgRectangleElement) {
+            //     ReactDOM.render(<ResultSection data={filteredData} />, bgRectangleElement);
+            // } else {
+            //     console.error('Class 이름이 bgrectangle인 요소를 찾을 수 없습니다.');
+            // }
             navigate('/resultsection', { state: { data: filteredData } });
         }
     }, [curKeywords, data.source, navigate]);

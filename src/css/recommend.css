@@ -237,10 +237,10 @@
     border-radius: 30px;
     box-shadow: 0px 4px 4px #00000014;
     height: 38px;
-    left: 32px;
+    left: 25px;
     position: absolute;
     top: 423px;
-    width: 90px;
+    width: 80px;
 }
 
 .stock-rect {
@@ -248,10 +248,21 @@
     border-radius: 30px;
     box-shadow: 0px 4px 4px #00000014;
     height: 38px;
-    left: 128px;
+    left: 110px;
     position: absolute;
     top: 423px;
-    width: 143px;
+    width: 80px;
+}
+
+.borrow-rect {
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px #00000014;
+    height: 38px;
+    left: 195px;
+    position: absolute;
+    top: 423px;
+    width: 80px;
 }
 
 .detail-text {
@@ -260,12 +271,12 @@
     font-size: 13px;
     font-weight: 400;
     height: 25px;
-    left: 38px;
+    left: 0px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 432px;
+    top: 10px;
     width: 79px;
 }
 
@@ -275,12 +286,27 @@
     font-size: 13px;
     font-weight: 400;
     height: 25px;
-    left: 136px;
+    left: -23px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
     text-align: center;
-    top: 432px;
+    top: 10px;
+    width: 126px;
+}
+
+.borrow-text {
+    color: #000000;
+    font-family: "IBM Plex Sans KR", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 25px;
+    left: -23px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 10px;
     width: 126px;
 }
 
