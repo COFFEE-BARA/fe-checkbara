@@ -1,0 +1,349 @@
+.index {
+    background-color: #f3f1ff;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+}
+
+.bgrectangle {
+    background-color: #ffffff;
+    border-radius: 40px 40px 0px 0px;
+    height: 100%;
+    left: 0;
+    position: absolute;
+    top: 100px;
+    width: 100%;
+    box-shadow: 0px -1px 10px rgba(89, 89, 89, 0.1);
+    /* 수평 offset, 수직 offset, 흐림 정도, 색상 */
+    z-index: 0;
+}
+
+.overlap-group-wrapper {
+    background-color: #efecff;
+    height: 932px;
+    overflow: hidden;
+    width: 430px;
+}
+
+.overlap-group {
+    height: 932px;
+    left: -2px;
+    position: relative;
+    width: 432px;
+}
+
+.gradient-BG {
+    height: 932px !important;
+    left: 2px !important;
+    position: absolute !important;
+    top: 0 !important;
+    width: 430px !important;
+}
+
+.rectangle {
+    background-color: var(--white);
+    border-radius: 40px 40px 0px 0px;
+    height: 932px;
+    left: 0;
+    position: absolute;
+    top: 112px;
+    width: 430px;
+}
+
+.group {
+    height: 27px;
+    left: 16px;
+    position: absolute;
+    top: 37px;
+    width: 27px;
+}
+
+.user-chat-wrapper {
+    color: #000000;
+    font-family: "IBM Plex Sans KR", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    left: 171px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 178px;
+    width: 193px;
+}
+
+.union {
+    height: 143px;
+    margin-left: 49px;
+    display: flex;
+    position: absolute;
+    top: 640px; 
+    width: 340px;
+    content: url('https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c66a91aeea4e0fd74766d7/img/union.svg');
+    z-index: 1;
+}
+
+.div {
+    color: #bbbbbb;
+    font-family: "IBM Plex Sans KR", Helvetica;
+    font-size: 15px;
+    font-weight: 400;
+    left: 54px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 932px;
+    width: 193px;
+    z-index: 1;
+}
+
+.head-text {
+    color: var(--grey-1);
+    font-family: "IBM Plex Sans KR-Medium", Helvetica;
+    font-size: 16px;
+    font-weight: 500;
+    height: 24px;
+    left: 61px;
+    letter-spacing: 1px;
+    line-height: normal;
+    position: absolute;
+    top: 37px;
+}
+
+.user-chat-box {
+    height: 73px;
+    left: 137px;
+    position: absolute;
+    top: 155px;
+    width: 250px;
+    z-index: 1;
+    margin-left: 30px;
+}
+
+.user-chat-box-rect {
+    background-color: #ffffff;
+    box-shadow: 2px 5px 2px #efefef;
+    height: 29px;
+    left: 345px;
+    margin-left: 30px;
+    position: absolute;
+    top: 156px;
+    width: 37px;
+}
+
+
+.chatbot-2nd-box-rect {
+    background-color: #edebf7;
+    height: 20px;
+    left: 16px;
+    position: absolute;
+    top: 487px;
+    width: 37px;
+}
+
+.chatbot-2nd-box {
+    background-color: #edebf7;
+    border-radius: 30px;
+    box-shadow: 0px 4px 5px #00000014;
+    height: 43px;
+    left: 16px;
+    position: absolute;
+    top: 487px;
+    width: 274px;
+}
+
+.chatbot-rank-title-element {
+    color: #000000;
+    font-family: "IBM Plex Sans KR-Medium", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 32px;
+    left: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 487px;
+    width: 159px;
+}
+
+.span {
+    font-weight: 500;
+}
+
+.chatbot-2nd-text {
+    font-family: "IBM Plex Sans KR", Helvetica;
+}
+
+.rectangle-6 {
+    background-color: #edebf7;
+    height: 20px;
+    left: 16px;
+    position: absolute;
+    top: 540px;
+    width: 37px;
+}
+
+
+.element-2 {
+    color: #000000;
+    font-family: "IBM Plex Sans KR-Medium", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 32px;
+    left: 48px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 603px;
+    width: 159px;
+}
+
+.chatbot-chat-box {
+    background-color: #edebf7;
+    border-radius: 30px;
+    box-shadow: 0px 4px 5px #00000014;
+    height: 234px;
+    left: 15px;
+    position: absolute;
+    top: 240px;
+    width: 274px;
+}
+
+.chatbot-chat-box-rect {
+    background-color: #edebf7;
+    height: 104px;
+    left: 15px;
+    position: absolute;
+    top: 240px;
+    width: 37px;
+}
+
+.chatbot-1st-rank {
+    color: #000000;
+    font-family: "IBM Plex Sans KR-Medium", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 63px;
+    left: 118px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 336px;
+    width: 159px;
+}
+
+.detail-rect {
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px #00000014;
+    height: 38px;
+    left: 32px;
+    position: absolute;
+    top: 423px;
+    width: 90px;
+}
+
+.stock-rect {
+    background-color: #ffffff;
+    border-radius: 30px;
+    box-shadow: 0px 4px 4px #00000014;
+    height: 38px;
+    left: 128px;
+    position: absolute;
+    top: 423px;
+    width: 143px;
+}
+
+.detail-text {
+    color: #000000;
+    font-family: "IBM Plex Sans KR", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 25px;
+    left: 38px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 432px;
+    width: 79px;
+}
+
+.stock-text {
+    color: #000000;
+    font-family: "IBM Plex Sans KR", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 25px;
+    left: 136px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    text-align: center;
+    top: 432px;
+    width: 126px;
+}
+
+.book-image {
+    height: 96px;
+    left: 34px;
+    object-fit: cover;
+    position: absolute;
+    top: 314px;
+    width: 69px;
+}
+
+.chatbot-text {
+    color: #000000;
+    font-family: "IBM Plex Sans KR", Helvetica;
+    font-size: 13px;
+    font-weight: 400;
+    height: 40px;
+    left: 39px;
+    letter-spacing: 0;
+    line-height: normal;
+    position: absolute;
+    top: 260px;
+    width: 223px;
+}
+
+.frame {
+    height: 52px;
+    left: 173px;
+    position: absolute;
+    top: 787px;
+    width: 52px;
+}
+
+.scan-wrapper {
+    background: linear-gradient(180deg, rgb(191.84, 181.86, 255) 15%, rgb(216.42, 210.32, 255) 72%);
+    border-radius: 26px;
+    box-shadow: inset 3px 1px 15px #ffffff80, inset 0px -3px 10px #7c43b95e;
+    height: 52px;
+    width: 52px; 
+    position: relative;
+    z-index: 1;
+}
+
+.scan {
+    height: 24px;
+    left: 14px;
+    position: absolute;
+    top: 14px;
+    width: 24px;
+    content: url('https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c674f661a7c21531072443/img/scan.svg');
+}
+
+.recommend-input {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    max-width: 430px;
+    width: 70%;
+    margin: 0 auto;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 5px 8px;
+    border: none;
+    box-sizing: border-box;
+    transition: 0.2s;
+    border-bottom: 1px solid rgb(186, 186, 186); 
+}

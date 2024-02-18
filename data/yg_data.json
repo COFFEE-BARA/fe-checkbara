@@ -1,0 +1,28 @@
+{
+    "bookstore":"교보문고",
+    "branch":"광화문",
+    "stock":3,
+    "latitude": 37.5956, 
+    "longitude": 126.9769
+},
+{
+    "bookstore":"교보문고",
+    "branch":"가든파이브",
+    "stock":0,
+    "latitude": 37.5656, 
+    "longitude": 126.9729
+},
+{
+    "bookstore":"교보문고",
+    "branch":"강남",
+    "stock":2,
+    "latitude": 37.6656, 
+    "longitude": 126.9069
+},
+{
+    "bookstore":"영풍문고",
+    "branch":"용산 아이파크몰점",
+    "stock":1,
+    "latitude": 37.4656, 
+    "longitude": 126.9569
+}
