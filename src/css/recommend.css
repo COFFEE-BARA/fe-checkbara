@@ -111,39 +111,20 @@
 }
 
 .user-chat-box {
-    height: 73px;
-    left: 137px;
-    position: absolute;
-    top: 155px;
-    width: 250px;
-    z-index: 1;
-    margin-left: 30px;
-}
-
-.user-chat-box-rect {
-    background-color: #ffffff;
+    background-color: #f2f2f2;
     box-shadow: 2px 5px 2px #efefef;
-    height: 29px;
-    left: 345px;
-    margin-left: 30px;
+    height: 73px;
     position: absolute;
-    top: 156px;
-    width: 37px;
+    top: -30px;
+    width: 230px;
+    margin-left: 15px;
+    border-radius: 30px 0px 30px 30px;
 }
 
-
-.chatbot-2nd-box-rect {
-    background-color: #edebf7;
-    height: 20px;
-    left: 16px;
-    position: absolute;
-    top: 487px;
-    width: 37px;
-}
 
 .chatbot-2nd-box {
     background-color: #edebf7;
-    border-radius: 30px;
+    border-radius: 0px 30px 30px 30px;
     box-shadow: 0px 4px 5px #00000014;
     height: 43px;
     left: 16px;
@@ -166,9 +147,6 @@
     width: 159px;
 }
 
-.span {
-    font-weight: 500;
-}
 
 .chatbot-2nd-text {
     font-family: "IBM Plex Sans KR", Helvetica;
@@ -182,7 +160,6 @@
     top: 540px;
     width: 37px;
 }
-
 
 .element-2 {
     color: #000000;
@@ -200,22 +177,13 @@
 
 .chatbot-chat-box {
     background-color: #edebf7;
-    border-radius: 30px;
+    border-radius: 0px 30px 30px 30px;
     box-shadow: 0px 4px 5px #00000014;
     height: 234px;
     left: 15px;
     position: absolute;
     top: 240px;
     width: 274px;
-}
-
-.chatbot-chat-box-rect {
-    background-color: #edebf7;
-    height: 104px;
-    left: 15px;
-    position: absolute;
-    top: 240px;
-    width: 37px;
 }
 
 .chatbot-1st-rank {
@@ -351,13 +319,13 @@
     z-index: 1;
 }
 
-.scan {
+.chatbot-1st-title {
+    font-family: 'IBM Plex Sans KR', sans-serif;
     height: 24px;
     left: 14px;
     position: absolute;
     top: 14px;
-    width: 24px;
-    content: url('https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c674f661a7c21531072443/img/scan.svg');
+    width: 135px;
 }
 
 .recommend-input {

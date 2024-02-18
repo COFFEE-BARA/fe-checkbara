@@ -67,11 +67,11 @@ const RecommendChat = () => {
     };
 
     const handleStockButtonClick = (isbn) => {
-        window.location.href = `/api/book/${isbn}/stock`; 
+        window.location.href = `/api/book/${isbn}/stock`;
     };
 
     const handleBorrowButtonClick = (isbn) => {
-        window.location.href = `/api/book/${isbn}/lending-library?lat=${lati}&lon=${long}`; 
+        window.location.href = `/api/book/${isbn}/lending-library?lat=${lati}&lon=${long}`;
     };
 
     return (
@@ -81,9 +81,6 @@ const RecommendChat = () => {
                     <div className="chevron-left" onClick={clickLeftButton}></div>
                     <div className="index">
                         <div className="head-text">AI에게 책 추천받기</div>
-                        <div className="user-chat-wrapper">
-                            <div className="user-chat-box">{userInput}</div>
-                        </div>
                         <div className="bgrectangle">
                             <div className='recommend'>
                                 {messages.map((msg, index) => (
@@ -109,31 +106,23 @@ const RecommendChat = () => {
                             </div>
                         </div>
                     </div>
-                    <img
-                        className="user-chat-box"
-                        alt="Rectangle"
-                        src="https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c674f661a7c21531072443/img/rectangle-2044.png"
-                    />
-                    <div className="user-chat-box-rect" />
-                    <div className="chatbot-2nd-box-rect" />
+                    <div className="user-chat-wrapper">
+                        <div className="user-chat-box">{userInput}</div>
+                    </div>
                     <div className="chatbot-2nd-box" />
                     <p className="chatbot-rank-title-element">
                         <span className="span">2위 | </span>
                         <span className="chatbot-2nd-text">무슨 증명</span>
                     </p>
-                    <div className="rectangle-7" />
-                    <div className="rectangle-8" />
-                    <div className="rectangle-9" />
                     <div className="chatbot-chat-box" />
-                    <div className="chatbot-chat-box-rect" />
                     <p className="chatbot-1st-rank">
-                        <span className="span">제목 | </span>
+                        <span className="chatbot-1st-title">제목 | </span>
                         <span className="text-wrapper-4">
-                            {"구의 증명 "}
+                            {" "}
                             <br />
                         </span>
-                        <span className="span">저자 | </span>
-                        <span className="text-wrapper-4">최진영</span>
+                        <span className="span"> </span>
+                        <span className="text-wrapper-4"></span>
                     </p>
 
                     <div className="button-group">
