@@ -132,11 +132,12 @@ function RecommendChat() {
                     <div className="user-chat-box">
                         {messages.map((msg, index) => (
                             <div key={index} className={`message ${msg.sender}`} style={{ margin: '10px 20px' }}>
-                                {msg.message}
+                                {msg.sender === 'user' && msg.message}
                             </div>
                         ))}
                     </div>
                 </div>
+
                 <div className="chatbot-2nd-box" />
                 <p className="chatbot-rank-title-element">
                     <span className="span">2위 | </span>
