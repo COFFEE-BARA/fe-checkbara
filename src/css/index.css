@@ -1,0 +1,70 @@
+@import "./reset.css";
+@import "./loader.css";
+@import "./section.css";
+
+#App {
+    width: 100%;
+    min-height: 100%;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--font-color);
+    min-width: 320px;
+}
+
+@keyframes btnScale {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.25);
+    }
+}
+
+/* input */
+main {
+    padding-top: 30px;
+}
+
+.input-wrapper {
+    max-width: flex;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    padding: 0 45px;
+    position: relative;
+}
+
+input {
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    max-width: 430px;
+    width: 100%;
+    margin: 0 auto;
+    font-size: 15px;
+    background-color: transparent;
+    padding: 5px 8px;
+    border: none;
+    box-sizing: border-box;
+    transition: 0.2s;
+    border-bottom: 1px solid rgb(186, 186, 186); 
+}
+
+input:focus {
+    outline: none;
+}
+
+/* search랑 result 사이에 마진 주는 애들 */
+.cur-keywords {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 10px;
+    gap: 10px;
+}
+
+.cur-keyword {
+    margin-right: 5px;
+}

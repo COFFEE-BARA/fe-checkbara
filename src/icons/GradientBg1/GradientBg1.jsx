@@ -10,9 +10,9 @@ export const GradientBg1 = ({ className }) => {
     <svg
       className={`gradient-bg-1 ${className}`}
       fill="none"
-      height="853"
-      viewBox="0 0 393 853"
-      width="393"
+      height="932"
+      viewBox="0 0 393 852"
+      width="430"
       xmlns="http://www.w3.org/2000/svg"
     >
       <g className="g" clipPath="url(#clip0_101_7599)">

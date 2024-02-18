@@ -4,12 +4,12 @@ import '../css/MainPage.css'
 function MainPage() {
     function clickAiChatbotButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/recommendinput';
     }
 
     function clickBookSearchButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/inputsection';
     }
 
     function clickStatisticsButton(e) {
