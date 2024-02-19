@@ -248,7 +248,7 @@
     display: flex; 
     justify-content: center; /* 수평 가운데 정렬 */
     align-items: center; /* 수직 가운데 정렬 */
-    color: #c89cff; /* 텍스트 색상을 진한 보라색으로 설정 */
-    font-size: 10px; /* 텍스트 크기 설정 */
+    color:#d1caff;
+    font-size: 11px; /* 텍스트 크기 설정 */
     z-index: 1;
 }
