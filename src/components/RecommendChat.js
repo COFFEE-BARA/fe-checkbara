@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import {ClipLoader} from "react-spinners";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/recommend.css";
 import "../css/RecommendDefault.css";
@@ -100,7 +101,18 @@ const handleSendMessage = async () => {
   };
 
   if(loading){
-    return <div>로딩 중입니다.</div>
+    return (
+      <>
+        <div className="chevron-left"></div>
+        <div className="bgrectangle">
+          <div className="loading">
+            <h1>챗봇의 추천을 받아오는 중입니다</h1>
+            <ClipLoader color="#c89cff" height={15} width={15} margin={30} />
+          </div>
+        </div>
+        <div className="head-text">AI에게 책 추천받기</div>
+      </>
+    );
   }
 
   return (
