@@ -2,12 +2,15 @@ import React, { useState, useEffect } from "react";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/recommend.css";
 import "../css/RecommendDefault.css";
+import { useLocation } from "react-router-dom";
 
 function RecommendChat() {
     const [messages, setMessages] = useState([]);
     const [userInput, setUserInput] = useState('');
     const [loading, setLoading] = useState(false);
     const [data, setData] = useState([]);
+    const {state}=useLocation();
+    console.log(state)
 
     const fetchedData = [
         {

@@ -7,6 +7,7 @@ import MainPage from './components/MainPage.js';
 import RecommendInput from './components/RecommendInput';
 import RecommendChat from './components/RecommendChat';
 import { request } from './api/api.js'; //조정
+import BookDetailPage from "./components/BookDetailPage"
 
 
 const MAX_KEYWORD = 3;
@@ -45,6 +46,7 @@ function App() {
                         <Route path="/inputsection" element={<InputSection onSearch={onSearch} keywords={keywords} />} />
                         <Route path="/recommendinput" element={<RecommendInput />}/>
                         <Route path="/recommendchat" element={<RecommendChat />}/>
+                        <Route path="/detailpage" element={<BookDetailPage />}/>
                     </Routes>
                 </RecoilRoot>
             </BrowserRouter>

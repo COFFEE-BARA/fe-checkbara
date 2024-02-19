@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState,useEffect } from "react";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/RecommendDefault.css";
 import axios from "axios"
+import { useNavigate } from "react-router-dom";
 
 const RecommendInput = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
+  const navigate=useNavigate()
 
   //const apiKey = '';
   const apiEndpoint = 'https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/recommendation';
@@ -14,13 +16,11 @@ const RecommendInput = () => {
   const addMessage = (sender, message) => {
     setMessages(prevMessages => [...prevMessages, { sender, message }]);
   };
-
-  async function postData(query) {
-    console.log(query)
-
-    const data = await axios.post(apiEndpoint, { query:query});
   
-    return data.data;
+  async function postData(query) {
+    const data = await axios.post(apiEndpoint, { query:query});
+    
+    return data.data.data.recommendedBookList;
   }
 
 
@@ -53,8 +53,10 @@ const RecommendInput = () => {
       // }).then((res)=>{console.log(res)});
 
       // const data = await response.json();
-      const aiResponse = data.choices?.[0]?.message?.content || 'No response';
-      addMessage('bot', aiResponse);
+      // const aiResponse = data.choices?.[0]?.message?.content || 'No response';
+      // const aiResponse=data?data:"No response";
+      // console.log(data)
+      addMessage('bot', data);
     } catch (error) {
       console.error('오류 발생', error);
       addMessage('bot', '오류가 발생했습니다.');
@@ -62,6 +64,14 @@ const RecommendInput = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    const len=messages?.length
+    if (len>0&&len%2==0){
+      navigate("/recommendchat", {state:messages})
+    }
+  }, [messages])
+  
 
   const handleKeyDown = (event) => {
     if (event.key === 'Enter') {
@@ -72,6 +82,11 @@ const RecommendInput = () => {
   const clickLeftButton = () => {
     window.location.href = '/mainpage';
   };
+
+
+  if(loading){
+    return <div>로딩 중입니다.</div>
+  }
 
   return (
     <div id='App'>
