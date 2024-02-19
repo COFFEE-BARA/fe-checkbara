@@ -36,9 +36,6 @@ function InputSection() {
     const handleKeyup = useCallback((e) => {
         if (e.key === "Enter") {
             e.preventDefault();
-
-            console.log("Enter key pressed");
-
             getBookList()
 
         }

@@ -64,11 +64,6 @@
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.statistics-button:hover > .statistics-image{
-    background-color: #616BC0;
-    content: url('../images/statistics-white.png');
-}
-
 .image-wrapper {
     background-color: rgba(255, 255, 255, 0.9);
     border-radius: 23px;
@@ -82,8 +77,33 @@
     margin-top: -10px;
 }
 
-.image-wrapper:hover {
+.book-search-button:hover .image-wrapper {
     background-color: #616BC0;
+}
+
+.ai-chatbot-button:hover .image-wrapper {
+    background-color: #616BC0;
+}
+
+.statistics-button:hover .image-wrapper {
+    background-color: #616BC0;
+}
+
+.book-search-button:hover .book-search-image{
+    width: 32px;
+    height: 25px;
+    content: url('../images/book-search-white.png');
+}
+
+.ai-chatbot-button:hover .ai-chatbot-image{
+    width: 23px;
+    height: 23px;
+    content: url('../images/ai-chatbot-white.png'); 
+}
+
+.statistics-button:hover .statistics-image{
+    width: 30px;
+    content: url('../images/statistics-white.png');
 }
 
 .ai-chatbot-image {
@@ -92,32 +112,15 @@
     content: url('../images/ai-chatbot-black.png'); 
 }
 
-.ai-chatbot-image:hover {
-    width: 23px;
-    height: 23px;
-    content: url('../images/ai-chatbot-white.png'); 
-}
-
 .book-search-image {
     width: 32px;
     height: 25px;
     content: url('../images/book-search-black.png');
 }
 
-.book-search-image:hover {
-    width: 32px;
-    height: 25px;
-    content: url('../images/book-search-white.png');
-}
-
 .statistics-image {
     width: 30px;
     content: url('../images/statistics-black.png');
-}
-
-.statistics-image:hover {
-    width: 30px;
-    content: url('../images/statistics-white.png');
 }
 
 /* 

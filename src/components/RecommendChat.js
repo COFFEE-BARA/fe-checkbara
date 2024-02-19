@@ -192,15 +192,17 @@ const handleSendMessage = async () => {
               <div className="scan-wrapper" onClick={handleSendMessage}>
                 <img className="scan" alt="Scan" src="" />
               </div>
-              <div className="union"></div>
-              <input
-                type="text"
-                className="recommend-input"
-                placeholder="검색할 내용을 입력해주세요"
-                value={userInput}
-                onChange={e => setUserInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-              />
+              <div className="union-back"></div>
+            <div className="union">
+            </div>
+                <input
+                    type="text"
+                    className="recommend-input"
+                    placeholder="검색할 내용을 입력해주세요"
+                    value={userInput}
+                    onChange={e => setUserInput(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                />
             </div>
           </div>
         </div>

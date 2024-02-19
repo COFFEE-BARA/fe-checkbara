@@ -79,6 +79,15 @@
     justify-content: flex-end;
 }
 
+.union-back {
+    position: fixed; 
+    top: 739px; 
+    left: 0; 
+    width: 430px; 
+    height: 200px;
+    background-color: #ffffff; 
+}
+
 .union {
     height: 143px;
     margin-left: 49px;
@@ -86,9 +95,10 @@
     position: fixed;
     top: 740px;
     width: 340px;
-    content: url('https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c66a91aeea4e0fd74766d7/img/union.svg');
-    /* z-index: 1; */
+    background-image: url('https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c66a91aeea4e0fd74766d7/img/union.svg');
+    background-repeat: no-repeat;
 }
+
 
 .div {
     color: #bbbbbb;
