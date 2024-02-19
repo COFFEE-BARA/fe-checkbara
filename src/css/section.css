@@ -211,6 +211,12 @@ a:hover {
     margin-left: 30px;
 }
 
+.stock-button:hover {
+    background-color: #979edf;
+    cursor: pointer; 
+    color: white;
+}
+
 .borrow-button{
     background-color: #e5e6ebba;
     border-radius: 30px;
@@ -221,4 +227,10 @@ a:hover {
     line-height: 29px; 
     margin-top: 10px;
     margin-left: 30px;
+}
+
+.borrow-button:hover {
+    background-color: #979edf;
+    cursor: pointer; 
+    color: white;
 }
