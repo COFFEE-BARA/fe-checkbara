@@ -24,8 +24,6 @@ function BookDetailPage() {
     getDetail();
   }, []);
 
-  console.log(detail)
-
   return (
     <>
       {detail && (
