@@ -20,6 +20,14 @@ function BookDetailPage() {
     setDetail(data.data.data);
   }
 
+  const stockButton = isbn => {
+    return `/book/${isbn}/stock`;
+  };
+
+  const borrowButton = isbn => {
+    return `/book/${isbn}/lending-library`;
+  };
+
   useEffect(() => {
     getDetail();
   }, []);
@@ -73,9 +81,9 @@ function BookDetailPage() {
             </div>
           </main>
           <footer>
-            <div class="bookstore-stock-button">서점 재고</div>
-            <div class="library-stock-button">도서관 재고</div>
-            <div class="sales-link-button">판매 링크</div>
+            <div class="bookstore-stock-button" onClick={() => (window.location.href = stockButton(detail.isbn))}>서점 재고</div>
+            <div class="library-stock-button" onClick={() => (window.location.href = borrowButton(detail.isbn))}>도서관 재고</div>
+            <div class="sales-link-button"><a href={detail.purchaseURL}>판매 링크</a></div>
           </footer>
         </body>
       )}
