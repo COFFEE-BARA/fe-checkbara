@@ -18,7 +18,7 @@ function RecommendChat() {
 
 
   useEffect(()=>{
-    state&&setMessages(state)
+    if(messages.length==0){state&&setMessages(state)}
   },[])
   
   
