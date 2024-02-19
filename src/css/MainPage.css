@@ -1,11 +1,10 @@
 .main-background {
     background-image: url('../images/background.png');
     background-size: cover;
-    padding-top: 67%;
+    padding-top: 50%;
     padding-bottom: 67%;
     height: 100%;
     font-family: 'IBM Plex Sans KR', sans-serif;
-    font-size: medium;
 }
 
 .main-page-container {
@@ -16,12 +15,19 @@
     margin: 10px;
 }
 
-.check-bara-icon {
-    padding: 5%;
-}
-
 .check-bara-icon-text {
     font-size: xx-large;
+    font-weight: bold;
+    margin-top: 80px;
+    margin-left: 10px;
+}
+
+.check-bara-icon-hello {
+    font-size: 20px;
+    margin-left: 10px;
+    margin-top: 10px;
+    height: 30px;
+    width: 100px;
 }
 
 .ai-chatbot-button, .book-search-button, .statistics-button {
@@ -39,7 +45,17 @@
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.ai-chatbot-image, .book-search-image, .statistics-image {
+.ai-chatbot-image, .book-search-image {
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10% 17% 10% 17%;
+    border-radius: 15px;
+    box-shadow: 3px 3px 3px rgb(213, 213, 213);
+}
+
+.statistics-image{
+    width: 20px;
+    height: 20px;
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10% 17% 10% 17%;

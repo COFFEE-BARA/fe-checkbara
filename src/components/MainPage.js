@@ -23,8 +23,8 @@ function MainPage() {
             <div class="main-background">
                 <div class="main-page-container">
                     <div class="check-bara-icon">
-                        <h3 class="check-bara-icon-text">Check Bara</h3>
-                        <p class="check-bara-icon-hello">안녕하세요</p>
+                        <div class="check-bara-icon-text">Check Bara</div>
+                        <div class="check-bara-icon-hello">안녕하세요</div>
                     </div>
                     <div class="ai-chatbot-button" onClick={(clickAiChatbotButton)}>
                         <div class="ai-chatbot-image"></div>
