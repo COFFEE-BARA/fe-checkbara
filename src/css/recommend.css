@@ -167,7 +167,7 @@
     line-height: normal;
     /* position: absolute; */
     margin-top: 487px;
-    width: 159px;
+    /* width: 159px; */
 }
 
 
@@ -385,10 +385,10 @@
 
 .chatbot-1st-author {
     font-family: 'IBM Plex Sans KR', sans-serif;
-    height: 24px;
-    position: absolute;
-    margin-top: 2px;
-    width: 135px;
+    /* height: 24px; */
+    /* position: absolute; */
+    margin-top: 1px;
+    /* width: 135px; */
 }
 
 .recommend-input {
@@ -411,6 +411,8 @@
     padding: 20px;
     display: flex;
     gap: 20px;
+    /* min-height: 150px; */
+    align-items: center;
     /* justify-content: space-between; */
     /* width: 100%; */
 }

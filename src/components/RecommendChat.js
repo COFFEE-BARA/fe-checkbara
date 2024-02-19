@@ -104,8 +104,6 @@ function RecommendChat() {
     window.location.href = `/api/book/${isbn}/lending-library?lat=${lati}&lon=${long}`;
   };
 
-  state.length > 0 && state.map((msg, index) => msg.user === "user" && console.log(msg.message));
-
   return (
     <>
       <div id="App">

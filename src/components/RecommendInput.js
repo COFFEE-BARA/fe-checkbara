@@ -18,6 +18,7 @@ const RecommendInput = () => {
   };
   
   async function postData(query) {
+    console.log(query)
     const data = await axios.post(apiEndpoint, { query:query});
     
     return data.data.data.recommendedBookList;
@@ -33,29 +34,8 @@ const RecommendInput = () => {
     setLoading(true);
 
     try {
-      const data=await postData("아무거나")
-      // const response = await fetch(apiEndpoint, {
-      //   method: 'POST',
-      //   headers: {
-      //     'Content-Type': 'application/json',
-      //     // 'Authorization': `Bearer ${apiKey}`,
-      //   },
-      //   body: JSON.stringify({
-      //     query:"아무거나"
-      //     // messages: [{ role: 'user', content: message }],
-      //     // max_tokens: 1365,
-      //     /*top_p: 1,
-      //     temperature: 1,
-      //     frequency_penalty: 0.5,
-      //     presence_penalty: 0.5,*/
-      //     // stop: ['문장 생성 중단 단어'],
-      //   }),
-      // }).then((res)=>{console.log(res)});
-
-      // const data = await response.json();
-      // const aiResponse = data.choices?.[0]?.message?.content || 'No response';
-      // const aiResponse=data?data:"No response";
-      // console.log(data)
+      const data=await postData(userInput)
+      
       addMessage('bot', data);
     } catch (error) {
       console.error('오류 발생', error);
