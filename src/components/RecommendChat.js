@@ -153,7 +153,7 @@ const handleSendMessage = async () => {
                                     />
                                     <div>
                                       <p className="chatbot-1st-title">제목 | {message.title}</p>
-                                      <p className="chatbot-1st-author">저자 | {message.author}</p>
+                                      <p className="chatbot-1st-author">저자 | {message.author.replace(/\^/g, ", ")}</p>
                                     </div>
                                     </div>
 
