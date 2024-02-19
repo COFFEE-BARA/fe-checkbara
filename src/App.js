@@ -46,7 +46,7 @@ function App() {
                         <Route path="/inputsection" element={<InputSection onSearch={onSearch} keywords={keywords} />} />
                         <Route path="/recommendinput" element={<RecommendInput />}/>
                         <Route path="/recommendchat" element={<RecommendChat />}/>
-                        <Route path="/detailpage" element={<BookDetailPage />}/>
+                        <Route path="/detailpage/:isbn" element={<BookDetailPage />}/>
                     </Routes>
                 </RecoilRoot>
             </BrowserRouter>

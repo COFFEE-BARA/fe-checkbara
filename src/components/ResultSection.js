@@ -1,16 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
-import { useLocation } from "react-router-dom"; // useLocation 추가
+import { useLocation, useNavigate } from "react-router-dom"; // useLocation 추가
 import "../css/section.css";
 import "../css/index.css";
 
 function ResultSection({ data, loading }) {
+  const navigate = useNavigate();
   const stockButton = isbn => {
     return `/book/${isbn}/stock`;
   };
 
   const borrowButton = isbn => {
     return `/book/${isbn}/lending-library`;
+  };
+
+  const moveToDetail = isbn => {
+    navigate(`/detailpage/${isbn}`);
   };
 
   return (
@@ -24,7 +29,7 @@ function ResultSection({ data, loading }) {
               {data && data.length > 0 && (
                 <section>
                   {data.map((item, index) => (
-                    <div key={index} className="source-isbn">
+                    <div key={index} className="source-isbn" onClick={() => moveToDetail(item.isbn)}>
                       <img
                         src={item.image ? item.image : "../img/notFound.png"}
                         alt="Thumbnail"
@@ -38,6 +43,7 @@ function ResultSection({ data, loading }) {
                         </div>
                         <p className="author">{item.author}</p>
                         <p className="price">{Number(item.price).toLocaleString()}원</p>
+
                         <div className="stock-button" onClick={() => (window.location.href = stockButton(item.isbn))}>
                           재고
                         </div>
