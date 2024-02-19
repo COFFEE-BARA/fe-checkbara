@@ -26,22 +26,22 @@ function ResultSection({ data, loading }) {
                   {data.map((item, index) => (
                     <div key={index} className="source-isbn">
                       <img
-                        src={item.ImageURL ? item.ImageURL : "../img/notFound.png"}
+                        src={item.image ? item.image : "../img/notFound.png"}
                         alt="Thumbnail"
                         className="thumbnail"
                       />
                       <div className="source-details">
                         <div className="title">
-                          <a href={item.ISBN} target="_blank" rel="noopener noreferrer">
-                            {item.Title}
+                          <a href={item.isbn} target="_blank" rel="noopener noreferrer">
+                            {item.title}
                           </a>
                         </div>
-                        <p className="author">{item.Author}</p>
-                        <p className="price">{Number(item.Price).toLocaleString()}원</p>
-                        <div className="stock-button" onClick={() => (window.location.href = stockButton(item.ISBN))}>
+                        <p className="author">{item.author}</p>
+                        <p className="price">{Number(item.price).toLocaleString()}원</p>
+                        <div className="stock-button" onClick={() => (window.location.href = stockButton(item.isbn))}>
                           재고
                         </div>
-                        <div className="borrow-button" onClick={() => (window.location.href = borrowButton(item.ISBN))}>
+                        <div className="borrow-button" onClick={() => (window.location.href = borrowButton(item.isbn))}>
                           대출
                         </div>
                       </div>

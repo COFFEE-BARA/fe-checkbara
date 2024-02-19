@@ -15,24 +15,20 @@ function InputSection() {
     
     async function getData(keyword) {
         // MEMO: 여기까지 잘 들어옴
-        console.log(keyword)
-        const url=`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/api/book/search?keyword=${keyword}`
+        const url=`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/search?keyword=${keyword}`
 
         const data = await axios.get(url);
+        // console.log(data)
       
-        return data.data.bookList;
+        return data.data.data.bookList;
       }
 
     const getBookList=async ()=>{
         try{
         const data=await getData(curKeywords)
-        console.log(data)
-        const filteredData = data&& data.filter(item =>
-            item.Title.toLowerCase().includes(curKeywords.toLowerCase())
-        );
-        setSearchResult(filteredData?.length > 0 ? filteredData : null); // 일치하는 데이터가 없으면 null로 설정
-        console.log("Search Result:", filteredData);
-        // setData(response)
+        
+        setSearchResult(data)
+        
         }
         catch(err){console.log(err)}
     }
@@ -45,20 +41,6 @@ function InputSection() {
 
             getBookList()
 
-            // const filteredData = data&& data.filter(item =>
-            //     item.Title.toLowerCase().includes(curKeywords.toLowerCase())
-            // );
-            // setSearchResult(filteredData?.length > 0 ? filteredData : null); // 일치하는 데이터가 없으면 null로 설정
-            // console.log("Search Result:", filteredData);
-
-            // const bgRectangleElement = document.querySelector('.bgrectangle');
-
-            // if (bgRectangleElement) {
-            //     ReactDOM.render(<ResultSection data={filteredData} />, bgRectangleElement);
-            // } else {
-            //     console.error('Class 이름이 bgrectangle인 요소를 찾을 수 없습니다.');
-            // }
-            // navigate('/resultsection', { state: { data: filteredData } });
         }
     }, [curKeywords, searchResult, navigate]);
 
@@ -94,7 +76,7 @@ function InputSection() {
                     </div>
                 </div>
             </div>
-            <ResultSection data={searchResult}  loading={loading}/>
+            <ResultSection data={searchResult} loading={loading}/>
         </>
     );
 }
