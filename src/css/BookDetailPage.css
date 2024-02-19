@@ -13,18 +13,13 @@ header {
     width: 100%;
     z-index: 1000;
     display: flex;
+    background-color: rgba(255, 255, 255, 0.5); /* 여기에 색상 및 투명도 조절 */
 }
 
-header>button {
-    margin: 2% 3% 2% 3%;
-    padding: 0px 2% 0px 2%;
-    background-color: #f3f1ff;
-    border: none;
-    font-size: xx-large;
-}
 
 .book-title {
     flex-direction: column;
+    width: 360px;
 }
 
 .book-author {
@@ -49,6 +44,7 @@ main {
 }
 
 .book-info2 {
+    margin-top: 100px;
     padding: 10px;
 }
 
@@ -57,26 +53,25 @@ main {
     border-radius: 15px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
     align-items: center;
     text-align: center;
     width: 80%;
-    margin: auto;
     margin-top: 5%;
+    margin-left: 10%;
     height: 101px;
-    width: 350px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .book-publisher,
 .book-date,
 .book-price {
-    margin: 30px;
+    margin: auto;
 }
 
 .book-publisher1,
 .book-date1,
 .book-price1 {
+    font-size: 15px;
     font-weight: bold;
 }
 
@@ -91,14 +86,14 @@ main {
     width: 70%;
     text-align: center;
     margin: auto;
-    border-radius: 10px;
-    border: 1px solid #ccc;
+    border-radius: 15px;
     overflow: hidden;
-}
+} 
 
 .book-image img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    border-radius: inherit;
 }
 
 footer {
@@ -146,4 +141,11 @@ footer>div {
     padding: 7% 7% 300px 7%;
     margin-top: 20px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.back-button{
+    content: url('https://cdn.animaapp.com/projects/65c654a881257e46c59d2046/releases/65c654e3cea0d4810c2d3337/img/chevron-left-2.svg');
+    height: 30px;
+    width: 30px;
+    margin-top: 20px;
 }

@@ -6,9 +6,11 @@ import axios from "axios";
 
 function BookDetailPage() {
   const navigate = useNavigate();
+
   const onClickBackButton = () => {
     navigate(-1);
   };
+
   const { isbn } = useParams();
   const [detail, setDetail] = useState();
 
@@ -37,7 +39,7 @@ function BookDetailPage() {
       {detail && (
         <body>
           <header class="book-info1">
-            <button onClick={onClickBackButton}>{"<"}</button>
+            <div className="back-button" onClick={onClickBackButton}/>
             <div class="book-title-author">
               <div class="book-title">{detail.title}</div>
               <div class="book-author">{detail.authore}</div>
@@ -54,11 +56,11 @@ function BookDetailPage() {
                   <div class="book-publisher2">출판사</div>
                 </div>
                 <div class="book-date">
-                  <div class="book-date1">{detail.publishingDate}</div>
+                  <div class="book-date1">{detail.publishingDate.slice(2).replace(/-/g, '')}</div>
                   <div class="book-date2">출간일</div>
                 </div>
                 <div class="book-price">
-                  <div class="book-price1">{detail.price}</div>
+                  <div class="book-price1">{Number(detail.price).toLocaleString()}원</div>
                   <div class="book-price2">가격</div>
                 </div>
               </div>

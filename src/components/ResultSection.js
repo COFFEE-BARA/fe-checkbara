@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import { useLocation, useNavigate } from "react-router-dom"; // useLocation 추가
 import "../css/section.css";
@@ -29,20 +29,23 @@ function ResultSection({ data, loading }) {
               {data && data.length > 0 && (
                 <section>
                   {data.map((item, index) => (
-                    <div key={index} className="source-isbn" onClick={() => moveToDetail(item.isbn)}>
+                    <div key={index} className="source-isbn">
                       <img
                         src={item.image ? item.image : "../img/notFound.png"}
                         alt="Thumbnail"
                         className="thumbnail"
+                        onClick={() => moveToDetail(item.isbn)}
                       />
                       <div className="source-details">
-                        <div className="title">
-                          <a href={item.isbn} target="_blank" rel="noopener noreferrer">
-                            {item.title}
-                          </a>
+                        <div className="title" onClick={() => moveToDetail(item.isbn)}>
+                          {item.title}
                         </div>
-                        <p className="author">{item.author}</p>
-                        <p className="price">{Number(item.price).toLocaleString()}원</p>
+                        <p className="author" onClick={() => moveToDetail(item.isbn)}>
+                          {item.author}
+                        </p>
+                        <p className="price" onClick={() => moveToDetail(item.isbn)}>
+                          {Number(item.price).toLocaleString()}원
+                        </p>
 
                         <div className="stock-button" onClick={() => (window.location.href = stockButton(item.isbn))}>
                           재고
