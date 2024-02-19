@@ -3,28 +3,36 @@ import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/recommend.css";
 import "../css/RecommendDefault.css";
 import { useLocation } from "react-router-dom";
+import {useRecoilState} from "recoil";
+import {chatMessages} from "../atom/chatMessages"
+import axios from "axios";
+
 
 function RecommendChat() {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useRecoilState(chatMessages);
   const [userInput, setUserInput] = useState("");
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState([]);
   const { state } = useLocation();
-  //   console.log(state);
 
-  const fetchedData = [
-    {
-      Title: "파이썬",
-      ImageURL: "https://shopping-phinf.pstatic.net/main_3250509/32505092162.20221101113257.jpg",
-      ISBN: "9791158391461",
-      Price: "0",
-      Author: "조대표",
-    },
-  ];
 
-  const apiKey = "";
-  const apiEndpoint = "https://api.openai.com/v1/chat/completions"; //바꾸기
-  const isbn = "1234";
+  useEffect(()=>{
+    state&&setMessages(state)
+  },[])
+
+//   const fetchedData = [
+//     {
+//       Title: "파이썬",
+//       ImageURL: "https://shopping-phinf.pstatic.net/main_3250509/32505092162.20221101113257.jpg",
+//       ISBN: "9791158391461",
+//       Price: "0",
+//       Author: "조대표",
+//     },
+//   ];
+
+//   const apiKey = "";
+  
+//   const isbn = "1234";
   const lati = "5678";
   const long = "910";
 
@@ -40,53 +48,83 @@ function RecommendChat() {
   };
 
   // 컴포넌트가 마운트될 때 데이터를 가져오도록 설정
-  useEffect(() => {
-    setData(fetchedData); //나중에 fetchData로 수정해야할듯
-  }, []);
+//   useEffect(() => {
+//     setData(fetchedData); //나중에 fetchData로 수정해야할듯
+//   }, []);
+  
+  const apiEndpoint = 'https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/recommendation';
 
   const addMessage = (sender, message) => {
     setMessages(prevMessages => [...prevMessages, { sender, message }]);
   };
+  
+  async function postData(query) {
+    console.log(query)
+    const data = await axios.post(apiEndpoint, { query:query});
+    
+    return data.data.data.recommendedBookList;
+  }
 
-  const handleSendMessage = async () => {
+//   const handleSendMessage = async () => {
+//     const message = userInput.trim();
+//     if (message.length === 0) return;
+
+//     addMessage("user", message);
+//     setUserInput("");
+//     setLoading(true);
+
+//     try {
+//       const response = await fetch(apiEndpoint, {
+//         method: "POST",
+//         headers: {
+//           "Content-Type": "application/json",
+//           Authorization: `Bearer ${apiKey}`,
+//         },
+//         body: JSON.stringify({
+//           model: "kdhyun08__taaco_sts",
+//           messages: [{ role: "user", content: message }],
+//           max_tokens: 1365,
+//           stop: ["문장 생성 중단 단어"],
+//         }),
+//       });
+
+//       const data = await response.json();
+//       const aiResponse = data.choices?.[0]?.message?.content || "No response";
+//       addMessage("bot", aiResponse);
+//     } catch (error) {
+//       console.error("오류 발생", error);
+//       addMessage("오류 발생");
+//     } finally {
+//       setLoading(false);
+//     }
+//   };
+const handleSendMessage = async () => {
     const message = userInput.trim();
     if (message.length === 0) return;
 
-    addMessage("user", message);
-    setUserInput("");
+    addMessage('user', message);
+    setUserInput('');
     setLoading(true);
 
     try {
-      const response = await fetch(apiEndpoint, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: "kdhyun08__taaco_sts",
-          messages: [{ role: "user", content: message }],
-          max_tokens: 1365,
-          stop: ["문장 생성 중단 단어"],
-        }),
-      });
-
-      const data = await response.json();
-      const aiResponse = data.choices?.[0]?.message?.content || "No response";
-      addMessage("bot", aiResponse);
+      const data=await postData(userInput)
+      
+      addMessage('bot', data);
     } catch (error) {
-      console.error("오류 발생", error);
-      addMessage("오류 발생");
+      console.error('오류 발생', error);
+      addMessage('bot', '오류가 발생했습니다.');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleKeyDown = event => {
-    if (event.key === "Enter") {
+
+  const handleKeyDown = (event) => {
+    if (event.key === 'Enter') {
       handleSendMessage();
     }
   };
+
 
   const clickLeftButton = () => {
     window.location.href = "/mainpage";
@@ -104,6 +142,12 @@ function RecommendChat() {
     window.location.href = `/api/book/${isbn}/lending-library?lat=${lati}&lon=${long}`;
   };
 
+
+
+  if(loading){
+    return <div>로딩 중입니다.</div>
+  }
+
   return (
     <>
       <div id="App">
@@ -112,7 +156,7 @@ function RecommendChat() {
           <div className="index">
             <div className="head-text">AI에게 책 추천받기</div>
             <div className="bgrectangle">
-              {state.map((msg, index) => {
+              {messages?.length>0&&messages.map((msg, index) => {
                 return (
                   <div key={index}>
                     {msg.sender === "user" && (
@@ -147,13 +191,13 @@ function RecommendChat() {
                                     </div>
 
                                     <div className="button-group">
-                                      <div className="chat-button" onClick={() => handleDetailButtonClick(isbn)}>
+                                      <div className="chat-button" onClick={() => handleDetailButtonClick(message.isbn)}>
                                         상세정보
                                       </div>
-                                      <div className="chat-button" onClick={() => handleStockButtonClick(isbn)}>
+                                      <div className="chat-button" onClick={() => handleStockButtonClick(message.isbn)}>
                                         서점재고
                                       </div>
-                                      <div className="chat-button" onClick={() => handleBorrowButtonClick(isbn)}>
+                                      <div className="chat-button" onClick={() => handleBorrowButtonClick(message.isbn)}>
                                         대출여부
                                       </div>
                                     </div>
@@ -164,10 +208,6 @@ function RecommendChat() {
                                   <>
                                     <div className="chatbot-2nd-box">
                                     {idx + 1}위 | {message.title}
-                                    {/* <p className="chatbot-rank-title-element">
-                                      <span className="span">{idx + 1}위 | </span>
-                                      <span className="chatbot-2nd-text">{message.title}</span>
-                                    </p> */}
                                     </div>
                                   </>
                                 )

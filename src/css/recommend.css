@@ -9,7 +9,7 @@
 .bgrectangle {
     background-color: #ffffff;
     border-radius: 40px 40px 0px 0px;
-    height: 100%;
+    height: 100vh;
     left: 0;
     /* position: absolute; */
     top: 100px;
@@ -19,6 +19,8 @@
     z-index: 0;
     display: flex;
     flex-direction: column;
+
+    padding-bottom: 2000px;
 }
 
 .overlap-group-wrapper {
@@ -127,12 +129,13 @@
 }
 
 .chatbot-2nd-box {
-    padding: 5px 10px;
+    padding: 10px;
     background-color: #edebf7;
     border-radius: 0px 30px 30px 30px;
     box-shadow: 0px 4px 5px #00000014;
     /* height: 43px; */
     margin-left: 16px;
+    margin-top: 20px;
     /* position: absolute; */
     top: 487px;
     width: 274px;
@@ -151,7 +154,7 @@
     /* position: absolute; */
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    /* gap: 20px; */
     margin-top: 20px;
     
 }

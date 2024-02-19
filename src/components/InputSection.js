@@ -13,20 +13,20 @@ function InputSection() {
     const navigate = useNavigate(); // useNavigate 밖에서 호출
     const [loading, setLoading] = useState(true);
     
-    async function getData(검색어) {
+    async function getData(keyword) {
         // MEMO: 여기까지 잘 들어옴
-        console.log(검색어)
-        const url=`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/api/book/search?keyword=${검색어}`
+        console.log(keyword)
+        const url=`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/api/book/search?keyword=${keyword}`
 
         const data = await axios.get(url);
       
         return data.data.bookList;
       }
 
-
     const getBookList=async ()=>{
         try{
         const data=await getData(curKeywords)
+        console.log(data)
         const filteredData = data&& data.filter(item =>
             item.Title.toLowerCase().includes(curKeywords.toLowerCase())
         );

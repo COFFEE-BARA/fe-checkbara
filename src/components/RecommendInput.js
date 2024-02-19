@@ -3,9 +3,11 @@ import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/RecommendDefault.css";
 import axios from "axios"
 import { useNavigate } from "react-router-dom";
+import {useRecoilState} from "recoil";
+import {chatMessages} from "../atom/chatMessages"
 
 const RecommendInput = () => {
-  const [messages, setMessages] = useState([]);
+  const [messages, setMessages] = useRecoilState(chatMessages);
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
   const navigate=useNavigate()
@@ -90,7 +92,8 @@ const RecommendInput = () => {
                 type='text'
                 className="recommend-input"
                 placeholder='검색할 내용을 입력해주세요'
-                value={userInput} onChange={(e) => setUserInput(e.target.value)}
+                value={userInput} 
+                onChange={(e) => setUserInput(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
               <div className="scan-wrapper" onClick={handleSendMessage}>
