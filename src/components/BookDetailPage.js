@@ -23,7 +23,9 @@ function BookDetailPage() {
   useEffect(() => {
     getDetail();
   }, []);
-  
+
+  console.log(detail)
+
   return (
     <>
       {detail && (
@@ -38,7 +40,7 @@ function BookDetailPage() {
           <main>
             <div class="book-info2">
               <div class="book-image">
-                <img src={image} />
+                <img src={detail.image} />
               </div>
               <div class="book-info2-child">
                 <div class="book-publisher">
@@ -63,16 +65,12 @@ function BookDetailPage() {
               <div class="book-agenda">
                 <h3 class="book-agenda1">목차</h3>
                 <div class="book-agenda2">
-                  {/* 1. 구<br/>
-                                2. 의<br/>
-                                3. 증<br/>
-                                4. 명<br/>
-                                5. 구<br/>
-                                6. 의<br/>
-                                7. 증<br/>
-                                8. 명<br/> */}
-                  {detail.publisherBookReview}
+                  {detail.tableOfContents}
                 </div>
+              </div>
+              <div class="book-review">
+                <h3 class="book-reivew1">출판사 서평</h3>
+                <div class="book-reivew2">{detail.publisherBookReview}</div>
               </div>
             </div>
           </main>
