@@ -83,7 +83,7 @@ const handleSendMessage = async () => {
   };
 
   const handleDetailButtonClick = isbn => {
-    window.location.href = `/api/book/${isbn}/detail`;
+    navigate (`/detailpage/${isbn}`);
   };
 
   const handleStockButtonClick = isbn => {

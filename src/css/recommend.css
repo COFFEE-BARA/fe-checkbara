@@ -129,6 +129,7 @@
 }
 
 .chatbot-2nd-box {
+    font-family: "IBM Plex Sans KR", Helvetica;
     padding: 10px;
     background-color: #edebf7;
     border-radius: 0px 30px 30px 30px;
@@ -141,13 +142,12 @@
     width: 274px;
 
     color: #000000;
-    font-family: "IBM Plex Sans KR-Medium", Helvetica;
     font-size: 13px;
     font-weight: 400;
     letter-spacing: 0;
     line-height: normal;
 
-    max-height: 40px;
+    max-height: 60px;
 }
 
 .total-bots{

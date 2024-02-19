@@ -73,7 +73,7 @@
     height: 96px;
     left: 65px;
     position: absolute;
-    top: 220px;
+    top: 190px;
     width: 303px;
 }
 
@@ -81,7 +81,7 @@
     background-color: #ffffff;
     border-radius: 20px;
     box-shadow: 1px 1px 13px 1px #d2cbff;
-    height: 96px;
+    height: 70px;
     left: 65px;
     position: absolute;
     top: 95px;
@@ -94,7 +94,8 @@
     font-family: "IBM Plex Sans KR", Helvetica;
     font-size: 13px;
     font-weight: 400;
-    left: 95px;
+    left: 105px;
+    margin-top: 10px;
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
@@ -111,7 +112,7 @@
     letter-spacing: 0;
     line-height: normal;
     position: absolute;
-    top: 235px;
+    top: 205px;
     width: 250px;
 }
 

@@ -67,7 +67,7 @@ const RecommendInput = () => {
 
 
   if(loading){
-    return <div>로딩 중입니다.</div>
+    return <div className="loading">로딩 중입니다.</div>
   }
 
   return (
@@ -85,7 +85,7 @@ const RecommendInput = () => {
               <p className="p">도커에 대한 정보도 친절하게 설명이 되어 있는 쿠버네티스 입문 책 추천해줘</p>
 
               <div className="example-rect2" />
-              <p className="p2">쿠우쿠우 많이 먹을 수 있는 방법이 나와있는 책 추천해줘</p>
+              <p className="p2">Elasitcsearch 공부하기 좋은 책 추천해줘</p>
 
               <div className='union'></div>
               <input
