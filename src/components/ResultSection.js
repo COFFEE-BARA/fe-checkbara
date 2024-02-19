@@ -4,10 +4,7 @@ import { useLocation } from 'react-router-dom'; // useLocation 추가
 import '../css/section.css';
 import '../css/index.css';
 
-function ResultSection() {
-    const [loading, setLoading] = useState(true);
-    const location = useLocation(); // useLocation 훅 사용
-
+function ResultSection({data, loading}) {
     const stockButton = (isbn) => {
         return `/book/${isbn}/stock`;
     };
@@ -15,18 +12,6 @@ function ResultSection() {
     const borrowButton = (isbn) => {
         return `/book/${isbn}/lending-library`;
     };
-
-    useEffect(() => {
-        // 데이터가 로드되면 로딩 상태를 false로 변경
-        const data = location.state?.data; // location에서 data 받아오기
-        if (data) {
-            setLoading(false);
-        }
-    }, [location]);
-
-    const data = location.state?.data; // location에서 data 받아오기
-
-    console.log("Data:", data); // 데이터 확인용 콘솔 로그
 
     return (
         <>
@@ -36,15 +21,15 @@ function ResultSection() {
                         <div>데이터를 로딩 중입니다...</div>
                     ) : (
                         <>
-                            {data && data.length > 0 ? (
+                            {data && data.length > 0 && (
                                 <section>
                                     {data.map((item, index) => (
                                         <div key={index} className="source-isbn">
                                             <img src={item.ImageURL ? item.ImageURL : "../img/notFound.png"} alt="Thumbnail" className="thumbnail" />
                                             <div className="source-details">
-                                                <p className="title">
+                                                <div className="title">
                                                     <a href={item.ISBN} target="_blank" rel="noopener noreferrer">{item.Title}</a>
-                                                </p>
+                                                </div>
                                                 <p className="author">{item.Author}</p>
                                                 <p className="price">{Number(item.Price).toLocaleString()}원</p>
                                                 <div className="stock-button" onClick={() => window.location.href = stockButton(item.ISBN)}>재고</div>
@@ -53,15 +38,13 @@ function ResultSection() {
                                         </div>
                                     ))}
                                 </section>
-                            ) : (
-                                <div>데이터가 없습니다.</div>
                             )}
                         </>
                     )}
                 </div>
             </div>
         </>
-    );
+    )
 }
 
 export default ResultSection;

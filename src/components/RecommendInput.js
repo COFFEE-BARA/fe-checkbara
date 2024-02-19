@@ -1,18 +1,28 @@
 import React, { useState } from "react";
 import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/RecommendDefault.css";
+import axios from "axios"
 
 const RecommendInput = () => {
   const [messages, setMessages] = useState([]);
   const [userInput, setUserInput] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const apiKey = '';
-  const apiEndpoint = 'https://api.openai.com/v1/chat/completions';
+  //const apiKey = '';
+  const apiEndpoint = 'https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/recommendation';
 
   const addMessage = (sender, message) => {
     setMessages(prevMessages => [...prevMessages, { sender, message }]);
   };
+
+  async function postData(query) {
+    console.log(query)
+
+    const data = await axios.post(apiEndpoint, { query:query});
+  
+    return data.data;
+  }
+
 
   const handleSendMessage = async () => {
     const message = userInput.trim();
@@ -23,25 +33,26 @@ const RecommendInput = () => {
     setLoading(true);
 
     try {
-      const response = await fetch(apiEndpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${apiKey}`,
-        },
-        body: JSON.stringify({
-          model: 'kdhyun08__taaco_sts',
-          messages: [{ role: 'user', content: message }],
-          max_tokens: 1365,
-          top_p: 1,
-          temperature: 1,
-          frequency_penalty: 0.5,
-          presence_penalty: 0.5,
-          stop: ['문장 생성 중단 단어'],
-        }),
-      });
+      const data=await postData("아무거나")
+      // const response = await fetch(apiEndpoint, {
+      //   method: 'POST',
+      //   headers: {
+      //     'Content-Type': 'application/json',
+      //     // 'Authorization': `Bearer ${apiKey}`,
+      //   },
+      //   body: JSON.stringify({
+      //     query:"아무거나"
+      //     // messages: [{ role: 'user', content: message }],
+      //     // max_tokens: 1365,
+      //     /*top_p: 1,
+      //     temperature: 1,
+      //     frequency_penalty: 0.5,
+      //     presence_penalty: 0.5,*/
+      //     // stop: ['문장 생성 중단 단어'],
+      //   }),
+      // }).then((res)=>{console.log(res)});
 
-      const data = await response.json();
+      // const data = await response.json();
       const aiResponse = data.choices?.[0]?.message?.content || 'No response';
       addMessage('bot', aiResponse);
     } catch (error) {
