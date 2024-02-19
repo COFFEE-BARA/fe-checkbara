@@ -46,6 +46,8 @@ function ResultSection({ data, loading }) {
                         <p className="price" onClick={() => moveToDetail(item.isbn)}>
                           {Number(item.price) !== 0 ? Number(item.price).toLocaleString() + "원" : "정보 없음"}
                         </p>
+                      </div>
+                      <div className="button-wrapper">
                         <div className="stock-button" onClick={() => (window.location.href = stockButton(item.isbn))}>
                           재고
                         </div>
