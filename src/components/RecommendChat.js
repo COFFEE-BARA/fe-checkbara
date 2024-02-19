@@ -104,6 +104,8 @@ function RecommendChat() {
     window.location.href = `/api/book/${isbn}/lending-library?lat=${lati}&lon=${long}`;
   };
 
+  state.length > 0 && state.map((msg, index) => msg.user === "user" && console.log(msg.message));
+
   return (
     <>
       <div id="App">
@@ -112,6 +114,79 @@ function RecommendChat() {
           <div className="index">
             <div className="head-text">AI에게 책 추천받기</div>
             <div className="bgrectangle">
+              {state.map((msg, index) => {
+                return (
+                  <div key={index}>
+                    {msg.sender === "user" && (
+                      <div className="user-chat-wrapper">
+                        <div className="user-chat-box">
+                          <div className={`message ${msg.sender}`} style={{ margin: "10px 20px" }}>
+                            {msg.message}
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                    
+                    <div className="total-bots">
+                    {msg.sender === "bot" && (
+                      <>
+                        {msg.message?.map((message, idx) => {
+                          return (
+                            <div key={idx}>
+                              {idx === 0 ? (
+                                <div className="chatbot-chat-box">
+                                  <div key={index} className="chatbot-1st-rank">
+                                    <div className="book-content-wrapper">
+                                    <img
+                                      src={message.image ? message.image : "../img/notFound.png"}
+                                      alt="book-image"
+                                      className="book-image-chat"
+                                    />
+                                    <div>
+                                      <p className="chatbot-1st-title">제목 | {message.title}</p>
+                                      <p className="chatbot-1st-author">저자 | {message.author}</p>
+                                    </div>
+                                    </div>
+
+                                    <div className="button-group">
+                                      <div className="chat-button" onClick={() => handleDetailButtonClick(isbn)}>
+                                        상세정보
+                                      </div>
+                                      <div className="chat-button" onClick={() => handleStockButtonClick(isbn)}>
+                                        서점재고
+                                      </div>
+                                      <div className="chat-button" onClick={() => handleBorrowButtonClick(isbn)}>
+                                        대출여부
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ) : (
+                                idx < 4 && (
+                                  <>
+                                    <div className="chatbot-2nd-box">
+                                    {idx + 1}위 | {message.title}
+                                    {/* <p className="chatbot-rank-title-element">
+                                      <span className="span">{idx + 1}위 | </span>
+                                      <span className="chatbot-2nd-text">{message.title}</span>
+                                    </p> */}
+                                    </div>
+                                  </>
+                                )
+                              )}
+                            </div>
+                          );
+                        })}
+                      </>
+                    )}
+                    </div>
+                  </div>
+                );
+              })}
+
+              <div className="scan-wrapper" onClick={handleSendMessage}>
+                <img className="scan" alt="Scan" src="" />
+              </div>
               <div className="union"></div>
               <input
                 type="text"
@@ -121,76 +196,9 @@ function RecommendChat() {
                 onChange={e => setUserInput(e.target.value)}
                 onKeyDown={handleKeyDown}
               />
-              <div className="scan-wrapper" onClick={handleSendMessage}>
-                <img className="scan" alt="Scan" src="" />
-              </div>
             </div>
           </div>
         </div>
-
-        {state.map((msg, index) => {
-          console.log(msg.sender==="user"&&msg.message);
-          return (
-            <>
-              {msg.sender === "user" && (
-                <div key={index} className={`message ${msg.sender}`} style={{ margin: "10px 20px" }}>
-                  {msg.message}
-                </div>
-              )}
-
-              {msg.sender === "bot" && (
-                <div key={index}>
-                  {msg.messages?.map((message, idx) => {
-                    console.log(message);
-                    return (
-                      <div key={idx}>
-                        {idx === 0 ? (
-                          <>
-                            {/* 첫번째 정보 */}
-                            <div key={index} className="chatbot-1st-rank">
-                              <img
-                                src={message.image ? message.image : "../img/notFound.png"}
-                                alt="book-image"
-                                className="book-image"
-                              />
-                              <div>
-                                <p className="chatbot-1st-title">제목 | {message.title}</p>
-                                <p className="chatbot-1st-author">저자 | {message.author}</p>
-                              </div>
-                            </div>
-
-                            <div className="button-group">
-                              <div className="detail-rect" onClick={() => handleDetailButtonClick(isbn)}>
-                                <div className="detail-text">상세정보</div>
-                              </div>
-                              <div className="stock-rect" onClick={() => handleStockButtonClick(isbn)}>
-                                <div className="stock-text">서점재고</div>
-                              </div>
-                              <div className="borrow-rect" onClick={() => handleBorrowButtonClick(isbn)}>
-                                <div className="borrow-text">대출여부</div>
-                              </div>
-                            </div>
-                          </>
-                        ) : (
-                          idx < 4 && (
-                            <>
-                              {/* 2, 3, 4위 정보 */}
-                              <div className="chatbot-2nd-box" />
-                              <p className="chatbot-rank-title-element">
-                                <span className="span">{index + 1}위 | </span>
-                                <span className="chatbot-2nd-text">{message.title}</span>
-                              </p>
-                            </>
-                          )
-                        )}
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </>
-          );
-        })}
 
         {/* 유저 질문 */}
         {/* <div className="user-chat-wrapper">
