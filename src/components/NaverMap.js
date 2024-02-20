@@ -24,6 +24,15 @@ function NaverMap() {
     const mapRef = useRef<window.naver.maps.Map | null>(null);
     const [list, setList] = useState();
 
+    async function getList() {
+        const data = await axios.get(path);
+        setList(data.data.data);
+    } 
+
+    useEffect(() => {
+        getList();
+      }, []);
+
     useEffect(() => {
         const success = (location) => {
             setCurrentMyLocation({
@@ -96,11 +105,12 @@ function NaverMap() {
     }, [currentMyLocation]);
 
     useEffect(() => {
+        var data;
         // 도서관 및 서점 리스트, 책 제목 백엔드에서 axios get으로 받아오기
         async function getList() {
             // 서점: bookstore, branch, stock, lat, lon
             // 도서관: libCode, libName, lat, lon
-            const data = await axios.get(apiUrl);
+            data = await axios.get(apiUrl);
             setList(data.data.data);
         } 
         getList();
@@ -112,7 +122,7 @@ function NaverMap() {
         }
         // 도서관 마커 찍는 코드 작성
 
-    },[setData])
+    },[setList])
 
     return (
         <>

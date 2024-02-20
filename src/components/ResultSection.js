@@ -5,8 +5,8 @@ import "../css/index.css";
 
 function ResultSection({ data, loading }) {
   const navigate = useNavigate();
-  const stockButton = isbn => {
-    return `/book/${isbn}/bookstore`;
+  const stockButton = (isbn, price) => {
+    return `/book/${isbn}/${price}/bookstore`;
   };
 
   const borrowButton = isbn => {
@@ -47,7 +47,7 @@ function ResultSection({ data, loading }) {
                         </p>
                       </div>
                       <div className="button-wrapper">
-                        <div className="stock-button" onClick={() => (window.location.href = stockButton(item.isbn))}>
+                        <div className="stock-button" onClick={() => (window.location.href = stockButton(item.isbn, item.price))}>
                           재고
                         </div>
                         <div className="borrow-button" onClick={() => (window.location.href = borrowButton(item.isbn))}>
