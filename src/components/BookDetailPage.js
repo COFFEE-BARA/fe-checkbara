@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate, useParams } from "react-router-dom";
 import "../css/BookDetailPage.css";
-import image from "../images/book-image.png";
 import axios from "axios";
 
 function BookDetailPage() {

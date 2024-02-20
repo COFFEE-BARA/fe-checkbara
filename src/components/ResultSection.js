@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import { useLocation, useNavigate } from "react-router-dom"; // useLocation 추가
 import "../css/section.css";
 import "../css/index.css";
@@ -59,7 +58,7 @@ function ResultSection({ data, loading }) {
                   ))}
                 </section>
               ) : (
-                <div>검색 결과가 없습니다.</div>
+                <div>원하는 책을 검색해 보세요!</div>
               )}
             </>
           {/* )} */}

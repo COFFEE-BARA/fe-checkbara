@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {PulseLoader} from "react-spinners";
-import { GradientBg1 } from "../icons/GradientBg1/GradientBg1.jsx";
 import "../css/recommend.css";
 import "../css/RecommendDefault.css";
 import { useLocation, useNavigate } from "react-router-dom";
