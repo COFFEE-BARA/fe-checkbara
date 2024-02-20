@@ -60,7 +60,7 @@ function BookDetailPage() {
                   <div class="book-date2">출간일</div>
                 </div>
                 <div class="book-price">
-                  <div class="book-price1">{Number(detail.price).toLocaleString()}원</div>
+                  <div class="book-price1">{Number(detail.price) !==0 ? Number(detail.price).toLocaleString()+ "원" : "정보 없음"}</div>
                   <div class="book-price2">가격</div>
                 </div>
               </div>

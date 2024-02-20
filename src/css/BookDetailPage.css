@@ -9,11 +9,10 @@ body {
 header {
     padding: 10px;
     text-align: left;
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 1000;
     display: flex;
-    background-color: rgba(255, 255, 255, 0.5); /* 여기에 색상 및 투명도 조절 */
 }
 
 
