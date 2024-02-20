@@ -1,8 +1,8 @@
-import React, { useRef, useEffect, useParam } from "react";
+import React, { useRef, useEffect, useParams, useState } from "react";
 import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { currentMyLocationAtom } from "../hooks/currentMyLocationAtom.js";
-import { isbnAtom } from "../hooks/isbnAtom.js";
+import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
+import { isbnAtom } from "../atom/isbnAtom.js";
 import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
@@ -16,8 +16,9 @@ import '../css/NaverMap.css';
 function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
-    const currentIsbn = useRecoilValue(isbnAtom)
+    const currentIsbn = useRecoilValue(isbnAtom);
     const mapRef = useRef<window.naver.maps.Map | null>(null);
+    const [detail, setDetail] = useState();
 
     useEffect(() => {
         const success = (location) => {
@@ -40,8 +41,8 @@ function NaverMap() {
         const sendDataToBackend = async () => {
             try {
                 // 백엔드로 isbn, lat, lon 전달
-                const response = await axios.post(`/api/book/${isbnAtom.isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
-                    isbn: isbnAtom.isbn,
+                const response = await axios.post(`/api/book/${currentIsbn.isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                    isbn: currentIsbn.isbn,
                     lat: currentMyLocation.lat,
                     lon: currentMyLocation.lng
                 });

@@ -4,12 +4,12 @@ import '../css/MainPage.css'
 function MainPage() {
     function clickAiChatbotButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/recommendinput';
     }
 
     function clickBookSearchButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/inputsection';
     }
 
     function clickStatisticsButton(e) {
@@ -17,33 +17,38 @@ function MainPage() {
         window.location.href='/';
     }
 
-
     return (
         <>
-            <div class="main-background">
-                <div class="main-page-container">
-                    <div class="check-bara-icon">
-                        <h3 class="check-bara-icon-text">Check Bara</h3>
-                        <p class="check-bara-icon-hello">안녕하세요</p>
+            <div className="main-background">
+                <div className="main-page-container">
+                    <div className="check-bara-icon">
+                        <div className="check-bara-icon-text">Check Bara</div>
+                        <div className="check-bara-icon-hello">안녕하세요</div>
                     </div>
-                    <div class="ai-chatbot-button" onClick={(clickAiChatbotButton)}>
-                        <div class="ai-chatbot-image"></div>
-                        <p class="ai-chatbot-button-text-1">AI 챗봇</p>
-                        <p class="ai-chatbot-button-text-2">책 추천받기</p>
+                    <div className="ai-chatbot-button" onClick={clickAiChatbotButton}>
+                        <div className="image-wrapper">
+                            <div className="ai-chatbot-image"></div>
+                        </div>
+                        <div className="ai-chatbot-button-text-1">AI 챗봇</div>
+                        <div className="ai-chatbot-button-text-2">책 추천받기</div>
                     </div>
-                    <div class="book-search-button" onClick={(clickBookSearchButton)}>
-                        <div class="book-search-image"></div>
-                        <p class="book-search-button-text-1">책 검색하기</p>
-                        <p class="book-search-button-text-2">책 정보보기</p>
+                    <div className="book-search-button" onClick={clickBookSearchButton}>
+                        <div className="image-wrapper">
+                            <div className="book-search-image"></div>
+                        </div>
+                        <div className="book-search-button-text-1">책 검색하기</div>
+                        <div className="book-search-button-text-2">책 정보보기</div>
                     </div>
-                    <div class="statistics-button" onClick={(clickStatisticsButton)}>
-                        <div class="statistics-image"></div>
-                        <p class="statistics-button-text-1">통계</p>
-                        <p class="statistics-button-text-2">통계 확인하기</p>
+                    <div className="statistics-button" onClick={clickStatisticsButton}>
+                        <div className="image-wrapper">
+                            <div className="statistics-image"></div>
+                        </div>
+                        <div className="statistics-button-text-1">통계</div>
+                        <div className="statistics-button-text-2">통계 확인하기</div>
                     </div>
                 </div>
             </div>
         </>
     );
 }
-export default MainPage
+export default MainPage;
