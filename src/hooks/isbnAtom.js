@@ -1,6 +1,6 @@
 import { atom } from 'recoil';
 
-export const currentMyLocationAtom = atom({
+export const isbnAtom = atom({
   key: 'isbnAtom',
   default: { isbn: "0" },
 });

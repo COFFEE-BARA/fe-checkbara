@@ -51,7 +51,8 @@ function NaverMap() {
             }
         };
 
-        if (currentMyLocation && isbn!="0") {
+        if (currentMyLocation && currentIsbn != "0") {
+            console.log(currentMyLocation, currentIsbn);
             sendDataToBackend();
         }
     }, [currentMyLocation, currentIsbn])
@@ -70,7 +71,7 @@ function NaverMap() {
         });
 
         ReactDOM.render(
-            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
+            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={currentIsbn}/>, 
             document.getElementById('library-markup-container')
         );
 
