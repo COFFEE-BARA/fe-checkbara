@@ -1,7 +1,8 @@
 import React, { useRef, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { currentMyLocationAtom } from "../hooks/atoms.js";
+import { currentMyLocationAtom } from "../hooks/currentMyLocationAtom.js";
+import { isbnAtom } from "../hooks/isbnAtom.js";
 import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
@@ -12,12 +13,11 @@ import ypbooks from "../images/ypbooks.png"
 
 import '../css/NaverMap.css';
 
-
 function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
+    const currentIsbn = useRecoilValue(isbnAtom)
     const mapRef = useRef<window.naver.maps.Map | null>(null);
-    const isbn = "9788956609959"
 
     useEffect(() => {
         const success = (location) => {
@@ -37,9 +37,11 @@ function NaverMap() {
     }, [setCurrentMyLocation]);
 
     useEffect(() => {
-        const sendLocationToBackend = async () => {
+        const sendDataToBackend = async () => {
             try {
-                const response = await axios.post(`/api/book/${isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                // 백엔드로 isbn, lat, lon 전달
+                const response = await axios.post(`/api/book/${isbnAtom.isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                    isbn: isbnAtom.isbn,
                     lat: currentMyLocation.lat,
                     lon: currentMyLocation.lng
                 });
@@ -49,23 +51,15 @@ function NaverMap() {
             }
         };
 
-        if (currentMyLocation) {
-            sendLocationToBackend();
+        if (currentMyLocation && isbn!="0") {
+            sendDataToBackend();
         }
-    }, [currentMyLocation])
-
-
-    useEffect(() => {
-        ReactDOM.render(
-            <ResultSection data={searchResult}/>, 
-            document.getElementById('')
-        );
-    })
+    }, [currentMyLocation, currentIsbn])
 
     useEffect(() => {
         let map = new window.naver.maps.Map("map", {
             center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
-            zoom: 15,
+            zoom: 16,
             minZoom: 10,
             zoomControl: true,
             mapTypeControl: true,
@@ -82,15 +76,16 @@ function NaverMap() {
 
     }, [currentMyLocation]);
 
+    useEffect(() => {
+        // 도서관 및 서점 리스트, 잭 제목 백엔드에서 axios get으로 받아오기
+        // 도서관 마커 찍는 코드 작성
+
+    })
+
     return (
         <>
-            {/* <LibraryMarkup currentMyLocation={currentMyLocation}/> */}
             <div class="top-bar">
                 <div class="search-book">현재 검색어 | bookName</div>
-                <div class="search-bar">
-                    <input class="search-tap" type="text" placeholder="검색할 위치를 입력해주세요" />
-                    <div class="search-button"></div>
-                </div>
             </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
             <div id="library-markup-container"></div>

@@ -7,20 +7,11 @@
 .top-bar {
     background-color: #F3F1FF;
     width: 100%;
-    height: 15%;
-    padding: 5%;
+    height: 5%;
+    padding: 2%;
     text-align: center;
     font-family: 'IBM Plex Sans KR', sans-serif;
     font-size: x-large;
-}
-
-.search-book {
-    padding-bottom: 5%;
-}
-
-.search-bar {
-    display: flex;
-    flex-direction: row;
 }
 
 .search-tap {
