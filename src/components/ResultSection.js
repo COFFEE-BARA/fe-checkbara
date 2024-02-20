@@ -22,11 +22,11 @@ function ResultSection({ data, loading }) {
     <>
       <div className="bgrectangle">
         <div className="result-wrapper">
-          {loading ? (
+          {/* {loading ? (
             <div>데이터를 로딩 중입니다...</div>
-          ) : (
+          ) : ( */}
             <>
-              {data && data.length > 0 && (
+              {data && data.length > 0 ? (
                 <section>
                   {data.map((item, index) => (
                     <div key={index} className="source-isbn">
@@ -58,9 +58,11 @@ function ResultSection({ data, loading }) {
                     </div>
                   ))}
                 </section>
+              ) : (
+                <div>검색 결과가 없습니다.</div>
               )}
             </>
-          )}
+          {/* )} */}
         </div>
       </div>
     </>

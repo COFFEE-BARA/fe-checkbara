@@ -21,27 +21,33 @@ function InputSection() {
         // console.log(data)
       
         return data.data.data.bookList;
-      }
-
-    const getBookList=async ()=>{
-        try{
-        const data=await getData(curKeywords)
-        
-        setSearchResult(data)
-        
-        }
-        catch(err){console.log(err)}
     }
 
-    const handleKeyup = useCallback((e) => {
-        if (e.key === "Enter") {
-            e.preventDefault();
-            getBookList()
-
+    const getBookList = useCallback(async (keyword) => {
+        try {
+            const data = await getData(keyword);
+            setSearchResult(data);
+            console.log(data);
+        } catch (err) {
+            console.log(err);
         }
-    }, [curKeywords, searchResult, navigate]);
+    }, []);
 
-    useEffect(()=>{!searchResult&&setLoading(false)},[searchResult])
+    // useEffect(() => {
+    //     // 공백인 경우에도 검색 수행
+    //     getBookList(curKeywords);
+    // }, [curKeywords, getBookList]);
+
+    
+    useEffect(() => {
+        if (curKeywords.trim() !== " ") { // 공백이 아닌 경우에만 검색 수행
+            getBookList(curKeywords);
+        } else {
+            setSearchResult(null); // 키워드가 공백인 경우 검색 결과 초기화
+        }
+    }, [curKeywords, getBookList]);
+
+    // useEffect(()=>{!searchResult&&setLoading(false)},[searchResult])
 
     const clickLeftButton = () => {
         window.location.href = '/mainpage';
@@ -61,7 +67,7 @@ function InputSection() {
                                         type="text"
                                         placeholder="검색할 내용을 입력하세요"
                                         class="input-input"
-                                        onKeyUp={handleKeyup}
+                                        // onKeyUp={handleKeyup}
                                         value={curKeywords}
                                         onChange={(e) => setCurKeywords(e.target.value)}
                                     />
