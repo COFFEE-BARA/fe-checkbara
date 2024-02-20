@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useParam } from "react";
 import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../hooks/currentMyLocationAtom.js";
