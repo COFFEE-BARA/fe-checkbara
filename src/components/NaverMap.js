@@ -4,6 +4,7 @@ import { useLocation } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
 import { isbnAtom } from "../atom/isbnAtom.js";
+import { priceAtom } from "../atom/priceAtom.js";
 import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
@@ -17,21 +18,26 @@ import '../css/NaverMap.css';
 function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
-    const currentIsbn = useRecoilValue(isbnAtom);
+    // const currentIsbn = useRecoilValue(isbnAtom);=
+    // const currentPrice = useRecoilValue(priceAtom);
     const urlCheck = useLocation();
     const path = urlCheck.pathname;
     var apiUrl;
     const mapRef = useRef<window.naver.maps.Map | null>(null);
     const [list, setList] = useState();
 
-    async function getList() {
-        const data = await axios.get(path);
-        setList(data.data.data);
-    } 
+    const { isbn, price } = useParams();
 
-    useEffect(() => {
-        getList();
-      }, []);
+    // async function getList() {
+    //     console.log(path)
+    //     // const url = `/book/${isbn}/${price}/bookstore`;
+    //     const data = await axios.get(path);
+    //     setList(data.data.data);
+    // } 
+
+    // useEffect(() => {
+    //     getList();
+    //   }, []);
 
     useEffect(() => {
         const success = (location) => {
@@ -53,17 +59,18 @@ function NaverMap() {
     useEffect(() => {
         const sendDataToBackend = async () => {
             if (path.includes("/bookstore")) {
-                apiUrl = `/api/book/${list.isbn}/${list.price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+                apiUrl = `/api/book/${isbn}/${price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
                 console.log('서점 재고 조회\n');
-                console.log(list.isbn, list.price);
+                console.log(isbn, price);
             } else if (path.includes("/library")) {
-                apiUrl = `/api/book/${currentIsbn.isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+                apiUrl = `/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
                 console.log('도서관 재고 조회:');
             }
 
             try {
                 const response = await axios.post(apiUrl, {
                     isbn: currentIsbn.isbn,
+                    price: currentPrice.price,
                     lat: currentMyLocation.lat,
                     lon: currentMyLocation.lng
                 });
@@ -78,12 +85,12 @@ function NaverMap() {
             }
         };                  
 
-        if (currentMyLocation && currentIsbn != "0") {
+        if (currentMyLocation && currentIsbn != "0" && currentPrice == "정보 없음" && currentPrice != "0") {
             sendDataToBackend();
         } else {
             console.log('location 또는 isbn 데이터를 전달하지 못함:');
         }
-    }, [currentMyLocation, currentIsbn, urlCheck]);
+    }, [currentMyLocation, currentIsbn, currentPrice, urlCheck]);
 
     useEffect(() => {
         let map = new window.naver.maps.Map("map", {
