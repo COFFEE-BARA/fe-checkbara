@@ -1,5 +1,6 @@
 import React, { useRef, useEffect, useParams, useState } from "react";
 import ReactDOM from 'react-dom';
+import { useLocation } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
 import { isbnAtom } from "../atom/isbnAtom.js";
@@ -17,6 +18,7 @@ function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
     const currentIsbn = useRecoilValue(isbnAtom);
+    const urlCheck = useLocation();
     const mapRef = useRef<window.naver.maps.Map | null>(null);
     const [detail, setDetail] = useState();
 
@@ -39,24 +41,40 @@ function NaverMap() {
 
     useEffect(() => {
         const sendDataToBackend = async () => {
+            const path = urlCheck.pathname;
+            var apiUrl;
+
+            if (path.includes("/bookstore")) {
+                apiUrl = `/api/book/${currentIsbn.isbn}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+                console.log('서점 재고 조회:');
+            } else if (path.includes("/library")) {
+                apiUrl = `/api/book/${currentIsbn.isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+                console.log('도서관 재고 조회:');
+            }
+
             try {
-                // 백엔드로 isbn, lat, lon 전달
-                const response = await axios.post(`/api/book/${currentIsbn.isbn}/lending-library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                const response = await axios.post(apiUrl, {
                     isbn: currentIsbn.isbn,
                     lat: currentMyLocation.lat,
                     lon: currentMyLocation.lng
                 });
-                console.log('Location sent to backend:', response.data);
+    
+                if (response.status === 200) {
+                    console.log('sendDataToBackend 함수 데이터 전달:', response.data);
+                } else {
+                    console.error('응답 상태 코드가 200이 아님');
+                }
             } catch (error) {
-                console.error('Error sending location to backend:', error);
+                console.error('API 호출 중 오류 발생:', error);
             }
-        };
+        };                  
 
         if (currentMyLocation && currentIsbn != "0") {
-            console.log(currentMyLocation, currentIsbn);
             sendDataToBackend();
+        } else {
+            console.log('location 또는 isbn 데이터를 전달하지 못함:');
         }
-    }, [currentMyLocation, currentIsbn])
+    }, [currentMyLocation, currentIsbn, urlCheck]);
 
     useEffect(() => {
         let map = new window.naver.maps.Map("map", {
