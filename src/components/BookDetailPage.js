@@ -22,11 +22,19 @@ function BookDetailPage() {
   }
 
   const stockButton = isbn => {
-    return `/book/${isbn}/stock`;
+    return `/book/${isbn}/bookstore`;
+  };
+
+  const handleBookstoreStockButtonClick = () => {
+    navigate(stockButton(detail.isbn)); 
   };
 
   const borrowButton = isbn => {
-    return `/book/${isbn}/lending-library`;
+    return `/book/${isbn}/library`;
+  };
+
+  const handleLibraryStockButtonClick = () => {
+    navigate(borrowButton(detail.isbn)); 
   };
 
   useEffect(() => {
@@ -82,8 +90,8 @@ function BookDetailPage() {
             </div>
           </main>
           <footer>
-            <div class="bookstore-stock-button" onClick={() => (window.location.href = stockButton(detail.isbn))}>서점 재고</div>
-            <div class="library-stock-button" onClick={() => (window.location.href = borrowButton(detail.isbn))}>도서관 재고</div>
+            <div class="bookstore-stock-button" onClick={(handleBookstoreStockButtonClick)}>서점 재고</div>
+            <div class="library-stock-button" onClick={(handleLibraryStockButtonClick)}>도서관 재고</div>
             <div class="sales-link-button"><a href={detail.purchaseURL}>판매 링크</a></div>
           </footer>
         </body>
