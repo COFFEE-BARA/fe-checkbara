@@ -9,9 +9,10 @@ import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
 import useGeolocation from "../hooks/useGeolocation";
-import aladin from "../images/aladin.png"
-import kyobo from "../images/kyobo.png"
-import ypbooks from "../images/ypbooks.png"
+import aladinIcon from "../images/aladin.png";
+import kyoboIcon from "../images/kyobo.png";
+import ypbookIcon from "../images/ypbooks.png";
+import libraryIcon from "../images/library-icon.png";
 
 import '../css/NaverMap.css';
 
@@ -22,22 +23,50 @@ function NaverMap() {
     // const currentPrice = useRecoilValue(priceAtom);
     const urlCheck = useLocation();
     const path = urlCheck.pathname;
-    var apiUrl;
     const mapRef = useRef<window.naver.maps.Map | null>(null);
     const [list, setList] = useState();
 
     const { isbn, price } = useParams();
+    var data;
 
     // async function getList() {
-    //     console.log(path)
-    //     // const url = `/book/${isbn}/${price}/bookstore`;
-    //     const data = await axios.get(path);
+    //     var apiUrl;
+    //     if (path.includes("/bookstore")) {
+    //         apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore`;
+    //     } else if (path.includes("/library")) {
+    //         apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library`;
+    //     }
+        
+    //     data = await axios.get(apiUrl);
     //     setList(data.data.data);
     // } 
 
-    // useEffect(() => {
-    //     getList();
-    //   }, []);
+    useEffect(() => {
+        async function getList() {
+            var apiUrl;
+            console.log(path);
+            if (path.includes("/bookstore")) {
+                apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore`;
+                data = await axios.get(apiUrl);
+                console.log(apiUrl);
+                setList(data.data.data);
+            } else if (path.includes("/library")) {
+                apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library`;
+                data = await axios.get(apiUrl);
+                console.log(apiUrl);
+                setList(data.data.data);
+            }
+            
+            
+        } 
+
+        getList();
+        if (data!=null){
+            console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
+        } else {
+            console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
+        }
+    }, []);
 
     // 위치 데이터 저장
     useEffect(() => {
@@ -60,28 +89,37 @@ function NaverMap() {
     // isbn, (price), lat, lon 백엔드로 전달
     useEffect(() => {
         const sendDataToBackend = async () => {
-            if (path.includes("/bookstore")) {
-                apiUrl = `/api/book/${isbn}/${price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
-                console.log('서점 재고 조회\n');
-                console.log(isbn, price);
-            } else if (path.includes("/library")) {
-                apiUrl = `/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
-                console.log('도서관 재고 조회:');
-            }
-
+            var response;
             try {
-                const response = await axios.post(apiUrl, {
-                    isbn: isbn,
-                    price: price,
-                    lat: currentMyLocation.lat,
-                    lon: currentMyLocation.lng
-                });
-    
+                if (path.includes("/bookstore")) {
+                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                        isbn: isbn,
+                        price: price,
+                        lat: currentMyLocation.lat,
+                        lon: currentMyLocation.lng
+                    });
+                    console.log('서점 재고 조회\n');
+                    console.log(response.isbn, response.price, response.lat, response.lon);
+                } else if (path.includes("/library")) {
+                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                        isbn: isbn,
+                        price: price,
+                        lat: currentMyLocation.lat,
+                        lon: currentMyLocation.lng
+                    });
+                    console.log('도서관 재고 조회');
+                    console.log(response.isbn, response.price, response.lat, response.lon);
+                }
+                
+                console.log(response.status);
                 if (response.status === 200) {
                     console.log('sendDataToBackend 함수 데이터 전달:', response.data);
                 } else {
                     console.error('응답 상태 코드가 200이 아님');
                 }
+
+
+
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
             }
@@ -92,7 +130,6 @@ function NaverMap() {
         } else {
             console.log('location 또는 isbn 데이터를 전달하지 못함:');
         }
-    }, [currentMyLocation, urlCheck]);
 
     // 지도 표시
     useEffect(() => {
@@ -114,26 +151,6 @@ function NaverMap() {
         );
 
     }, [currentMyLocation]);
-
-    // useEffect(() => {
-    //     var data;
-    //     // 도서관 및 서점 리스트, 책 제목 백엔드에서 axios get으로 받아오기
-    //     async function getList() {
-    //         // 서점: bookstore, branch, stock, lat, lon
-    //         // 도서관: libCode, libName, lat, lon
-    //         data = await axios.get(apiUrl);
-    //         setList(data.data.data);
-    //     } 
-    //     getList();
-
-    //     if (data!=null){
-    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
-    //     } else {
-    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
-    //     }
-    //     // 도서관 마커 찍는 코드 작성
-
-    // },[setList])
 
     return (
         <>

@@ -9,8 +9,8 @@ function ResultSection({ data, loading }) {
     return `/book/${isbn}/${price}/bookstore`;
   };
 
-  const borrowButton = isbn => {
-    return `/book/${isbn}/library`;
+  const borrowButton = (isbn, price) => {
+    return `/book/${isbn}/${price}/library`;
   };
 
   const moveToDetail = isbn => {

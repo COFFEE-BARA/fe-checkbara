@@ -21,16 +21,16 @@ function BookDetailPage() {
     setDetail(data.data.data);
   }
 
-  const stockButton = isbn => {
-    return `/book/${isbn}/bookstore`;
+  const stockButton = (isbn, price) => {
+    return `/book/${isbn}/${price}/bookstore`;
   };
 
   const handleBookstoreStockButtonClick = () => {
     navigate(stockButton(detail.isbn)); 
   };
 
-  const borrowButton = isbn => {
-    return `/book/${isbn}/library`;
+  const borrowButton = (isbn, price) => {
+    return `/book/${isbn}/${price}/library`;
   };
 
   const handleLibraryStockButtonClick = () => {
