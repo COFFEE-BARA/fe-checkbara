@@ -1,10 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { RecoilRoot } from 'recoil';
-
 import NaverMap from './components/NaverMap';
 import Distance from './components/LibraryMarkup';
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import InputSection from './components/InputSection.js';
 import ResultSection from './components/ResultSection.js';
