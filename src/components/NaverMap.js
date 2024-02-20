@@ -19,8 +19,10 @@ function NaverMap() {
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
     const currentIsbn = useRecoilValue(isbnAtom);
     const urlCheck = useLocation();
+    const path = urlCheck.pathname;
+    var apiUrl;
     const mapRef = useRef<window.naver.maps.Map | null>(null);
-    const [detail, setDetail] = useState();
+    const [list, setList] = useState();
 
     useEffect(() => {
         const success = (location) => {
@@ -41,9 +43,6 @@ function NaverMap() {
 
     useEffect(() => {
         const sendDataToBackend = async () => {
-            const path = urlCheck.pathname;
-            var apiUrl;
-
             if (path.includes("/bookstore")) {
                 apiUrl = `/api/book/${currentIsbn.isbn}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
                 console.log('서점 재고 조회:');
@@ -97,10 +96,18 @@ function NaverMap() {
     }, [currentMyLocation]);
 
     useEffect(() => {
-        // 도서관 및 서점 리스트, 잭 제목 백엔드에서 axios get으로 받아오기
+        // 도서관 및 서점 리스트, 책 제목 백엔드에서 axios get으로 받아오기
+        async function getList() {
+            // 서점: bookstore, branch, stock, lat, lon
+            // 도서관: libCode, libName, lat, lon
+            const data = await axios.get(apiUrl);
+            setList(data.data.data);
+        } 
+        getList();
+
         // 도서관 마커 찍는 코드 작성
 
-    })
+    },[setData])
 
     return (
         <>
