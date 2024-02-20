@@ -53,8 +53,9 @@ function NaverMap() {
     useEffect(() => {
         const sendDataToBackend = async () => {
             if (path.includes("/bookstore")) {
-                apiUrl = `/api/book/${currentIsbn.isbn}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
-                console.log('서점 재고 조회:');
+                apiUrl = `/api/book/${list.isbn}/${list.price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+                console.log('서점 재고 조회\n');
+                console.log(list.isbn, list.price);
             } else if (path.includes("/library")) {
                 apiUrl = `/api/book/${currentIsbn.isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
                 console.log('도서관 재고 조회:');
