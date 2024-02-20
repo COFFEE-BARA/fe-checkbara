@@ -1,10 +1,7 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
-import { RecoilRoot } from 'recoil';
-
 import NaverMap from './components/NaverMap';
 import Distance from './components/LibraryMarkup';
 import React, { useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { RecoilRoot } from 'recoil';
 import InputSection from './components/InputSection.js';
 import ResultSection from './components/ResultSection.js';
@@ -47,7 +44,8 @@ function App() {
                 <RecoilRoot>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="/stock" element={<NaverMap />}></Route>
+                        <Route path="/book/:isbn/bookstore" element={<NaverMap />} />
+                        <Route path="/book/:isbn/library" element={<NaverMap />} />
                         <Route path="/mainpage" element={<MainPage />} />
                         <Route path="/resultsection" element={<ResultSection data={data} pageNum={pageNum} />} />
                         <Route path="/inputsection" element={<InputSection onSearch={onSearch} keywords={keywords} />} />

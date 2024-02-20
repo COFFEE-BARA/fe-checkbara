@@ -6,11 +6,11 @@ import "../css/index.css";
 function ResultSection({ data, loading }) {
   const navigate = useNavigate();
   const stockButton = isbn => {
-    return `/book/${isbn}/stock`;
+    return `/book/${isbn}/bookstore`;
   };
 
   const borrowButton = isbn => {
-    return `/book/${isbn}/lending-library`;
+    return `/book/${isbn}/library`;
   };
 
   const moveToDetail = isbn => {

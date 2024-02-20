@@ -87,11 +87,11 @@ const handleSendMessage = async () => {
   };
 
   const handleStockButtonClick = isbn => {
-    window.location.href = `/api/book/${isbn}/stock`;
+    window.location.href = `/book/${isbn}/bookstore`;
   };
 
   const handleBorrowButtonClick = isbn => {
-    window.location.href = `/api/book/${isbn}/lending-library?lat=${lati}&lon=${long}`;
+    window.location.href = `/book/${isbn}/library?lat=${lati}&lon=${long}`;
   };
 
 
