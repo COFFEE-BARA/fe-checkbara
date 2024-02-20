@@ -1,6 +1,6 @@
-import React, { useRef, useEffect, useParams, useState } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
-import { useLocation } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
 import { isbnAtom } from "../atom/isbnAtom.js";
@@ -39,6 +39,7 @@ function NaverMap() {
     //     getList();
     //   }, []);
 
+    // 위치 데이터 저장
     useEffect(() => {
         const success = (location) => {
             setCurrentMyLocation({
@@ -56,6 +57,7 @@ function NaverMap() {
         }
     }, [setCurrentMyLocation]);
 
+    // isbn, (price), lat, lon 백엔드로 전달
     useEffect(() => {
         const sendDataToBackend = async () => {
             if (path.includes("/bookstore")) {
@@ -69,8 +71,8 @@ function NaverMap() {
 
             try {
                 const response = await axios.post(apiUrl, {
-                    isbn: currentIsbn.isbn,
-                    price: currentPrice.price,
+                    isbn: isbn,
+                    price: price,
                     lat: currentMyLocation.lat,
                     lon: currentMyLocation.lng
                 });
@@ -85,13 +87,14 @@ function NaverMap() {
             }
         };                  
 
-        if (currentMyLocation && currentIsbn != "0" && currentPrice == "정보 없음" && currentPrice != "0") {
+        if (currentMyLocation && isbn != "0" ) { //&& price == "정보 없음" || price != "0"
             sendDataToBackend();
         } else {
             console.log('location 또는 isbn 데이터를 전달하지 못함:');
         }
-    }, [currentMyLocation, currentIsbn, currentPrice, urlCheck]);
+    }, [currentMyLocation, urlCheck]);
 
+    // 지도 표시
     useEffect(() => {
         let map = new window.naver.maps.Map("map", {
             center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
@@ -106,31 +109,31 @@ function NaverMap() {
         });
 
         ReactDOM.render(
-            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={currentIsbn}/>, 
+            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
             document.getElementById('library-markup-container')
         );
 
     }, [currentMyLocation]);
 
-    useEffect(() => {
-        var data;
-        // 도서관 및 서점 리스트, 책 제목 백엔드에서 axios get으로 받아오기
-        async function getList() {
-            // 서점: bookstore, branch, stock, lat, lon
-            // 도서관: libCode, libName, lat, lon
-            data = await axios.get(apiUrl);
-            setList(data.data.data);
-        } 
-        getList();
+    // useEffect(() => {
+    //     var data;
+    //     // 도서관 및 서점 리스트, 책 제목 백엔드에서 axios get으로 받아오기
+    //     async function getList() {
+    //         // 서점: bookstore, branch, stock, lat, lon
+    //         // 도서관: libCode, libName, lat, lon
+    //         data = await axios.get(apiUrl);
+    //         setList(data.data.data);
+    //     } 
+    //     getList();
 
-        if (data!=null){
-            console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
-        } else {
-            console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
-        }
-        // 도서관 마커 찍는 코드 작성
+    //     if (data!=null){
+    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
+    //     } else {
+    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
+    //     }
+    //     // 도서관 마커 찍는 코드 작성
 
-    },[setList])
+    // },[setList])
 
     return (
         <>
