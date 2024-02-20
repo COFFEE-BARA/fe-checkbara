@@ -21,17 +21,18 @@
 
 .check-bara-icon-text {
     font-family: Helvetica;
-    font-weight: bold;
+    font-weight: 900;
     font-size: xx-large;
-    width: 200px;
+    width: 190px;
     margin-top: 130px;
-    margin-left: 10px;
+    margin-left: 20px;
+    font-family: 'Inter', sans-serif;
 }
 
 .check-bara-icon-hello {
     font-size: 22px;
-    margin-left: 92px;
-    margin-top: 15px;
+    margin-left: 82px;
+    margin-top: 0px;
     height: 40px;
     width: 100px;
 }
