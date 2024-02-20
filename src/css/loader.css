@@ -1,0 +1,12 @@
+/* 책 검색 첫 화면시 뜨는 화면*/
+
+.loader {
+    width: 100%;
+    text-align: center;
+    vertical-align: top;
+    margin-top: 60px;
+    font-size: 18px;
+    font-family: 'IBM Plex Sans KR', sans-serif;
+    font-weight: normal;
+    z-index: 100;
+}

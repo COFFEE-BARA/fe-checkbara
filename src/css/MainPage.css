@@ -1,9 +1,8 @@
 .main-background {
     background-image: url('../images/background.png');
     background-size: cover;
-    padding-top: 67%;
-    padding-bottom: 67%;
-    height: 100%;
+    width: 430px;
+    height: 932px;
     font-family: 'IBM Plex Sans KR', sans-serif;
     font-size: medium;
 }
@@ -12,67 +11,151 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     grid-auto-rows: minmax(150px, auto);
-    grid-gap: 10px;
-    margin: 10px;
+    margin-left: -3px;
+    position: absolute;
+    top: 50%;
+    left: 45%;
+    transform: translate(-50%, -50%);
 }
 
-.check-bara-icon {
-    padding: 5%;
-}
 
 .check-bara-icon-text {
+    font-family: Helvetica;
+    font-weight: 900;
     font-size: xx-large;
+    width: 190px;
+    margin-top: 130px;
+    margin-left: 20px;
+    font-family: 'Inter', sans-serif;
 }
 
-.ai-chatbot-button, .book-search-button, .statistics-button {
+.check-bara-icon-hello {
+    font-size: 22px;
+    margin-left: 82px;
+    margin-top: 0px;
+    height: 40px;
+    width: 100px;
+}
+
+.book-search-button{
     padding: 15%;
+    margin-bottom: 10px;
+    width: 135px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border-radius: 22px;
+    backdrop-filter: blur(5px);
+    box-shadow: 5px 5px 10px 0px rgba(203, 203, 203, 0.5);
+    /* box-shadow: 0px 35px 60px 0px rgba(228, 239, 255, 0.5), inset 0px -8px 16px 0px rgba(194, 220, 255, 0.6), inset 0px -10px 10px 1px rgb(225, 225, 225); */
 }
 
-.ai-chatbot-button, .book-search-button, .statistics-button {
-    background-color: rgba(255, 255, 255, 0.6);
+.ai-chatbot-button, .statistics-button {
+    padding: 20%;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    width: 140px;
+    height: 175px;
+    background-color: rgba(255, 255, 255, 0.5);
     border-radius: 22px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0px 35px 68px 0px rgba(228, 239, 255, 0.5), inset 0px -8px 16px 0px rgba(194, 220, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255);
+    backdrop-filter: blur(3px);
+    box-shadow: 5px 5px 10px 0px rgba(203, 203, 203, 0.5);
+    /* box-shadow: 0px 35px 60px 0px rgba(228, 239, 255, 0.5), inset 0px -8px 16px 0px rgba(194, 220, 255, 0.6), inset 0px 11px 28px 0px rgb(255, 255, 255); */
 }
 
 .ai-chatbot-button:hover, .book-search-button:hover, .statistics-button:hover {
     background-color: rgba(255, 255, 255, 0.9);
 }
 
-.ai-chatbot-image, .book-search-image, .statistics-image {
+.image-wrapper {
+    background-color: rgba(255, 255, 255, 0.9);
+    border-radius: 23px;
+    box-shadow: 7px 7px 10px 1px rgb(199, 199, 199);
+    width: 70px;
+    height: 70px;
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    margin-left: -10px;
+    margin-top: -10px;
+}
+
+.book-search-button:hover .image-wrapper {
+    background-color: #616BC0;
+}
+
+.ai-chatbot-button:hover .image-wrapper {
+    background-color: #616BC0;
+}
+
+.statistics-button:hover .image-wrapper {
+    background-color: #616BC0;
+}
+
+.book-search-button:hover .book-search-image{
+    width: 32px;
+    height: 25px;
+    content: url('../images/book-search-white.png');
+}
+
+.ai-chatbot-button:hover .ai-chatbot-image{
+    width: 23px;
+    height: 23px;
+    content: url('../images/ai-chatbot-white.png'); 
+}
+
+.statistics-button:hover .statistics-image{
+    width: 30px;
+    content: url('../images/statistics-white.png');
+}
+
+.ai-chatbot-image {
+    width: 23px;
+    height: 23px;
+    content: url('../images/ai-chatbot-black.png'); 
+}
+
+.book-search-image {
+    width: 32px;
+    height: 25px;
+    content: url('../images/book-search-black.png');
+}
+
+.statistics-image {
+    width: 30px;
+    content: url('../images/statistics-black.png');
+}
+
+/* 
+.book-search-image,.statistics-image{
+    background-size: cover;
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 10% 10% 10% 10%;
+    border-radius: 15px;
+    box-shadow: 3px 3px 10px rgb(213, 213, 213);
+    width: 50px;
+    height: 50px;
+} */
+
+/* 
+.statistics-image{
+    width: 20px;
+    height: 20px;
     background-size: cover;
     background-color: rgba(255, 255, 255, 0.9);
     padding: 10% 17% 10% 17%;
     border-radius: 15px;
     box-shadow: 3px 3px 3px rgb(213, 213, 213);
-}
-
-.ai-chatbot-image {
-    content: url('../images/ai-chatbot-black.png'); 
-}
-.ai-chatbot-button:hover > .ai-chatbot-image{
-    background-color: #616BC0;
-    content: url('../images/ai-chatbot-white.png'); 
-}
-
-.book-search-image {
-    content: url('../images/book-search-black.png');
-}
-
-.book-search-button:hover > .book-search-image{
-    background-color: #616BC0;
-    content: url('../images/book-search-white.png');
-}
-
-.statistics-image {
-    content: url('../images/statistics-black.png');
-}
-
-.statistics-button:hover > .statistics-image{
-    background-color: #616BC0;
-    content: url('../images/statistics-white.png');
-}
+} */
 
 .ai-chatbot-button-text-1, .book-search-button-text-1, .statistics-button-text-1 {
+    color: #525252;
+    font-size: 18px;
+    margin-top: 60px;
     font-weight: bold;
+}
+
+.ai-chatbot-button-text-2, .book-search-button-text-2, .statistics-button-text-2 {
+    color:#525252;
+    font-size: 15px;
+    margin-top: 5px;
+    margin-bottom: -10px;
 }
