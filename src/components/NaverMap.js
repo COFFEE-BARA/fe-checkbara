@@ -105,6 +105,11 @@ function NaverMap() {
         } 
         getList();
 
+        if (data!=null){
+            console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
+        } else {
+            console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
+        }
         // 도서관 마커 찍는 코드 작성
 
     },[setData])
