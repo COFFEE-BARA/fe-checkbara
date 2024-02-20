@@ -1,8 +1,8 @@
 import React, { useRef, useEffect, useParam } from "react";
 import ReactDOM from 'react-dom';
 import { useSetRecoilState, useRecoilValue } from "recoil";
-import { currentMyLocationAtom } from "../hooks/currentMyLocationAtom.js";
-import { isbnAtom } from "../hooks/isbnAtom.js";
+import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
+import { isbnAtom } from "../atom/isbnAtom.js";
 import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
