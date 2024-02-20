@@ -12,7 +12,7 @@ import useGeolocation from "../hooks/useGeolocation";
 import aladinIcon from "../images/aladin.png";
 import kyoboIcon from "../images/kyobo.png";
 import ypbookIcon from "../images/ypbooks.png";
-import libraryIcon from "../images/library-icon.png";
+import libraryIcon from "../images/library.png";
 
 import '../css/NaverMap.css';
 
@@ -27,7 +27,8 @@ function NaverMap() {
     const [list, setList] = useState();
 
     const { isbn, price } = useParams();
-    var data;
+    // var data;
+    var response;
 
     // async function getList() {
     //     var apiUrl;
@@ -41,32 +42,30 @@ function NaverMap() {
     //     setList(data.data.data);
     // } 
 
-    useEffect(() => {
-        async function getList() {
-            var apiUrl;
-            console.log(path);
-            if (path.includes("/bookstore")) {
-                apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore`;
-                data = await axios.get(apiUrl);
-                console.log(apiUrl);
-                setList(data.data.data);
-            } else if (path.includes("/library")) {
-                apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library`;
-                data = await axios.get(apiUrl);
-                console.log(apiUrl);
-                setList(data.data.data);
-            }
-            
-            
-        } 
+    // useEffect(() => {
+    //     async function getList() {
+    //         var apiUrl;
+    //         console.log(path);
+    //         if (path.includes("/bookstore")) {
+    //             apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore`;
+    //             data = await axios.get(apiUrl);
+    //             console.log(apiUrl);
+    //             setList(data.data.data);
+    //         } else if (path.includes("/library")) {
+    //             apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library`;
+    //             data = await axios.get(apiUrl);
+    //             console.log(apiUrl);
+    //             setList(data.data.data);
+    //         }
+    //     } 
 
-        getList();
-        if (data!=null){
-            console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
-        } else {
-            console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
-        }
-    }, []);
+    //     getList();
+    //     if (data!=null){
+    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
+    //     } else {
+    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
+    //     }
+    // }, []);
 
     // 위치 데이터 저장
     useEffect(() => {
@@ -89,7 +88,7 @@ function NaverMap() {
     // isbn, (price), lat, lon 백엔드로 전달
     useEffect(() => {
         const sendDataToBackend = async () => {
-            var response;
+            
             try {
                 if (path.includes("/bookstore")) {
                     response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
@@ -118,18 +117,17 @@ function NaverMap() {
                     console.error('응답 상태 코드가 200이 아님');
                 }
 
-
-
             } catch (error) {
                 console.error('API 호출 중 오류 발생:', error);
             }
         };                  
 
-        if (currentMyLocation && isbn != "0" ) { //&& price == "정보 없음" || price != "0"
+        if (currentMyLocation && isbn != "0" && price == "정보 없음" || price != "0") { 
             sendDataToBackend();
         } else {
             console.log('location 또는 isbn 데이터를 전달하지 못함:');
         }
+    });
 
     // 지도 표시
     useEffect(() => {
@@ -151,6 +149,27 @@ function NaverMap() {
         );
 
     }, [currentMyLocation]);
+
+    // useEffect(() => {
+    //     var data;
+    //     if (currentMyLocation && response) {
+    //         if (path.includes("/bookstore")){
+    //             data = response.data.
+    //         } else if (path.includes("/library")){
+
+    //         }
+    //         libraries.forEach(loc => {
+    //             const marker = new window.naver.maps.Marker({
+    //                 position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
+    //                 map: map,
+    //                 icon: {
+    //                     content: `<img src="${markerImage}" Marker" style="width:30px; height:30px;">`,
+    //                     anchor: new window.naver.maps.Point(15, 30),
+    //                 },
+    //             });
+    //         });
+    //     }
+    // }, [currentMyLocation, loading, libraries]);
 
     return (
         <>
