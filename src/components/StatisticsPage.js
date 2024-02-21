@@ -10,7 +10,7 @@ function EmbeddedDashboard() {
     };
 
     // 링크
-    const embeddedLink = `https://smw-coffeebara.kb.us-east-2.aws.elastic-cloud.com:9243/app/dashboards#/view/0af5f220-d022-11ee-b9f1-c5b3500cd5a1?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))`;
+    const embeddedLink = `https://smw-coffeebara.kb.us-east-2.aws.elastic-cloud.com:9243/app/dashboards?auth_provider_hint=anonymous1#/view/8704a1b0-d0c0-11ee-9f44-f53cb9148fa7?_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=()`;
 
     // iframe 내용
     const iframeContent = `
