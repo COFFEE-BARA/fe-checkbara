@@ -4,7 +4,7 @@ import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
 import axios from 'axios';
-import LibraryMarkup from "./LibraryMarkup.js";
+import Markup from "./Markup.js";
 
 import aladinIcon from "../images/aladin.png";
 import kyoboIcon from "../images/kyobo.png";
@@ -77,10 +77,10 @@ function NaverMap() {
             }));
         }
 
-        ReactDOM.render(
-            <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
-            document.getElementById('library-markup-container')
-        );
+        // ReactDOM.render(
+        //     <Markup path={path} currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
+        //     document.getElementById('library-markup-container')
+        // );
     }, [currentMyLocation, map]);
 
     useEffect(() => {
@@ -107,6 +107,7 @@ function NaverMap() {
 
     return (
         <>
+            { <Markup path={path} result={result} currentMyLocation={currentMyLocation} map={map} isbn={isbn}/> }
             {data && (
                 <div class="top-bar">
                     <div class="search-word">현재 검색어</div>
