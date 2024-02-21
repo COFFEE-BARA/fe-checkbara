@@ -14,7 +14,7 @@ function MainPage() {
 
     function clickStatisticsButton(e) {
         e.preventDefault();
-        window.location.href='/';
+        window.location.href='/statistics';
     }
 
     return (

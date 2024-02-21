@@ -44,6 +44,7 @@ function App() {
                 <RecoilRoot>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
+                        <Route path="/statistics" element={<StatisticsPage />}/>
                         <Route path="/book/:isbn/bookstore" element={<NaverMap />} />
                         <Route path="/book/:isbn/library" element={<NaverMap />} />
                         <Route path="/mainpage" element={<MainPage />} />
@@ -52,7 +53,6 @@ function App() {
                         <Route path="/recommendinput" element={<RecommendInput />}/>
                         <Route path="/recommendchat" element={<RecommendChat />}/>
                         <Route path="/detailpage/:isbn" element={<BookDetailPage />}/>
-                        <Route path="/statistics" element={<StatisticsPage />}/>
                     </Routes>
                 </RecoilRoot>
             </BrowserRouter>
