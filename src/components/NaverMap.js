@@ -27,8 +27,8 @@ function NaverMap() {
     const [list, setList] = useState();
 
     const { isbn } = useParams();
-    // var data;
     var response;
+    let map;
 
     // async function getList() {
     //     var apiUrl;
@@ -85,7 +85,7 @@ function NaverMap() {
         }
     }, [setCurrentMyLocation]);
 
-    // isbn, (price), lat, lon 백엔드로 전달
+    // isbn, lat, lon 백엔드로 전달
     useEffect(() => {
         const sendDataToBackend = async () => {
             try {
@@ -95,16 +95,14 @@ function NaverMap() {
                         lat: currentMyLocation.lat,
                         lon: currentMyLocation.lng
                     });
-                    console.log('서점 재고 조회\n');
-                    console.log(response.isbn, response.price, response.lat, response.lon);
+                    console.log('서점 재고 조회\n', response);
                 } else if (path.includes("/library")) {
-                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                    response = await axios.get(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
                         isbn: isbn,
                         lat: currentMyLocation.lat,
                         lon: currentMyLocation.lng
                     });
-                    console.log('도서관 재고 조회');
-                    console.log(response.isbn, response.lat, response.lon);
+                    console.log('도서관 재고 조회', response);
                 }
                 
                 console.log(response.status);
@@ -128,7 +126,7 @@ function NaverMap() {
 
     // 지도 표시
     useEffect(() => {
-        let map = new window.naver.maps.Map("map", {
+        map = new window.naver.maps.Map("map", {
             center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
             zoom: 16,
             minZoom: 10,
@@ -147,26 +145,46 @@ function NaverMap() {
 
     }, [currentMyLocation]);
 
-    // useEffect(() => {
-    //     var data;
-    //     if (currentMyLocation && response) {
-    //         if (path.includes("/bookstore")){
-    //             data = response.data.
-    //         } else if (path.includes("/library")){
+    useEffect(() => {
+        var data;
+        let markerImage = "";
 
-    //         }
-    //         libraries.forEach(loc => {
-    //             const marker = new window.naver.maps.Marker({
-    //                 position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
-    //                 map: map,
-    //                 icon: {
-    //                     content: `<img src="${markerImage}" Marker" style="width:30px; height:30px;">`,
-    //                     anchor: new window.naver.maps.Point(15, 30),
-    //                 },
-    //             });
-    //         });
-    //     }
-    // }, [currentMyLocation, loading, libraries]);
+        if (currentMyLocation && response) {
+            if (path.includes("/bookstore")){
+                data = response.data.bookstoreList
+            } else if (path.includes("/library")){
+                data = response.data.libraryList
+            }
+            console.log("marker useeffect", path);
+            
+            data.forEach(loc => {
+                if (path.includes("/bookstore")){
+                    switch (loc.bookstore) {
+                        case "교보문고":
+                            markerImage = kyoboIcon;
+                            break;
+                        case "영풍문고":
+                            markerImage = ypbookIcon;
+                            break;
+                        case "알라딘":
+                            markerImage = aladinIcon;
+                            break;
+                    }
+                } else if (path.includes("/library")){
+                    markerImage = libraryIcon;
+                }
+               
+                const marker = new window.naver.maps.Marker({
+                    position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
+                    map: map,
+                    icon: {
+                        content: `<img src="${markerImage}" Marker" style="width:30px; height:30px;">`,
+                        anchor: new window.naver.maps.Point(15, 30),
+                    },
+                });
+            });
+        }
+    }, [currentMyLocation]);
 
     return (
         <>
