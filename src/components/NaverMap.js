@@ -26,7 +26,7 @@ function NaverMap() {
     const mapRef = useRef<window.naver.maps.Map | null>(null);
     const [list, setList] = useState();
 
-    const { isbn, price } = useParams();
+    const { isbn } = useParams();
     // var data;
     var response;
 
@@ -88,26 +88,23 @@ function NaverMap() {
     // isbn, (price), lat, lon 백엔드로 전달
     useEffect(() => {
         const sendDataToBackend = async () => {
-            
             try {
                 if (path.includes("/bookstore")) {
-                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
                         isbn: isbn,
-                        price: price,
                         lat: currentMyLocation.lat,
                         lon: currentMyLocation.lng
                     });
                     console.log('서점 재고 조회\n');
                     console.log(response.isbn, response.price, response.lat, response.lon);
                 } else if (path.includes("/library")) {
-                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
+                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
                         isbn: isbn,
-                        price: price,
                         lat: currentMyLocation.lat,
                         lon: currentMyLocation.lng
                     });
                     console.log('도서관 재고 조회');
-                    console.log(response.isbn, response.price, response.lat, response.lon);
+                    console.log(response.isbn, response.lat, response.lon);
                 }
                 
                 console.log(response.status);
@@ -122,7 +119,7 @@ function NaverMap() {
             }
         };                  
 
-        if (currentMyLocation && isbn != "0" && price == "정보 없음" || price != "0") { 
+        if (currentMyLocation && isbn != "0") { 
             sendDataToBackend();
         } else {
             console.log('location 또는 isbn 데이터를 전달하지 못함:');
