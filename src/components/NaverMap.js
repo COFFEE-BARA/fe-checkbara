@@ -1,10 +1,8 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useRef, useEffect } from "react";
 import ReactDOM from 'react-dom';
 import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
-import { isbnAtom } from "../atom/isbnAtom.js";
-import { priceAtom } from "../atom/priceAtom.js";
 import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
@@ -19,53 +17,14 @@ import '../css/NaverMap.css';
 function NaverMap() {
     const setCurrentMyLocation = useSetRecoilState(currentMyLocationAtom);
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
-    // const currentIsbn = useRecoilValue(isbnAtom);=
-    // const currentPrice = useRecoilValue(priceAtom);
     const urlCheck = useLocation();
     const path = urlCheck.pathname;
     const mapRef = useRef<window.naver.maps.Map | null>(null);
-    const [list, setList] = useState();
-
     const { isbn } = useParams();
     var response;
     let map;
-
-    // async function getList() {
-    //     var apiUrl;
-    //     if (path.includes("/bookstore")) {
-    //         apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore`;
-    //     } else if (path.includes("/library")) {
-    //         apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library`;
-    //     }
-        
-    //     data = await axios.get(apiUrl);
-    //     setList(data.data.data);
-    // } 
-
-    // useEffect(() => {
-    //     async function getList() {
-    //         var apiUrl;
-    //         console.log(path);
-    //         if (path.includes("/bookstore")) {
-    //             apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/bookstore`;
-    //             data = await axios.get(apiUrl);
-    //             console.log(apiUrl);
-    //             setList(data.data.data);
-    //         } else if (path.includes("/library")) {
-    //             apiUrl = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/${price}/library`;
-    //             data = await axios.get(apiUrl);
-    //             console.log(apiUrl);
-    //             setList(data.data.data);
-    //         }
-    //     } 
-
-    //     getList();
-    //     if (data!=null){
-    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아옴: ", data);
-    //     } else {
-    //         console.log("백엔드에서 도서관 및 서점 데이터를 받아오지 못함");
-    //     }
-    // }, []);
+    let name;
+    let marker;
 
     // 위치 데이터 저장
     useEffect(() => {
@@ -156,7 +115,7 @@ function NaverMap() {
                 data = response.data.libraryList
             }
             console.log("marker useeffect", path);
-            
+
             data.forEach(loc => {
                 if (path.includes("/bookstore")){
                     switch (loc.bookstore) {
@@ -169,19 +128,31 @@ function NaverMap() {
                         case "알라딘":
                             markerImage = aladinIcon;
                             break;
-                    }
+                    }  
                 } else if (path.includes("/library")){
                     markerImage = libraryIcon;
                 }
-               
-                const marker = new window.naver.maps.Marker({
+                name = loc.name
+
+                marker = new window.naver.maps.Marker({
                     position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
                     map: map,
                     icon: {
-                        content: `<img src="${markerImage}" Marker" style="width:30px; height:30px;">`,
+                        content: `<img src="${markerImage}" alt= "${name}" Marker" style="width:30px; height:30px;">`,
                         anchor: new window.naver.maps.Point(15, 30),
                     },
                 });
+
+                marker.addListener('mouseover', () => {
+                    new window.naver.maps.InfoWindow({
+                        content: loc.libName,
+                        position: marker.getPosition(),
+                    }).open(map, marker);
+                });
+            
+                marker.addListener('mouseout', () => {
+                    map.closeInfoWindow();
+                });;
             });
         }
     }, [currentMyLocation]);
@@ -189,7 +160,7 @@ function NaverMap() {
     return (
         <>
             <div class="top-bar">
-                <div class="search-book">현재 검색어 | bookName</div>
+                <div class="search-book">현재 검색어 | {response.title} </div>
             </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
             <div id="library-markup-container"></div>
