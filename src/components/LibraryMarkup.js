@@ -1,13 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { MapContainer, Marker, Popup } from "react-leaflet";
-import markerImage from '../images/library.png';
+
+import aladinIcon from "../images/aladin.png";
+import kyoboIcon from "../images/kyobo.png";
+import ypbookIcon from "../images/ypbooks.png";
+import libraryIcon from "../images/library.png";
 
 function LibraryMarkup({ currentMyLocation, map, isbn }) { //NaverMap에서 isbn값 받아와서 넘겨줘야함
     const [libraries, setLibraries] = useState([]);
     const [loading, setLoading] = useState(true); 
 
     useEffect(() => {
-        fetch(`/api/book/${isbn}/lending-library`)
+        fetch(`/api/book/${isbn}/library`)
             .then(response => response.json())
             .then(data => {
                 setLibraries(data); 
@@ -26,7 +30,7 @@ function LibraryMarkup({ currentMyLocation, map, isbn }) { //NaverMap에서 isbn
                     position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
                     map: map,
                     icon: {
-                        content: `<img src="${markerImage}" alt= "${loc.libName}" Marker" style="width:30px; height:30px;">`,
+                        content: `<img src="${libraryIcon}" alt= "${loc.libName}" Marker" style="width:30px; height:30px;">`,
                         anchor: new window.naver.maps.Point(15, 30),
                     },
                 });

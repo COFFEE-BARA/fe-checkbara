@@ -1,4 +1,4 @@
-.map {
+#map {
     width: 100%;
     height: auto;
     border-radius: 15px;
@@ -12,6 +12,14 @@
     text-align: center;
     font-family: 'IBM Plex Sans KR', sans-serif;
     font-size: x-large;
+}
+
+.search-word {
+    font-weight: bold;
+}
+
+.search-book {
+    font-size: large;
 }
 
 .search-tap {

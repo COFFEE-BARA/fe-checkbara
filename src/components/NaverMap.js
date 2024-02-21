@@ -43,7 +43,7 @@ function NaverMap() {
 
     useEffect(() => {
         getData();
-    }, [data]);
+    }, []);
 
     useEffect(() => {
         const success = (location) => {
@@ -103,15 +103,16 @@ function NaverMap() {
             console.log("로딩중");
             // 로딩 페이지를 만들어야 하나 recommend page보고 고쳐봐야지
         }
-    },[data, result]);
+    },[data]);
 
     return (
         <>
-            <div class="top-bar">
-                {result && (
-                    <div class="search-book">현재 검색어 |{result.title} </div>
-                )}
-            </div>
+            {data && (
+                <div class="top-bar">
+                    <div class="search-word">현재 검색어</div>
+                    <div class="search-book">{data.title}</div>
+                </div>
+            )}
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
             <div id="library-markup-container"></div>
         </>
