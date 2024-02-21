@@ -43,7 +43,7 @@ function EmbeddedDashboard() {
     return (
         <>
             <div className="chevron-left-input" style={{ marginTop: '10px', marginLeft: '-5px' }} onClick={clickLeftButton}></div>
-            <div className="head-text" style={{ marginTop: '-20px' , marginLeft: '-10px'}}>MainPage로 돌아가기</div>
+            <div className="head-text" style={{ marginTop: '-20px' , marginLeft: '-10px'}}>Kibana 통계 확인하기</div>
             <iframe src={embeddedUrl} width="100%" height="932px" />
         </>
     );    
