@@ -45,13 +45,12 @@ function BookDetailPage() {
     <>
       {detail && (
         <body>
-          <header class="book-info1">
+          <div class="book-info1">
             <div className="back-button" onClick={onClickBackButton}/>
             <div class="book-title-author">
               <div class="book-title">{detail.title}</div>
-              <div class="book-author">{detail.authore}</div>
             </div>
-          </header>
+          </div>
           <main>
             <div class="book-info2">
               <div class="book-image">

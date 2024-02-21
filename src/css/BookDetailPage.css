@@ -7,7 +7,7 @@ body {
     height: 100%;
 }
 
-header {
+.header {
     padding: 10px;
     text-align: left;
     position: absolute;
@@ -16,22 +16,19 @@ header {
     display: flex;
 }
 
+.book-info1{
+    margin-bottom: 10px;
+}
 
 .book-title {
     flex-direction: column;
     width: 360px;
-}
-
-.book-author {
-    flex-direction: column;
-    color: grey;
-}
-
-.book-title {
+    margin-left: 40px;
     font-weight: bold;
     font-size: x-large;
-    margin-top: 5%;
+    margin-top: -30px;
 }
+
 
 main {
     /* margin-top: 60px; */
@@ -44,7 +41,6 @@ main {
 }
 
 .book-info2 {
-    margin-top: 100px;
     padding: 10px;
 }
 
@@ -88,7 +84,7 @@ main {
     margin: auto;
     border-radius: 15px;
     overflow: hidden;
-    margin-top: 10px;
+    margin-top: -10px;
 } 
 
 .book-image img {
@@ -119,7 +115,8 @@ footer {
     left: 0;
     bottom: 0px;
     width: 430px;
-    min-height: calc(100vh - 820px);
+    /* min-height: calc(100vh - 820px); */
+    height: 8%;
     background-color: #ffffff; 
 } 
 
