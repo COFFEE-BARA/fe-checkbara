@@ -3,16 +3,14 @@ import '../css/section.css';
 import '../css/recommend.css';
 
 function EmbeddedDashboard() {
-    // 로그인 정보
-    const username = 'guest';
-    const password = 'guest11';
+    // MEMO: 로그인 정보 삭제함 없어도 연결됨
 
     const clickLeftButton = () => {
         window.location.href = '/mainpage';
     };
 
     // 링크
-    const embeddedLink = `https://smw-coffeebara.kb.us-east-2.aws.elastic-cloud.com:9243/app/dashboards?auth_provider_hint=anonymous1#/view/0af5f220-d022-11ee-b9f1-c5b3500cd5a1?_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=()`;
+    const embeddedLink = `https://smw-coffeebara.kb.us-east-2.aws.elastic-cloud.com:9243/app/dashboards#/view/0af5f220-d022-11ee-b9f1-c5b3500cd5a1?_g=(filters:!(),refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))`;
 
     // iframe 내용
     const iframeContent = `
