@@ -9,7 +9,8 @@ import MainPage from './components/MainPage.js';
 import RecommendInput from './components/RecommendInput';
 import RecommendChat from './components/RecommendChat';
 // import { request } from './api/api.js'; //조정
-import BookDetailPage from "./components/BookDetailPage"
+import BookDetailPage from "./components/BookDetailPage";
+import StatisticsPage from "./components/StatisticsPage";
 
 
 const MAX_KEYWORD = 3;
@@ -43,7 +44,8 @@ function App() {
                 <RecoilRoot>
                     <Routes>
                         <Route path="/" element={<MainPage />} />
-                        <Route path="/book/:isbn/:price/bookstore" element={<NaverMap />} />
+                        <Route path="/statistics" element={<StatisticsPage />}/>
+                        <Route path="/book/:isbn/bookstore" element={<NaverMap />} />
                         <Route path="/book/:isbn/library" element={<NaverMap />} />
                         <Route path="/mainpage" element={<MainPage />} />
                         <Route path="/resultsection" element={<ResultSection data={data} pageNum={pageNum} />} />
