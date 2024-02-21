@@ -1,12 +1,11 @@
+import ReactDOM from "react-dom";
 import React, { useRef, useEffect, useState } from "react";
-import ReactDOM from 'react-dom';
 import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
 import axios from 'axios';
 import LibraryMarkup from "./LibraryMarkup.js";
 
-import useGeolocation from "../hooks/useGeolocation";
 import aladinIcon from "../images/aladin.png";
 import kyoboIcon from "../images/kyobo.png";
 import ypbookIcon from "../images/ypbooks.png";
@@ -19,13 +18,12 @@ function NaverMap() {
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
     const urlCheck = useLocation();
     const path = urlCheck.pathname;
-    const mapRef = useRef<window.naver.maps.Map | null>(null);
+    // const mapRef = useRef<window.naver.maps.Map | null>(null);÷
     const { isbn } = useParams();
-    var response;
-    let map;
-    let name;
     let marker;
     const [data, setData] = useState();
+    const [result, setResult] = useState();
+    const [map, setMap] = useState(null);
 
     async function getData(){
         let url;
@@ -47,7 +45,6 @@ function NaverMap() {
         getData();
     }, [data]);
 
-    // 위치 데이터 저장
     useEffect(() => {
         const success = (location) => {
             setCurrentMyLocation({
@@ -65,84 +62,55 @@ function NaverMap() {
         }
     }, [setCurrentMyLocation]);
 
-    // 지도 표시
     useEffect(() => {
-        map = new window.naver.maps.Map("map", {
-            center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
-            zoom: 16,
-            minZoom: 10,
-            zoomControl: true,
-            mapTypeControl: true,
-            zoomControlOptions: {
-                position: window.naver.maps.Position.TOP_RIGHT,
-            },
-            mapDataControl: false,
-        });
+        if (!map) {
+            setMap(new window.naver.maps.Map("map", {
+                center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
+                zoom: 16,
+                minZoom: 10,
+                zoomControl: true,
+                mapTypeControl: true,
+                zoomControlOptions: {
+                    position: window.naver.maps.Position.TOP_RIGHT,
+                },
+                mapDataControl: false,
+            }));
+        }
 
         ReactDOM.render(
             <LibraryMarkup currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
             document.getElementById('library-markup-container')
         );
-
-    }, [currentMyLocation]);
+    }, [currentMyLocation, map]);
 
     useEffect(() => {
-        var data;
-        let markerImage = "";
-
-        if (currentMyLocation && response) {
-            if (path.includes("/bookstore")){
-                data = response.data.bookstoreList
-            } else if (path.includes("/library")){
-                data = response.data.libraryList
+        let resultData = [];
+        if (data) {
+            if (path.includes("/bookstore")) {
+                const kyoboData = data.stockResult.kyoboStockList;
+                const ypbookData = data.stockResult.ypbookStockList;
+                const aladinData = data.stockResult.aladinStockList;
+                resultData.push(...[kyoboData, ypbookData, aladinData]);
+                setResult(resultData);
+                console.log(result)
+            } else if (path.includes("/library")) {
+                const libraryData = data.libraryList;
+                resultData.append(libraryData);
+                setResult(resultData);
+                console.log(result)
             }
-            console.log("marker useeffect", path);
-
-            data.forEach(loc => {
-                if (path.includes("/bookstore")){
-                    switch (loc.bookstore) {
-                        case "교보문고":
-                            markerImage = kyoboIcon;
-                            break;
-                        case "영풍문고":
-                            markerImage = ypbookIcon;
-                            break;
-                        case "알라딘":
-                            markerImage = aladinIcon;
-                            break;
-                    }  
-                } else if (path.includes("/library")){
-                    markerImage = libraryIcon;
-                }
-                name = loc.name
-
-                marker = new window.naver.maps.Marker({
-                    position: new window.naver.maps.LatLng(loc.latitude, loc.longitude),
-                    map: map,
-                    icon: {
-                        content: `<img src="${markerImage}" alt= "${name}" Marker" style="width:30px; height:30px;">`,
-                        anchor: new window.naver.maps.Point(15, 30),
-                    },
-                });
-
-                marker.addListener('mouseover', () => {
-                    new window.naver.maps.InfoWindow({
-                        content: loc.libName,
-                        position: marker.getPosition(),
-                    }).open(map, marker);
-                });
-            
-                marker.addListener('mouseout', () => {
-                    map.closeInfoWindow();
-                });;
-            });
+        } else {
+            console.log("로딩중");
+            // 로딩 페이지를 만들어야 하나 recommend page보고 고쳐봐야지
         }
-    }, [currentMyLocation]);
+    },[data, result]);
 
     return (
         <>
             <div class="top-bar">
-                <div class="search-book">현재 검색어 | </div>
+                {result && (
+                    <div class="search-book">현재 검색어 |{result.title} </div>
+                )}
             </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
             <div id="library-markup-container"></div>
