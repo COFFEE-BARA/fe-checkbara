@@ -1,9 +1,15 @@
 import React from 'react';
+import '../css/section.css';
+import '../css/recommend.css';
 
 function EmbeddedDashboard() {
     // 로그인 정보
     const username = 'guest';
     const password = 'guest11';
+
+    const clickLeftButton = () => {
+        window.location.href = '/mainpage';
+    };
 
     // 링크
     const embeddedLink = `https://smw-coffeebara.kb.us-east-2.aws.elastic-cloud.com:9243/app/dashboards?auth_provider_hint=anonymous1#/view/0af5f220-d022-11ee-b9f1-c5b3500cd5a1?_g=(refreshInterval:(pause:!t,value:60000),time:(from:now-15m,to:now))&_a=()`;
@@ -13,6 +19,11 @@ function EmbeddedDashboard() {
         <html>
         <head>
             <title>Embedded Dashboard</title>
+                <style>
+                body {
+                    margin-top: 50px; 
+                }
+            </style>
         </head>
         <body>
             <iframe src="${embeddedLink}" width="100%" height="100%" frameborder="0"></iframe>
@@ -30,8 +41,12 @@ function EmbeddedDashboard() {
     const embeddedUrl = `data:text/html;base64,${encodedContent}`;
 
     return (
-        <iframe src={embeddedUrl} width="100%" height="932px" />
-    );
+        <>
+            <div className="chevron-left-input" style={{ marginTop: '10px', marginLeft: '-5px' }} onClick={clickLeftButton}></div>
+            <div className="head-text" style={{ marginTop: '-20px' , marginLeft: '-10px'}}>MainPage로 돌아가기</div>
+            <iframe src={embeddedUrl} width="100%" height="932px" />
+        </>
+    );    
 }
 
 export default EmbeddedDashboard;
