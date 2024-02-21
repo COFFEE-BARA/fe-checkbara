@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import ReactDOM from 'react-dom';
 import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
@@ -25,6 +25,27 @@ function NaverMap() {
     let map;
     let name;
     let marker;
+    const [data, setData] = useState();
+
+    async function getData(){
+        let url;
+        if (path.includes("/bookstore")) {
+            url = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+        } else if (path.includes("/library")) {
+            url = `https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`;
+        }
+    
+        try {
+            const response = await axios.get(url);
+            setData(response.data.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }    
+
+    useEffect(() => {
+        getData();
+    }, [data]);
 
     // 위치 데이터 저장
     useEffect(() => {
@@ -43,45 +64,6 @@ function NaverMap() {
             navigator.geolocation.getCurrentPosition(success, error);
         }
     }, [setCurrentMyLocation]);
-
-    // isbn, lat, lon 백엔드로 전달
-    useEffect(() => {
-        const sendDataToBackend = async () => {
-            try {
-                if (path.includes("/bookstore")) {
-                    response = await axios.post(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/bookstore?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
-                        isbn: isbn,
-                        lat: currentMyLocation.lat,
-                        lon: currentMyLocation.lng
-                    });
-                    console.log('서점 재고 조회\n', response);
-                } else if (path.includes("/library")) {
-                    response = await axios.get(`https://3cggt0xn0b.execute-api.ap-northeast-2.amazonaws.com/check-bara/api/book/${isbn}/library?lat=${currentMyLocation.lat}&lon=${currentMyLocation.lng}`, {
-                        isbn: isbn,
-                        lat: currentMyLocation.lat,
-                        lon: currentMyLocation.lng
-                    });
-                    console.log('도서관 재고 조회', response);
-                }
-                
-                console.log(response.status);
-                if (response.status === 200) {
-                    console.log('sendDataToBackend 함수 데이터 전달:', response.data);
-                } else {
-                    console.error('응답 상태 코드가 200이 아님');
-                }
-
-            } catch (error) {
-                console.error('API 호출 중 오류 발생:', error);
-            }
-        };                  
-
-        if (currentMyLocation && isbn != "0") { 
-            sendDataToBackend();
-        } else {
-            console.log('location 또는 isbn 데이터를 전달하지 못함:');
-        }
-    });
 
     // 지도 표시
     useEffect(() => {
@@ -160,7 +142,7 @@ function NaverMap() {
     return (
         <>
             <div class="top-bar">
-                <div class="search-book">현재 검색어 | {response.title} </div>
+                <div class="search-book">현재 검색어 | </div>
             </div>
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
             <div id="library-markup-container"></div>
