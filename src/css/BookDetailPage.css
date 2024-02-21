@@ -7,7 +7,7 @@ body {
     height: 100%;
 }
 
-header {
+.header {
     padding: 10px;
     text-align: left;
     position: absolute;
@@ -16,22 +16,19 @@ header {
     display: flex;
 }
 
+.book-info1{
+    margin-bottom: 10px;
+}
 
 .book-title {
     flex-direction: column;
     width: 360px;
-}
-
-.book-author {
-    flex-direction: column;
-    color: grey;
-}
-
-.book-title {
+    margin-left: 40px;
     font-weight: bold;
     font-size: x-large;
-    margin-top: 5%;
+    margin-top: -30px;
 }
+
 
 main {
     /* margin-top: 60px; */
@@ -44,7 +41,6 @@ main {
 }
 
 .book-info2 {
-    margin-top: 100px;
     padding: 10px;
 }
 
@@ -88,6 +84,7 @@ main {
     margin: auto;
     border-radius: 15px;
     overflow: hidden;
+    margin-top: -10px;
 } 
 
 .book-image img {
@@ -95,19 +92,35 @@ main {
     height: 100%;
     border-radius: inherit;
 }
-
+/* 
 footer {
     background-color: #ffffff;
-    /* padding: 1% 3% 2% 3%; */
+    padding: 1% 3% 2% 3%;
     overflow: hidden;
     text-align: center;
     position: fixed;
     width: 430px;
-    height: 8%;
+    height: 80px;
     bottom: 40px;
     display: flex;
     flex-direction: row;
-}
+} */
+
+
+footer {
+    flex-direction: row;
+    display: flex;
+    text-align: center;
+    position: fixed;
+    left: 0;
+    bottom: 0px;
+    width: 430px;
+    /* min-height: calc(100vh - 820px); */
+    height: 8%;
+    background-color: #ffffff; 
+} 
+
+
 
 footer>div {
     flex-direction: row;
@@ -117,6 +130,7 @@ footer>div {
     margin: 1%;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
+
 
 .bookstore-stock-button {
     background-color: #e1eaff;

@@ -45,13 +45,12 @@ function BookDetailPage() {
     <>
       {detail && (
         <body>
-          <header class="book-info1">
+          <div class="book-info1">
             <div className="back-button" onClick={onClickBackButton}/>
             <div class="book-title-author">
               <div class="book-title">{detail.title}</div>
-              <div class="book-author">{detail.authore}</div>
             </div>
-          </header>
+          </div>
           <main>
             <div class="book-info2">
               <div class="book-image">
@@ -89,11 +88,13 @@ function BookDetailPage() {
               </div>
             </div>
           </main>
-          <footer>
-            <div class="bookstore-stock-button" onClick={(handleBookstoreStockButtonClick)}>서점 재고</div>
-            <div class="library-stock-button" onClick={(handleLibraryStockButtonClick)}>도서관 재고</div>
-            <div class="sales-link-button"><a href={detail.purchaseURL}>판매 링크</a></div>
-          </footer>
+          <div className="footer-box">
+            <footer>
+              <div class="bookstore-stock-button" onClick={(handleBookstoreStockButtonClick)}>서점 재고</div>
+              <div class="library-stock-button" onClick={(handleLibraryStockButtonClick)}>도서관 재고</div>
+              <div class="sales-link-button"><a href={detail.purchaseURL}>판매 링크</a></div>
+            </footer>
+          </div>
         </body>
       )}
     </>
