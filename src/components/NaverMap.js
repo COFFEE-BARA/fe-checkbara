@@ -74,13 +74,7 @@ function NaverMap() {
             mapRef.current = new window.naver.maps.Map("map", {
                 center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
                 zoom: 16,
-                minZoom: 10,
                 zoomControl: true,
-                mapTypeControl: true,
-                zoomControlOptions: {
-                    position: window.naver.maps.Position.TOP_RIGHT,
-                },
-                mapDataControl: false,
             });
         }
     }, [currentMyLocation]);
@@ -97,7 +91,7 @@ function NaverMap() {
                 console.log(result)
             } else if (path.includes("/library")) {
                 const libraryData = data.libraryList;
-                resultData.append(libraryData);
+                resultData.push(...[libraryData]);
                 setResult(resultData);
                 console.log(result)
             }
@@ -129,6 +123,7 @@ function NaverMap() {
                             } else if (type == "영풍문고"){
                                 icon = ypbookIcon;
                             }
+                            console.log("아이콘",icon);
                             const marker = new window.naver.maps.Marker({
                                 position: new window.naver.maps.LatLng(latitude, longtitude),
                                 map: mapRef.current,
@@ -163,18 +158,7 @@ function NaverMap() {
             )}
              {/* { <Markup path={path} result={result} currentMyLocation={currentMyLocation}  isbn={isbn}/> } */}
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-            <div id="library-markup-container">
-                <MapContainer>
-                    {markerRef.current && markerRef.current.length > 0  && markerRef.current.map((marker, index) => (
-                        <Marker
-                            key={index}
-                            position={marker.getPosition()}
-                        >
-                            <Popup>{marker.name}</Popup>
-                        </Marker>
-                    ))}
-                </MapContainer>
-            </div>
+            <div ref={mapRef} id="library-markup-container"></div>
         </>
     )
 }
