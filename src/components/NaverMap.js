@@ -25,6 +25,7 @@ function NaverMap() {
     let marker;
     const [data, setData] = useState();
     const [result, setResult] = useState();
+    const { naver } = window;
     const markerRef = useRef([]);
     var icon;
 
@@ -87,20 +88,80 @@ function NaverMap() {
     }, []);
 
     useEffect(() => {
+        if (!mapRef.current || !naver) return;
+
         if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
-            mapRef.current = new window.naver.maps.Map("map", {
-                center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
+            
+            const location = new naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng);
+            const mapOptions = {
+                center: location,
                 zoom: 16,
                 minZoom: 10,
                 zoomControl: true,
-                mapTypeControl: true,
-                zoomControlOptions: {
-                    position: window.naver.maps.Position.TOP_RIGHT,
-                },
-                mapDataControl: false,
-            });
+            }
+            const map = new naver.maps.Map(mapRef.current, mapOptions);
+            
+            // mapRef.current = new window.naver.maps.Map("map", {
+            //     center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
+            //     zoom: 16,
+            //     minZoom: 10,
+            //     zoomControl: true,
+            //     mapTypeControl: true,
+            //     zoomControlOptions: {
+            //         position: window.naver.maps.Position.TOP_RIGHT,
+            //     },
+            //     mapDataControl: false,
+            // });
+
+            if (result) {
+                const validResults = result.filter(item => item !== null);
+            
+                validResults.forEach(bookplaces => {
+                    bookplaces.forEach(bookplace => {
+                        if (result) {
+                            let type="";
+                            const { name, latitude, longtitude } = bookplace;
+                            if (path.includes("/bookstore")) {
+                                type = bookplace.type;
+                            }
+                            
+                            if (type == ""){
+                                icon = libraryIcon;
+                            } else if (type != "" && name == "교보문고"){
+                                icon = kyoboIcon;
+                            } else if (type != "" && name == "알라딘"){
+                                icon = aladinIcon;
+                            } else if (type != "" && name == "영풍문고"){
+                                icon = ypbookIcon;
+                            }
+    
+                            var lat = parseFloat(latitude);
+                            var lon = parseFloat(longtitude);
+                            const bookLocation = new naver.maps.LatLng(lat, lon);
+
+                           
+                            // if (Array.isArray(markerRef.current)){
+                            //     markerRef.current.push(marker);
+                            //     console.log("마커레프:",markerRef.current)
+                            // } else {
+                            //     markerRef.current = [marker];
+                            //     console.log("마커레프 초기화:", markerRef.current);
+                            // }
+                        }
+
+                        new naver.maps.Marker({
+                            position: location,
+                            map: map,
+                            icon: {
+                                content: `<img src="${icon}" alt="${name} Marker" style="width:30px; height:30px;">`,
+                                anchor: new window.naver.maps.Point(15, 30),
+                            },
+                        });
+                    });
+                });
+            }
         }
-    }, [currentMyLocation]);
+    }, [currentMyLocation, result]);
 
     useEffect(() => {
         let resultData = [];
@@ -124,51 +185,52 @@ function NaverMap() {
         }
     },[data]);
 
-    useEffect(() => {
-        if (result) {
-            const validResults = result.filter(item => item !== null);
+    // useEffect(() => {
+    //     if (result) {
+    //         const validResults = result.filter(item => item !== null);
         
-            validResults.forEach(bookplaces => {
-                bookplaces.forEach(bookplace => {
-                    if (result) {
-                        let type="";
-                        const { name, latitude, longtitude } = bookplace;
-                        if (path.includes("/bookstore")) {
-                            type = bookplace.type;
-                        }
+    //         validResults.forEach(bookplaces => {
+    //             bookplaces.forEach(bookplace => {
+    //                 if (result) {
+    //                     let type="";
+    //                     const { name, latitude, longtitude } = bookplace;
+    //                     if (path.includes("/bookstore")) {
+    //                         type = bookplace.type;
+    //                     }
                         
-                        console.log("위도 경도", latitude, longtitude);
-                        console.log(bookplace);
-                        
-                        if (type == ""){
-                            icon = libraryIcon;
-                        } else if (type != "" && name == "교보문고"){
-                            icon = kyoboIcon;
-                        } else if (type != "" && name == "알라딘"){
-                            icon = aladinIcon;
-                        } else if (type != "" && name == "영풍문고"){
-                            icon = ypbookIcon;
-                        }
-                        const marker = new window.naver.maps.Marker({
-                            position: new window.naver.maps.LatLng(latitude, longtitude),
-                            map: mapRef.current,
-                            icon: {
-                                content: `<img src="${icon}" alt="${name} Marker" style="width:30px; height:30px;">`,
-                                anchor: new window.naver.maps.Point(15, 30),
-                            },
-                        });
-                        if (Array.isArray(markerRef.current)){
-                            markerRef.current.push(marker);
-                            console.log("마커레프:",markerRef.current)
-                        } else {
-                            markerRef.current = [marker];
-                            console.log("마커레프 초기화:", markerRef.current);
-                        }
-                    }
-                });
-            });
-        }
-    }, [result]);
+    //                     if (type == ""){
+    //                         icon = libraryIcon;
+    //                     } else if (type != "" && name == "교보문고"){
+    //                         icon = kyoboIcon;
+    //                     } else if (type != "" && name == "알라딘"){
+    //                         icon = aladinIcon;
+    //                     } else if (type != "" && name == "영풍문고"){
+    //                         icon = ypbookIcon;
+    //                     }
+    //                     console.log("위도 경도", typeof(latitude), typeof(longtitude));
+
+    //                     var lat = parseFloat(latitude);
+    //                     var lon = parseFloat(longtitude);
+    //                     const marker = new window.naver.maps.Marker({
+    //                         position: new window.naver.maps.LatLng(lat, lon),
+    //                         map: mapRef.current,
+    //                         icon: {
+    //                             content: `<img src="${icon}" alt="${name} Marker" style="width:30px; height:30px;">`,
+    //                             anchor: new window.naver.maps.Point(15, 30),
+    //                         },
+    //                     });
+    //                     if (Array.isArray(markerRef.current)){
+    //                         markerRef.current.push(marker);
+    //                         console.log("마커레프:",markerRef.current)
+    //                     } else {
+    //                         markerRef.current = [marker];
+    //                         console.log("마커레프 초기화:", markerRef.current);
+    //                     }
+    //                 }
+    //             });
+    //         });
+    //     }
+    // }, [result, currentMyLocation]);
 
     return (
         <>
@@ -181,8 +243,8 @@ function NaverMap() {
             )}
              {/* { <Markup path={path} result={result} currentMyLocation={currentMyLocation}  isbn={isbn}/> } */}
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-            <div id="library-markup-container">
-                <MapContainer>
+            <div ref={mapRef} id="library-markup-container">
+                {/* <MapContainer>
                     {markerRef.current && markerRef.current.length > 0  && markerRef.current.map((marker, index) => (
                         <Marker
                             key={index}
@@ -191,7 +253,7 @@ function NaverMap() {
                             <Popup>{marker.name}</Popup>
                         </Marker>
                     ))}
-                </MapContainer>
+                </MapContainer> */}
             </div>
         </>
     )
