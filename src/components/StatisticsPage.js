@@ -2,8 +2,9 @@ import React from 'react';
 import '../css/section.css';
 import '../css/recommend.css';
 
-function EmbeddedDashboard() {
-    // MEMO: 로그인 정보 삭제함 없어도 연결됨
+function StatisticsPage() {
+    const username = 'guest';
+    const password = 'guest11';
 
     const clickLeftButton = () => {
         window.location.href = '/mainpage';
@@ -47,4 +48,4 @@ function EmbeddedDashboard() {
     );    
 }
 
-export default EmbeddedDashboard;
+export default StatisticsPage;
