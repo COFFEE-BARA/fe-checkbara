@@ -25,6 +25,40 @@ function NaverMap() {
     const [result, setResult] = useState();
     const [map, setMap] = useState(null);
 
+    // useEffect(() => {
+    //     const success = (location) => {
+    //         setCurrentMyLocation({
+    //             lat: location.coords.latitude,
+    //             lng: location.coords.longitude,
+    //         });
+    //     };
+        
+    //     const error = () => {
+    //         setCurrentMyLocation({ lat: 37.5666103, lng: 126.9783882 });
+    //     };
+
+    //     if (navigator.geolocation) {
+    //         navigator.geolocation.getCurrentPosition(success, error);
+    //     }
+    // }, [setCurrentMyLocation]);
+
+    async function getLocation() {
+        const success = (location) => {
+            setCurrentMyLocation({
+                lat: location.coords.latitude,
+                lng: location.coords.longitude,
+            });
+        };
+        
+        const error = () => {
+            setCurrentMyLocation({ lat: 37.5666103, lng: 126.9783882 });
+        };
+
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(success, error);
+        }
+    }
+
     async function getData(){
         let url;
         if (path.includes("/bookstore")) {
@@ -40,27 +74,15 @@ function NaverMap() {
             console.error('Error fetching data:', error);
         }
     }    
+    
+    useEffect(() => {
+        getLocation();
+    }, [setCurrentMyLocation]);
 
     useEffect(() => {
+        
         getData();
     }, []);
-
-    useEffect(() => {
-        const success = (location) => {
-            setCurrentMyLocation({
-                lat: location.coords.latitude,
-                lng: location.coords.longitude,
-            });
-        };
-        
-        const error = () => {
-            setCurrentMyLocation({ lat: 37.5666103, lng: 126.9783882 });
-        };
-
-        if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(success, error);
-        }
-    }, [setCurrentMyLocation]);
 
     useEffect(() => {
         if (!map) {
@@ -107,13 +129,14 @@ function NaverMap() {
 
     return (
         <>
-            { <Markup path={path} result={result} currentMyLocation={currentMyLocation} map={map} isbn={isbn}/> }
+           
             {data && (
                 <div class="top-bar">
                     <div class="search-word">현재 검색어</div>
                     <div class="search-book">{data.title}</div>
                 </div>
             )}
+             { <Markup path={path} result={result} currentMyLocation={currentMyLocation} map={map} isbn={isbn}/> }
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
             <div id="library-markup-container"></div>
         </>

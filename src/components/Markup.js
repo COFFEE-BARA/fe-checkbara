@@ -14,7 +14,7 @@ function Markup({ path, result, currentMyLocation, map, isbn }) {
     const [loading, setLoading] = useState(true); 
     let icon, name;
     let array=[];
-    const markerRef = useRef(null);
+    const markerRef = useRef([]);
 
     useEffect(() => {
         if (result) {
@@ -24,6 +24,7 @@ function Markup({ path, result, currentMyLocation, map, isbn }) {
                 bookplaces.forEach(bookplace => {
                     if (result) {
                         const { type, name, stock, latitude, longtitude } = bookplace;
+                        console.log("위도 경도", latitude, longtitude);
                         console.log(bookplace);
                         const marker = new window.naver.maps.Marker({
                             position: new window.naver.maps.LatLng(latitude, longtitude),
@@ -33,12 +34,20 @@ function Markup({ path, result, currentMyLocation, map, isbn }) {
                                 anchor: new window.naver.maps.Point(15, 30),
                             },
                         });
-                        console.log("마커들 : ",marker)
-                        console.log("마커레프:",markerRef.current)
-                        if (markerRef.current && result){
-                            console.log("마커레프:",markerRef.current)
+                        if (Array.isArray(markerRef.current)){
                             markerRef.current.push(marker);
+                            console.log("마커레프:",markerRef.current)
+                        } else {
+                            markerRef.current = [marker];
+                            console.log("마커레프 초기화:", markerRef.current);
                         }
+                        
+                        // console.log("마커들 : ",marker)
+                        // console.log("마커레프:",markerRef.current)
+                        // if (markerRef.current && result){
+                        //     console.log("마커레프:",markerRef.current)
+                        //     markerRef.current.push(marker);
+                        // }
                         
 
                     }
