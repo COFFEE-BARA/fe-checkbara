@@ -154,7 +154,6 @@ function NaverMap() {
                 </div>
             )}
             <div ref={mapRef} id="map" style={{ width: "100%", height: "100vh" }}></div>
-            {/* <div ref={mapRef} id="library-markup-container"></div> */}
         </>
     )
 }
