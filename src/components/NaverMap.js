@@ -2,9 +2,11 @@ import ReactDOM from "react-dom";
 import React, { useRef, useEffect, useState } from "react";
 import { useLocation, useParams } from "react-router-dom";
 import { useSetRecoilState, useRecoilValue } from "recoil";
+import { MapContainer, Marker, Popup } from "react-leaflet";
+
 import { currentMyLocationAtom } from "../atom/currentMyLocationAtom.js";
 import axios from 'axios';
-import Markup from "./Markup.js";
+// import Markup from "./Markup.js";
 
 import aladinIcon from "../images/aladin.png";
 import kyoboIcon from "../images/kyobo.png";
@@ -18,12 +20,13 @@ function NaverMap() {
     const currentMyLocation = useRecoilValue(currentMyLocationAtom); 
     const urlCheck = useLocation();
     const path = urlCheck.pathname;
-    // const mapRef = useRef<window.naver.maps.Map | null>(null);÷
+    const mapRef = useRef(null);
     const { isbn } = useParams();
     let marker;
     const [data, setData] = useState();
     const [result, setResult] = useState();
-    const [map, setMap] = useState(null);
+    const markerRef = useRef([]);
+    var icon;
 
     // useEffect(() => {
     //     const success = (location) => {
@@ -80,13 +83,12 @@ function NaverMap() {
     }, [setCurrentMyLocation]);
 
     useEffect(() => {
-        
         getData();
     }, []);
 
     useEffect(() => {
-        if (!map) {
-            setMap(new window.naver.maps.Map("map", {
+        if (currentMyLocation.lat !== 0 && currentMyLocation.lng !== 0) {
+            mapRef.current = new window.naver.maps.Map("map", {
                 center: new window.naver.maps.LatLng(currentMyLocation.lat, currentMyLocation.lng),
                 zoom: 16,
                 minZoom: 10,
@@ -96,14 +98,9 @@ function NaverMap() {
                     position: window.naver.maps.Position.TOP_RIGHT,
                 },
                 mapDataControl: false,
-            }));
+            });
         }
-
-        // ReactDOM.render(
-        //     <Markup path={path} currentMyLocation={currentMyLocation} map={map} isbn={isbn}/>, 
-        //     document.getElementById('library-markup-container')
-        // );
-    }, [currentMyLocation, map]);
+    }, [currentMyLocation]);
 
     useEffect(() => {
         let resultData = [];
@@ -127,6 +124,52 @@ function NaverMap() {
         }
     },[data]);
 
+    useEffect(() => {
+        if (result) {
+            const validResults = result.filter(item => item !== null);
+        
+            validResults.forEach(bookplaces => {
+                bookplaces.forEach(bookplace => {
+                    if (result) {
+                        let type="";
+                        const { name, latitude, longtitude } = bookplace;
+                        if (path.includes("/bookstore")) {
+                            type = bookplace.type;
+                        }
+                        
+                        console.log("위도 경도", latitude, longtitude);
+                        console.log(bookplace);
+                        
+                        if (type == ""){
+                            icon = libraryIcon;
+                        } else if (type != "" && name == "교보문고"){
+                            icon = kyoboIcon;
+                        } else if (type != "" && name == "알라딘"){
+                            icon = aladinIcon;
+                        } else if (type != "" && name == "영풍문고"){
+                            icon = ypbookIcon;
+                        }
+                        const marker = new window.naver.maps.Marker({
+                            position: new window.naver.maps.LatLng(latitude, longtitude),
+                            map: mapRef.current,
+                            icon: {
+                                content: `<img src="${icon}" alt="${name} Marker" style="width:30px; height:30px;">`,
+                                anchor: new window.naver.maps.Point(15, 30),
+                            },
+                        });
+                        if (Array.isArray(markerRef.current)){
+                            markerRef.current.push(marker);
+                            console.log("마커레프:",markerRef.current)
+                        } else {
+                            markerRef.current = [marker];
+                            console.log("마커레프 초기화:", markerRef.current);
+                        }
+                    }
+                });
+            });
+        }
+    }, [result]);
+
     return (
         <>
            
@@ -136,9 +179,20 @@ function NaverMap() {
                     <div class="search-book">{data.title}</div>
                 </div>
             )}
-             { <Markup path={path} result={result} currentMyLocation={currentMyLocation} map={map} isbn={isbn}/> }
+             {/* { <Markup path={path} result={result} currentMyLocation={currentMyLocation}  isbn={isbn}/> } */}
             <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-            <div id="library-markup-container"></div>
+            <div id="library-markup-container">
+                <MapContainer>
+                    {markerRef.current && markerRef.current.length > 0  && markerRef.current.map((marker, index) => (
+                        <Marker
+                            key={index}
+                            position={marker.getPosition()}
+                        >
+                            <Popup>{marker.name}</Popup>
+                        </Marker>
+                    ))}
+                </MapContainer>
+            </div>
         </>
     )
 }

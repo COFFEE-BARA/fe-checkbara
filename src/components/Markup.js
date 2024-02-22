@@ -70,15 +70,6 @@ function Markup({ path, result, currentMyLocation, map, isbn }) {
                         <Popup>{marker.name}</Popup>
                     </Marker>
                 ))}
-                {/* {markerRef.current.map((marker, index) => (
-                    
-                    <Marker
-                        key ={bookplace.name}
-                        position={[parseFloat(bookplace.latitude), parseFloat(bookplace.longitude)]}
-                    >
-                        <Popup>{bookplace.name}</Popup>
-                    </Marker>
-                ))} */}
             </MapContainer>
             
         </>
