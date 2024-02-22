@@ -114,7 +114,6 @@ function NaverMap() {
                             if (path.includes("/bookstore")) {
                                 type = bookplace.type;
                             }
-                            console.log("위도 경도", latitude, longtitude);
                             
                             if (type == "교보문고"){
                                 icon = kyoboIcon;
@@ -123,7 +122,7 @@ function NaverMap() {
                             } else if (type == "영풍문고"){
                                 icon = ypbookIcon;
                             }
-                            console.log("아이콘",icon);
+
                             const marker = new window.naver.maps.Marker({
                                 position: new window.naver.maps.LatLng(latitude, longtitude),
                                 map: mapRef.current,
