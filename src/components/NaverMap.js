@@ -134,10 +134,8 @@ function NaverMap() {
                             });
                             if (Array.isArray(markerRef.current)){
                                 markerRef.current.push(marker);
-                                console.log("마커레프:",markerRef.current)
                             } else {
                                 markerRef.current = [marker];
-                                console.log("마커레프 초기화:", markerRef.current);
                             }
                         }
                        
@@ -149,16 +147,14 @@ function NaverMap() {
 
     return (
         <>
-           
             {data && (
                 <div class="top-bar">
                     <div class="search-word">현재 검색어</div>
                     <div class="search-book">{data.title}</div>
                 </div>
             )}
-             {/* { <Markup path={path} result={result} currentMyLocation={currentMyLocation}  isbn={isbn}/> } */}
-            <div id="map" style={{ width: "100%", height: "100vh" }}></div>
-            <div ref={mapRef} id="library-markup-container"></div>
+            <div ref={mapRef} id="map" style={{ width: "100%", height: "100vh" }}></div>
+            {/* <div ref={mapRef} id="library-markup-container"></div> */}
         </>
     )
 }
