@@ -28,23 +28,6 @@ function NaverMap() {
     const markerRef = useRef([]);
     var icon = libraryIcon;
 
-    // useEffect(() => {
-    //     const success = (location) => {
-    //         setCurrentMyLocation({
-    //             lat: location.coords.latitude,
-    //             lng: location.coords.longitude,
-    //         });
-    //     };
-        
-    //     const error = () => {
-    //         setCurrentMyLocation({ lat: 37.5666103, lng: 126.9783882 });
-    //     };
-
-    //     if (navigator.geolocation) {
-    //         navigator.geolocation.getCurrentPosition(success, error);
-    //     }
-    // }, [setCurrentMyLocation]);
-
     async function getLocation() {
         const success = (location) => {
             setCurrentMyLocation({
