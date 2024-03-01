@@ -1,5 +1,13 @@
 # ⚛️ Checkbara FE
-| [현유경](https://github.com/yugyeongh) | [양다연](https://github.com/dayeon1201) |
+
+<br/>
+<div align="center">
+
+| <img width="165" alt="yugyeong" src="https://github.com/COFFEE-BARA/be-bookstore-stock/assets/72396865/90b7268d-92e5-43d1-9da8-ae48afd9e8c1"> | <img width="165" alt="dayeon" src="https://github.com/COFFEE-BARA/be-bookstore-stock/assets/72396865/f19e65e6-0856-4b6a-a355-993ce83ddcb7"> |
+| --- | --- |
+| 🐶[현유경](https://github.com/yugyeongh)🐶 | 🐤[양다연](https://github.com/dayeon1201)🐤 |
+
+<br/>
 
 <br/>
 
