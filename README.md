@@ -113,8 +113,8 @@
 <br/><br/>
 
 ### 6️⃣ 통계(ES Kibana) 확인
-<img width="250" alt="스크린샷 2024-03-01 오후 2 24 18" src="https://github.com/COFFEE-BARA/fe-checkbara/assets/114728629/0b368018-1a42-4868-be6c-dd905886cda8">
 <img width="250" alt="스크린샷 2024-03-01 오후 2 23 46" src="https://github.com/COFFEE-BARA/fe-checkbara/assets/114728629/54258d14-b535-4773-a651-b114683d3000">
+<img width="250" alt="스크린샷 2024-03-01 오후 2 24 18" src="https://github.com/COFFEE-BARA/fe-checkbara/assets/114728629/0b368018-1a42-4868-be6c-dd905886cda8">
 
 <br/><br/>
 
@@ -126,3 +126,45 @@
 
 1. **`iframe`** 을 통해 Kibana 대시보드를 포함하는 HTML 콘텐츠를 설정
 2. 데이터 URL을 iframe의 소스로 설정하여 Kibana 대시보드를 표시
+
+<br/><br/>
+
+### 7️⃣ 서점 재고 확인
+<img width="250" alt="스크린샷 2024-03-01 오후 4 48 49" src="https://github.com/COFFEE-BARA/fe-checkbara/assets/114728629/13551832-863a-4eef-9b2a-e46767476dd9">
+
+<br/><br/>
+
+❓what
+
+- 사용자의 현재 위치 기반 지도 업데이트
+- 교보문고, 영풍문고, 알라딘에 책 재고가 존재하면 마커 표시
+
+❗️how
+
+1. **`getCurrentPosition`** 메소드를 사용해 getLocation 함수에서 사용자의 현재 위치를 불러오고 **`useEffect`** 를 사용해 현재 위치 변경 시 리렌더링
+2. **`axios`** 을 사용해 백엔드에서 데이터를 받아오고 **`useEffect`** 를 사용해 데이터 변경 시 리렌더링
+3. bookstore data인지 library data인지 path를 통해 구분하고 조건문을 사용해 필터링
+4. 서점 별 다른 마커 적용을 위해 조건문 사용
+5. **`window.naver.maps.Marker`** 를 통해 position 및 icon을 설정해준 뒤 **`useRef`** 배열에 저장
+6. marker의 배열 변경을 감지하기 위해 **`useEffect`** hook을 사용
+
+<br/><br/>
+
+### 8️⃣ 도서관 대출가능여부 확인
+<img width="250" alt="스크린샷 2024-03-01 오후 4 48 59" src="https://github.com/COFFEE-BARA/fe-checkbara/assets/114728629/ef7d5780-8fd5-4e2c-b483-e99c2cadecc5">
+
+<br/><br/>
+
+❓what
+
+- 사용자의 현재 위치 기반 지도 업데이트
+- 도서관 정보 나루 API에서 제공하는 도서관의 책 재고가 존재하면 마커 표시
+
+❗️how
+
+1. **`getCurrentPosition`** 메소드를 사용해 getLocation 함수에서 사용자의 현재 위치를 불러오고 **`useEffect`** 를 사용해 현재 위치 변경 시 리렌더링
+2. **`axios`** 을 사용해 백엔드에서 데이터를 받아오고 **`useEffect`** 를 사용해 데이터 변경 시 리렌더링
+3. bookstore data인지 library data인지 path를 통해 구분하고 조건문을 사용해 필터링
+4. 도서관 별 다른 마커 적용을 위해 조건문 사용
+5. **`window.naver.maps.Marker`** 를 통해 position 및 icon을 설정해준 뒤 **`useRef`** 배열에 저장
+6. marker의 배열 변경을 감지하기 위해 **`useEffect`** hook을 사용
