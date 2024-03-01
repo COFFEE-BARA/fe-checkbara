@@ -178,3 +178,19 @@
 4. 도서관 별 다른 마커 적용을 위해 조건문 사용
 5. **`window.naver.maps.Marker`** 를 통해 position 및 icon을 설정해준 뒤 **`useRef`** 배열에 저장
 6. marker의 배열 변경을 감지하기 위해 **`useEffect`** hook을 사용
+
+<br/><br/>
+
+### 🗄 폴더 구조
+<pre>
+<code>
+📁src
+- 📁atom
+- 📁components
+- 📁css
+- 📁hooks
+- 📁icons
+- 📁images
+- App.js
+</code>
+</pre>
