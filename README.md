@@ -17,7 +17,7 @@
 
 <div align="center">
 
-| 역할                 | 종류                                                                                                                                                                                                              |
+| 분류                 | 기술 스택                                                                                                                                                                                                              |
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Framework              | ![React](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=React&logoColor=black)                                                                                                                |
 | Programming Language | ![JavaScript](https://img.shields.io/badge/javascript-blue?style=for-the-badge&logo=javascript)                                                                                             |
